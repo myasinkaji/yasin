@@ -1,7 +1,6 @@
 import React from 'react';
 import {Grid, makeStyles, Paper} from "@material-ui/core";
 import PageHeader from "../component/PageHeader";
-import PageContent from "../component/PageContent";
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -11,6 +10,7 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.secondary.light
     },
 }));
+
 function PageOne() {
     const classes = useStyles();
 
