@@ -3,6 +3,7 @@ import {Route, Switch} from 'react-router-dom';
 import PageOne from "../page/PageOne";
 import PageThree from "../page/PageThree";
 import PageTwo from "../page/PageTwo";
+import CentralGuildForm from "../page/centralguild/CentralGuildForm";
 
 
 const PageContent = () => {
@@ -16,6 +17,9 @@ const PageContent = () => {
             </Route>
             <Route path='/pagethree'>
                 <PageThree/>
+            </Route>
+            <Route exact path='/central-guild'>
+                <CentralGuildForm />
             </Route>
         </Switch>
     );
