@@ -1,12 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './app/App';
 import reportWebVitals from './reportWebVitals';
+import {createMuiTheme, MuiThemeProvider, Paper} from "@material-ui/core";
+import {BrowserRouter as Router} from 'react-router-dom';
 
+const theme = createMuiTheme({
+    palette: {
+        type: 'dark'
+    }
+})
 ReactDOM.render(
     <React.StrictMode>
-        <App/>
+        <Router>
+            <MuiThemeProvider theme={theme}>
+                <Paper square style={{height: '100vh'}}>
+                    <App/>
+                </Paper>
+            </MuiThemeProvider>
+        </Router>
     </React.StrictMode>,
     document.getElementById('root')
 );
