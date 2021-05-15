@@ -1,25 +1,34 @@
 import React from 'react';
-import {IconButton, makeStyles, Paper, Toolbar} from "@material-ui/core";
-import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
+import {makeStyles, Paper, Toolbar, Typography} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
-    paper: {
-        padding: theme.spacing(2),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-        backgroundColor: theme.palette.secondary.dark
+    root: {
+        '&, & $icon': {
+            backgroundColor: theme.palette.secondary.dark
+        }
+    },
+    icon: {
+        padding: theme.spacing(1.5),
+        marginRight: theme.spacing(4),
+    },
+    subtitle: {
+        opacity: 0.6
     },
 }));
-const PageHeader = () => {
+const PageHeader = (props) => {
     const classes = useStyles();
+    const {title, subtitle, icon} = props;
 
     return (
-        <Paper>
-            <Toolbar color={"primary"}>
-                <IconButton>
-                    <PeopleOutlineIcon/>
-                </IconButton>
-                <Paper className={classes.paper}>Page header goes here</Paper>
+        <Paper square className={classes.root}>
+            <Toolbar>
+                <Paper square className={classes.icon}>
+                    {icon}
+                </Paper>
+                <div>
+                    <Typography variant='h6'>{title}</Typography>
+                    <Typography variant='subtitle2' className={classes.subtitle}>{subtitle}</Typography>
+                </div>
             </Toolbar>
         </Paper>
 
