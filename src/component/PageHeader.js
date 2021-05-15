@@ -8,6 +8,8 @@ const useStyles = makeStyles(theme => ({
         }
     },
     icon: {
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(1),
         padding: theme.spacing(1.5),
         marginRight: theme.spacing(4),
     },
