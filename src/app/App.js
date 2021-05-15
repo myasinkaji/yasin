@@ -16,11 +16,11 @@ function App() {
                 <Grid item xs={12}>
                     <Header/>
                 </Grid>
-                <Grid item xs={0.5}/>
+                <Grid item xs={false}/>
                 <Grid item container xs={11}>
                     <PageContent/>
                 </Grid>
-                <Grid item xs={0.5}/>
+                <Grid item xs={false}/>
             </Grid>
 
             <CssBaseline/>
