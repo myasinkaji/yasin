@@ -1,6 +1,5 @@
 import {CssBaseline, Grid, makeStyles} from "@material-ui/core";
 import Header from "../component/Header";
-import PageHeader from "../component/PageHeader";
 import PageContent from "../component/PageContent";
 
 const useStyles = makeStyles(theme => ({
@@ -28,12 +27,7 @@ function App() {
                 </Grid>
                 <Grid item xs={0.5}/>
                 <Grid item container xs={11}>
-                    <Grid item xs={12}>
-                        <PageHeader/>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <PageContent/>
-                    </Grid>
+                    <PageContent/>
                 </Grid>
                 <Grid item xs={0.5}/>
             </Grid>

@@ -1,5 +1,7 @@
 import React from 'react';
-import {makeStyles, Paper} from "@material-ui/core";
+import {Grid, makeStyles, Paper} from "@material-ui/core";
+import PageHeader from "../component/PageHeader";
+import PageContent from "../component/PageContent";
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -13,7 +15,14 @@ function PageOne() {
     const classes = useStyles();
 
     return (
-        <Paper className={classes.paper}>This is page one</Paper>
+        <>
+            <Grid item xs={12}>
+                <PageHeader/>
+            </Grid>
+            <Grid item xs={12}>
+                <Paper className={classes.paper}>This is page one</Paper>
+            </Grid>
+        </>
     );
 
 }
