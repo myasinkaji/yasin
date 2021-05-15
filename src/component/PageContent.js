@@ -3,7 +3,7 @@ import {Route, Switch} from 'react-router-dom';
 import PageOne from "../page/PageOne";
 import PageThree from "../page/PageThree";
 import PageTwo from "../page/PageTwo";
-import CentralGuildForm from "../page/centralguild/CentralGuildForm";
+import CentralGuildPage from "../page/centralguild/CentralGuildPage";
 
 
 const PageContent = () => {
@@ -19,7 +19,7 @@ const PageContent = () => {
                 <PageThree/>
             </Route>
             <Route exact path='/central-guild'>
-                <CentralGuildForm />
+                <CentralGuildPage/>
             </Route>
         </Switch>
     );
