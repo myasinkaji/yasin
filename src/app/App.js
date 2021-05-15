@@ -5,15 +5,6 @@ import PageContent from "../component/PageContent";
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
-    },
-    left: {
-        backgroundColor: theme.palette.primary.light
-    },
-    right: {
-        backgroundColor: theme.palette.primary.light
-    },
-    body: {
-        backgroundColor: theme.palette.secondary.main
     }
 }));
 
