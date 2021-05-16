@@ -15,6 +15,7 @@ const Button = (props) => {
     return (
         <MuiButton
             size='small'
+            color='primary'
             className={classes.root}
             variant='contained'
             fullWidth
