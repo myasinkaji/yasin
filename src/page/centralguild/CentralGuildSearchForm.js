@@ -4,12 +4,13 @@ import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
 import SaveIcon from '@material-ui/icons/Save';
 import SearchIcon from '@material-ui/icons/Search';
-import * as Service from "../../service/CentralGuildService";
 
 
-const CentralGuildSearchForm = () => {
+const CentralGuildSearchForm = (props) => {
 
     const [active, setActive] = useState(true);
+    const {setOpen} = props;
+
     return (
         <>
             <Grid container spacing={3}>
@@ -25,10 +26,14 @@ const CentralGuildSearchForm = () => {
                         <TextField label='UniqueId'/>
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField label='Postal Code'/>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField label='Manager Name'/>
+                        <FormControlLabel
+                            control={<Checkbox
+                                color='primary'
+                                checked={active}
+                                onChange={() => setActive(!active)}
+                                name="checkedA"/>}
+                            label="Active"
+                        />
                     </Grid>
                 </Grid>
                 <Grid item container xs={12} md={6} spacing={3}>
@@ -39,16 +44,7 @@ const CentralGuildSearchForm = () => {
                     <Grid item xs={12}>
                         <TextField label='Mobile'/>
                     </Grid>
-                    <Grid item xs={12}>
-                        <FormControlLabel
-                            control={<Checkbox
-                                color='primary'
-                                checked={active}
-                                onChange={() => setActive(!active)}
-                                name="checkedA"/>}
-                            label="Active"
-                        />
-                    </Grid>
+
 
                     <Grid item container xs={12}>
                         <Grid item xs={12}>
@@ -61,9 +57,9 @@ const CentralGuildSearchForm = () => {
                         <Grid item xs={12}>
                             <Button
                                 onClick={() => {
-                                    Service.getPage(1, 10)
+                                    setOpen(true)
                                 }}
-                                label='ذخیره'
+                                label='جدید'
                                 color='primary'
                                 icon={<SaveIcon/>}/>
                         </Grid>
@@ -72,6 +68,8 @@ const CentralGuildSearchForm = () => {
 
 
             </Grid>
+
+
         </>
     );
 }
