@@ -1,7 +1,13 @@
 import Axios from 'axios';
 
+const BASE_URL = 'http://localhost:8080/hoviat';
 function getFunc(url) {
-    console.log('getting url: ', url);
+    const config = {
+        method: 'get',
+        url: BASE_URL + url,
+    }
+
+    return Axios(config);
 }
 function postFunc(url) {
     console.log('posting to url: ', url);
