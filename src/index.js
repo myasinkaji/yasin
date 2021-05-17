@@ -15,7 +15,7 @@ ReactDOM.render(
     <React.StrictMode>
         <Router>
             <MuiThemeProvider theme={theme}>
-                <Paper square style={{height: '100vh'}}>
+                <Paper square>
                     <App/>
                 </Paper>
             </MuiThemeProvider>
