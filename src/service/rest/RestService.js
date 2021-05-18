@@ -9,8 +9,17 @@ function getFunc(url) {
 
     return Axios(config);
 }
-function postFunc(url) {
-    console.log('posting to url: ', url);
+function postFunc(url, object) {
+    const data = JSON.stringify(object);
+    const config = {
+        method: 'post',
+        url: BASE_URL + url,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data
+    }
+    return Axios(config);
 }
 function putFunc(url) {
     console.log('put to url: ', url);
