@@ -28,12 +28,7 @@ const useStyles = makeStyles(theme => ({
 }));
 const CentralGuildTable = (props) => {
     const classes = useStyles();
-    const {page, setRecord, setOpen} = props;
-
-    function onEdit(guild) {
-        setRecord(guild);
-        setOpen(true);
-    }
+    const {page, edit} = props;
 
     return (
         <TableContainer component={Paper}>
@@ -67,7 +62,7 @@ const CentralGuildTable = (props) => {
                                 <IconButton size='small'>
                                     <DeleteIcon fontSize='small' color="primary"/>
                                 </IconButton>
-                                <IconButton size='small' onClick={() => onEdit(guild)}>
+                                <IconButton size='small' onClick={() => edit(guild)}>
                                     <EditIcon fontSize='small' color="primary"/>
                                 </IconButton>
                             </TableCell>
