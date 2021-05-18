@@ -1,27 +1,30 @@
 import React from 'react';
-import {Dialog as MuiDialog, DialogActions, DialogContent, DialogTitle, makeStyles} from '@material-ui/core'
-import Button from "./controls/Button";
+import {Dialog as MuiDialog, DialogTitle, IconButton, makeStyles, Typography} from '@material-ui/core'
+import CancelIcon from '@material-ui/icons/Cancel';
 
 const useStyles = makeStyles(theme => ({
-    root: {
-    }
+    dialogTitle: {
+        backgroundColor: theme.palette.secondary.dark,
+        alignItems: 'center'
+    },
+    closeIcon: {
+        float: 'right'
+    },
 }));
 
 const Dialog = (props) => {
     const classes = useStyles();
-    const {open, setOpen, title} = props;
+    const {open, onClose, title} = props;
 
     return (
-        <MuiDialog open={open} className={classes.root}>
-            <DialogTitle>{title}</DialogTitle>
-            <DialogContent>
-                {props.children}
-            </DialogContent>
-            <DialogActions>
-                <Button label='Save Entity'
-                        onClick={() => setOpen(false)}
-                />
-            </DialogActions>
+        <MuiDialog open={open}>
+            <DialogTitle className={classes.dialogTitle}>
+                <Typography component='span' variant='h6'>{title}</Typography>
+                <IconButton className={classes.closeIcon} size='small' onClick={onClose}>
+                    <CancelIcon/>
+                </IconButton>
+            </DialogTitle>
+            {props.children}
         </MuiDialog>
     );
 }
