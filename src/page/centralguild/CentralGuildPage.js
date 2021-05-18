@@ -47,6 +47,11 @@ const CentralGuildPage = () => {
         setOpen(false);
     }
 
+    function onEditClick(guild) {
+        setRecord(guild);
+        setOpen(true);
+    }
+
     return (
         <>
             <Grid item xs={12}>
@@ -62,7 +67,7 @@ const CentralGuildPage = () => {
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <CentralGuildTable page={page} setRecord={setRecord} setOpen={setOpen}/>
+                    <CentralGuildTable page={page} onEditClick={onEditClick}/>
                 </Paper>
             </Grid>
             <Dialog title='Insert new' onClose={dialogClose} open={open}>
