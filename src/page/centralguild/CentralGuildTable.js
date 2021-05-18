@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
     Checkbox,
     IconButton,
@@ -14,8 +14,6 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
-import * as Service from '../../service/CentralGuildService';
-
 const useStyles = makeStyles(theme => ({
 
     head: {
@@ -28,15 +26,14 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.secondary.light
     },
 }));
-const CentralGuildTable = () => {
+const CentralGuildTable = (props) => {
     const classes = useStyles();
-    const [page, setPage] = useState({data: [], count: 0});
+    const {page, setRecord, setOpen} = props;
 
-    useEffect(() => {
-        Service.getPage(0, 5, 'asc', 'code').then(response => {
-            setPage(response.data);
-        });
-    }, []);
+    function onEdit(guild) {
+        setRecord(guild);
+        setOpen(true);
+    }
 
     return (
         <TableContainer component={Paper}>
@@ -56,7 +53,7 @@ const CentralGuildTable = () => {
                 </TableHead>
                 <TableBody>
                     {page.data.map((guild, index) => (
-                        <TableRow className={index % 2 == 0 ? classes.evenRow : ''}>
+                        <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={guild.code}>
                             <TableCell align='center'>{guild.uniqueId}</TableCell>
                             <TableCell align='center'>{guild.code}</TableCell>
                             <TableCell align='center'>{guild.managerName}</TableCell>
@@ -70,7 +67,7 @@ const CentralGuildTable = () => {
                                 <IconButton size='small'>
                                     <DeleteIcon fontSize='small' color="primary"/>
                                 </IconButton>
-                                <IconButton size='small'>
+                                <IconButton size='small' onClick={() => onEdit(guild)}>
                                     <EditIcon fontSize='small' color="primary"/>
                                 </IconButton>
                             </TableCell>
