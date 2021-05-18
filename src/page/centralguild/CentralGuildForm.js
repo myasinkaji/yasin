@@ -1,41 +1,115 @@
-import React from 'react';
-import {Grid} from "@material-ui/core";
+import React, {useState} from 'react';
+import {DialogActions, DialogContent, Grid, makeStyles} from "@material-ui/core";
 import TextField from "../../component/controls/TextField";
+import Button from "../../component/controls/Button";
+import * as Service from '../../service/centralGuild/CentralGuildService';
+import Checkbox from "../../component/controls/Checkbox";
 
-const CentralGuildForm = () => {
+
+const useStyle = makeStyles(theme => ({
+    dialogContent: {
+        backgroundColor: 'pink',
+        paddingBottom: theme.spacing(4)
+    }
+}));
+
+
+const CentralGuildForm = (props) => {
+    const classes = useStyle();
+    const {setOpen, recordForUpdate, submitAware} = props;
+    const initialValue = recordForUpdate ? recordForUpdate : Service.initialValue;
+    const [guild, setGuild] = useState(initialValue);
+    const [errors, setErrors] = useState({});
+
+    function onchange(event) {
+        const {name, value} = event.target;
+        setGuild({
+            ...guild,
+            [name]: value,
+        });
+    }
+
+    function register() {
+        try {
+            if (Service.validate(guild, setErrors)) {
+                Service.save(guild)
+                setOpen(false);
+                submitAware();
+            }
+        } catch (e) {
+            console.error(e);
+            //Todo handle error
+        }
+    }
+
+    function reset() {
+        setGuild(initialValue);
+    }
+
     return (
-        <Grid container spacing={3}>
-            <Grid item container xs={12} md={6} spacing={3}>
-                <Grid item xs={12}>
-                    <TextField label='Code'/>
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField label='Name'/>
-                </Grid>
+        <>
+            <DialogContent className={classes.dialogContent}>
+                <Grid container spacing={3}>
+                    <Grid item container xs={12} md={6} spacing={3}>
+                        <Grid item xs={12}>
+                            <TextField error={errors.code}
+                                       onChange={onchange} name='code' label='Code' value={guild.code}/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField error={errors.name}
+                                       onChange={onchange} name='name' label='Name' value={guild.name}/>
+                        </Grid>
 
-                <Grid item xs={12}>
-                    <TextField label='UniqueId'/>
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField label='Postal Code'/>
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField label='Manager Name'/>
-                </Grid>
-            </Grid>
-            <Grid item container xs={12} md={6} spacing={3}>
+                        <Grid item xs={12}>
+                            <TextField error={errors.uniqueId}
+                                       onChange={onchange} name='uniqueId' label='UniqueId' value={guild.uniqueId}/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField error={errors.postalCode}
+                                       onChange={onchange} name='postalCode' label='Postal Code'
+                                       value={guild.postalCode}/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField error={errors.managerName}
+                                       onChange={onchange} name='managerName' label='Manager Name'
+                                       value={guild.managerName}/>
+                        </Grid>
+                    </Grid>
+                    <Grid item container xs={12} md={6} spacing={3}>
 
-                <Grid item xs={12}>
-                    <TextField label='Phone'/>
+                        <Grid item xs={12}>
+                            <TextField error={errors.phone}
+                                       onChange={onchange} name='phone' label='Phone' value={guild.phone}/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField error={errors.mobile}
+                                       onChange={onchange} name='mobile' label='Mobile' value={guild.mobile}/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Checkbox
+                                name='active'
+                                label="Is Active"
+                                checked={guild.active}
+                                onChange={onchange}
+                            />
+                        </Grid>
+                    </Grid>
+
+
                 </Grid>
-                <Grid item xs={12}>
-                    <TextField label='Mobile'/>
+            </DialogContent>
+
+            <DialogActions>
+                <Grid container>
+                    <Grid item xs={12} md={6}>
+                        <Button label='Reset' color='secondary' onClick={reset} type='reset'/>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <Button label='Save Entity' onClick={register} type='submit'/>
+                    </Grid>
                 </Grid>
-
-            </Grid>
-
-
-        </Grid>
+            </DialogActions>
+        </>
     );
 }
 
