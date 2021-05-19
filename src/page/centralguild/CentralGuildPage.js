@@ -33,14 +33,12 @@ const CentralGuildPage = () => {
             setPage(response.data);
         }).catch(error => {
             //todo handle error
-            console.err(error);
+            console.error(error);
         });
     }
     const submitAware = () => {
         dialogClose();
-        setInterval(() => {
-            loadPage()
-        }, 1000)
+        loadPage();
     }
 
     function dialogClose() {
