@@ -37,6 +37,7 @@ const CentralGuildPage = () => {
         });
     }
     const submitAware = () => {
+        dialogClose();
         setInterval(() => {
             loadPage()
         }, 1000)
@@ -71,7 +72,7 @@ const CentralGuildPage = () => {
                 </Paper>
             </Grid>
             <Dialog title='Insert new' onClose={dialogClose} open={open}>
-                <CentralGuildForm submitAware={submitAware} recordForUpdate={record} setOpen={setOpen}/>
+                <CentralGuildForm submitAware={submitAware} recordForUpdate={record} />
             </Dialog>
         </>
     );

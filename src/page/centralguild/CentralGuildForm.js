@@ -16,7 +16,7 @@ const useStyle = makeStyles(theme => ({
 
 const CentralGuildForm = (props) => {
     const classes = useStyle();
-    const {setOpen, recordForUpdate, submitAware} = props;
+    const {recordForUpdate, submitAware} = props;
     const initialValue = recordForUpdate ? recordForUpdate : Service.initialValue;
     const [guild, setGuild] = useState(initialValue);
     const [errors, setErrors] = useState({});
@@ -33,7 +33,6 @@ const CentralGuildForm = (props) => {
         try {
             if (Service.validate(guild, setErrors)) {
                 Service.save(guild)
-                setOpen(false);
                 submitAware();
             }
         } catch (e) {
