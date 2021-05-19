@@ -1,7 +1,7 @@
 import RestService from "../rest/RestService";
 
 const address = '/cg';
-export const initialValue = {
+export const INITIAL_GUILD = {
     uniqueId: '',
     code: '',
     managerName: '',

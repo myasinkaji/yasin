@@ -17,7 +17,7 @@ const useStyle = makeStyles(theme => ({
 const CentralGuildForm = (props) => {
     const classes = useStyle();
     const {recordForUpdate, submitAware} = props;
-    const initialValue = recordForUpdate ? recordForUpdate : Service.initialValue;
+    const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_GUILD;
     const [guild, setGuild] = useState(initialValue);
     const [errors, setErrors] = useState({});
 

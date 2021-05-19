@@ -44,7 +44,7 @@ const CentralGuildPage = () => {
     }
 
     function dialogClose() {
-        setRecord(Service.initialValue);
+        setRecord(Service.INITIAL_GUILD);
         setOpen(false);
     }
 
