@@ -2,7 +2,7 @@ import React from 'react';
 import {Checkbox as MuiCheckbox, FormControlLabel} from "@material-ui/core";
 
 const Checkbox = (props) => {
-    const {checked, onChange, name, label} = props;
+    const {checked, onChange, name, label, ...other} = props;
 
     const convert = (name, value) => ({
         target: {
@@ -14,6 +14,7 @@ const Checkbox = (props) => {
         <FormControlLabel
             control={<MuiCheckbox
                 color='primary'
+                {...other}
                 checked={checked}
                 name={name}
                 {...(onChange ?
