@@ -11,16 +11,17 @@ const useStyles = makeStyles(theme => ({
 }));
 const Button = (props) => {
     const classes = useStyles();
-    const {label, icon} = props;
+    const {label, icon, onClick, ...other} = props;
     return (
         <MuiButton
             size='small'
             color='primary'
-            className={classes.root}
             variant='contained'
             fullWidth
-            {...props}
+            className={classes.root}
             startIcon={icon}
+            onClick={onClick}
+            {...other}
         >{label}</MuiButton>
     );
 }
