@@ -7,6 +7,7 @@ import CentralGuildForm from "./CentralGuildForm";
 import Dialog from "../../component/Dialog";
 import CentralGuildTable from "./CentralGuildTable";
 import * as Service from '../../service/centralGuild/CentralGuildService';
+import * as Constants from '../../service/Constants';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -22,20 +23,32 @@ const CentralGuildPage = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [record, setRecord] = useState(undefined);
-    const [page, setPage] = useState({data: [], count: 0});
+    const [page, setPage] = useState(Constants.EMPTY_PAGE);
 
     useEffect(() => {
         loadPage();
     }, []);
 
     const loadPage = () => {
-        Service.getPage(0, 5, 'asc', 'code').then(response => {
-            setPage(response.data);
-        }).catch(error => {
+        const promise = Service.getPage(Service.DEFAULT_PAGE_REQUEST);
+        setPageData(promise);
+    }
+
+    function onSearchClick(searchCriteria) {
+        const promise = Service.search(Service.DEFAULT_PAGE_REQUEST, searchCriteria);
+        setPageData(promise);
+    }
+
+    function setPageData(promise) {
+        promise
+            .then(response => {
+                setPage(response.data);
+            }).catch(error => {
             //todo handle error
             console.error(error);
         });
     }
+
     const submitAware = () => {
         dialogClose();
         loadPage();
@@ -61,7 +74,7 @@ const CentralGuildPage = () => {
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <CentralGuildSearchForm setOpen={setOpen}/>
+                    <CentralGuildSearchForm setOpen={setOpen} searchAction={onSearchClick}/>
                 </Paper>
             </Grid>
             <Grid item xs={12}>
@@ -70,7 +83,7 @@ const CentralGuildPage = () => {
                 </Paper>
             </Grid>
             <Dialog title='Insert new' onClose={dialogClose} open={open}>
-                <CentralGuildForm submitAware={submitAware} recordForUpdate={record} />
+                <CentralGuildForm submitAware={submitAware} recordForUpdate={record}/>
             </Dialog>
         </>
     );

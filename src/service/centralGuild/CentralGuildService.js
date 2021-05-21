@@ -1,6 +1,19 @@
 import RestService from "../rest/RestService";
+import * as BaseService from '../../service/BaseService';
+import * as Constants from "../Constants";
 
-const address = '/cg';
+const BASE_ADDRESS = '/cg';
+const SEARCH_ADDRESS = BASE_ADDRESS.concat('/search')
+
+export const GUILD_SEARCH_CRITERIA = {
+    uniqueId: '',
+    code: '',
+    name: '',
+    active: false,
+    phone: '',
+    mobile: ''
+};
+
 export const INITIAL_GUILD = {
     uniqueId: '',
     code: '',
@@ -11,22 +24,26 @@ export const INITIAL_GUILD = {
     phone: '',
     mobile: ''
 }
+export const DEFAULT_PAGE_REQUEST = {
+    page: 0,
+    pageSize: Constants.DEFAULT_PAGE_SIZE,
+    order: Constants.DEFAULT_ORDER,
+    orderBy: 'code'
+}
 
-export function getPage(page, pageSize, order, orderBy) {
-    const url = address
-        .concat('?page=')
-        .concat(page)
-        .concat('&pageSize=')
-        .concat(pageSize)
-        .concat('&order=')
-        .concat(order)
-        .concat('&orderBy=')
-        .concat(orderBy);
+export function getPage(pageRequest) {
+    const url = BASE_ADDRESS
+        .concat('?')
+        .concat(BaseService.getPageRequestURLParams(pageRequest))
     return RestService.get(url)
 }
 
 export function save(guild) {
-    RestService.post(address, guild);
+    RestService.post(BASE_ADDRESS, guild);
+}
+
+export function search(pageRequest, searchCriteria) {
+    return BaseService.search(SEARCH_ADDRESS, pageRequest, searchCriteria);
 }
 
 export function validate(guild, setErrors) {
