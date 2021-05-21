@@ -3,6 +3,7 @@ import {DialogActions, DialogContent, Grid, makeStyles} from "@material-ui/core"
 import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
 import * as Service from '../../service/centralGuild/CentralGuildService';
+import * as Constants from '../../service/Constants';
 import Checkbox from "../../component/controls/Checkbox";
 
 
@@ -19,7 +20,7 @@ const CentralGuildForm = (props) => {
     const {recordForUpdate, submitAware} = props;
     const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_GUILD;
     const [guild, setGuild] = useState(initialValue);
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState(Constants.NO_ERROR);
 
     function onchange(event) {
         const {name, value} = event.target;
