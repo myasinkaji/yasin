@@ -26,18 +26,22 @@ export function getPageRequestURLParams(pageRequest) {
 }
 
 export function getSuccessMessageObject(message) {
-    return {
-        title: 'Success',
-        isOpen: true,
-        type: 'success',
-        message: message
-    };
+    return getMessage('Success', 'success', message);
+}
+export function getInfoMessageObject(message) {
+    return getMessage('Info', 'info', message);
+}
+export function getWarningMessageObject(message) {
+    return getMessage('Warning', 'warning', message);
 }
 export function getErrorMessageObject(message) {
+    return getMessage('Error', 'error', message);
+}
+function getMessage(title, type, message) {
     return {
-        title: 'Error',
-        isOpen: true,
-        type: 'error',
-        message: message
+        title,
+        type,
+        message,
+        isOpen: true
     };
 }
