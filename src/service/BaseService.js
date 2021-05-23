@@ -24,3 +24,12 @@ export function getPageRequestURLParams(pageRequest) {
         .concat('&orderBy=')
         .concat(pageRequest.orderBy)
 }
+
+export function getErrorObject(message) {
+    return {
+        title: 'Error',
+        isOpen: true,
+        type: 'error',
+        message: message
+    };
+}

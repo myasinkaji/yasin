@@ -3,6 +3,7 @@ import {DialogActions, DialogContent, Grid, makeStyles} from "@material-ui/core"
 import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
 import * as Service from '../../service/centralGuild/CentralGuildService';
+import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
 import Checkbox from "../../component/controls/Checkbox";
 
@@ -17,7 +18,7 @@ const useStyle = makeStyles(theme => ({
 
 const CentralGuildForm = (props) => {
     const classes = useStyle();
-    const {recordForUpdate, submitAware} = props;
+    const {recordForUpdate, submitAware, setNotify} = props;
     const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_GUILD;
     const [guild, setGuild] = useState(initialValue);
     const [errors, setErrors] = useState(Constants.NO_ERROR);
@@ -31,14 +32,12 @@ const CentralGuildForm = (props) => {
     }
 
     function register() {
-        try {
-            if (Service.validate(guild, setErrors)) {
-                Service.save(guild)
-                submitAware();
-            }
-        } catch (e) {
-            console.error(e);
-            //Todo handle error
+        if (Service.validate(guild, setErrors)) {
+            Service.save(guild).then(response => {
+                submitAware(guild);
+            }).catch(e => {
+                setNotify(BaseService.getErrorObject(`Error Code: ${e.status}, Message: ${e.name}`));
+            })
         }
     }
 
