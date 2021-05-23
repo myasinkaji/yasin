@@ -33,7 +33,7 @@ const CentralGuildForm = (props) => {
 
     function register() {
         if (Service.validate(guild, setErrors)) {
-            Service.save(guild).then(response => {
+            Service.save(guild).then(() => {
                 submitAware(guild);
             }).catch(e => {
                 setNotify(BaseService.getErrorObject(`Error Code: ${e.status}, Message: ${e.name}`));
