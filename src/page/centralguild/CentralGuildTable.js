@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
 }));
 const CentralGuildTable = (props) => {
     const classes = useStyles();
-    const {page, onEditClick} = props;
+    const {page, onEditClick, onDeleteClick} = props;
 
     return (
         <TableContainer component={Paper}>
@@ -59,7 +59,7 @@ const CentralGuildTable = (props) => {
                             <TableCell align='center'>{guild.phone}</TableCell>
                             <TableCell align='center'>{guild.mobile}</TableCell>
                             <TableCell align='center'>
-                                <IconButton size='small'>
+                                <IconButton size='small' onClick={() => onDeleteClick(guild)}>
                                     <DeleteIcon fontSize='small' color="primary"/>
                                 </IconButton>
                                 <IconButton size='small' onClick={() => onEditClick(guild)}>
