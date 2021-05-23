@@ -29,7 +29,8 @@ function putFunc(url) {
 }
 
 function deleteFunc(url) {
-    console.log('deleting url: ', url);
+    url = BASE_URL + url;
+    return Axios.delete(url);
 }
 
 const RestService = {
