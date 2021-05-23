@@ -36,7 +36,7 @@ const CentralGuildForm = (props) => {
             Service.save(guild).then(() => {
                 submitAware(guild);
             }).catch(e => {
-                setNotify(BaseService.getErrorObject(`Error Code: ${e.status}, Message: ${e.name}`));
+                setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`));
             })
         }
     }

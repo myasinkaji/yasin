@@ -25,7 +25,15 @@ export function getPageRequestURLParams(pageRequest) {
         .concat(pageRequest.orderBy)
 }
 
-export function getErrorObject(message) {
+export function getSuccessMessageObject(message) {
+    return {
+        title: 'Success',
+        isOpen: true,
+        type: 'success',
+        message: message
+    };
+}
+export function getErrorMessageObject(message) {
     return {
         title: 'Error',
         isOpen: true,
