@@ -38,8 +38,15 @@ export function getPage(pageRequest) {
     return RestService.get(url)
 }
 
+export function remove(guildCode) {
+    const url = BASE_ADDRESS
+        .concat('?')
+        .concat('code=')
+        .concat(guildCode);
+    return RestService.delete(url);
+}
 export function save(guild) {
-    RestService.post(BASE_ADDRESS, guild);
+    return RestService.post(BASE_ADDRESS, guild);
 }
 
 export function search(pageRequest, searchCriteria) {
