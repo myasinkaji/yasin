@@ -7,7 +7,10 @@ import CentralGuildForm from "./CentralGuildForm";
 import Dialog from "../../component/Dialog";
 import CentralGuildTable from "./CentralGuildTable";
 import * as Service from '../../service/centralGuild/CentralGuildService';
+import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
+import Notification from "../../component/Notification";
+import ConfirmDialog from "../../component/ConfirmDialog";
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -24,6 +27,8 @@ const CentralGuildPage = () => {
     const [open, setOpen] = useState(false);
     const [record, setRecord] = useState(undefined);
     const [page, setPage] = useState(Constants.EMPTY_PAGE);
+    const [notify, setNotify] = useState({isOpen: true, title: '', message: '', type: ''});
+    const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
 
     useEffect(() => {
         loadPage();
@@ -44,19 +49,37 @@ const CentralGuildPage = () => {
             .then(response => {
                 setPage(response.data);
             }).catch(error => {
-            //todo handle error
-            console.error(error);
+            setNotify(BaseService.getErrorMessageObject(`Error Code: ${error.status}, Message: ${error.message}`))
         });
     }
 
-    const submitAware = () => {
+    const submitAware = (guild) => {
         dialogClose();
         loadPage();
+        setNotify(BaseService.getSuccessMessageObject(`${guild.code} is registered Successfully`));
     }
 
     function dialogClose() {
         setRecord(Service.INITIAL_GUILD);
         setOpen(false);
+    }
+
+    function onDeleteClick(guild) {
+        setConfirmDialog({
+            isOpen: true,
+            title: 'Are you sure to delete this record?',
+            subTitle: "You can't undo this operation",
+            onConfirm: () => removeGuild(guild)
+        });
+    }
+
+    function removeGuild(guild) {
+        Service.remove(guild.code).then(() => {
+            loadPage();
+            setNotify(BaseService.getWarningMessageObject(`${guild.code} is deleted Successfully`));
+        }).catch(e => {
+            setNotify(BaseService.getErrorMessageObject(`${guild.code} can not be delete. ${e.message}`));
+        });
     }
 
     function onEditClick(guild) {
@@ -79,12 +102,20 @@ const CentralGuildPage = () => {
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <CentralGuildTable page={page} onEditClick={onEditClick}/>
+                    <CentralGuildTable page={page} onEditClick={onEditClick} onDeleteClick={onDeleteClick}/>
                 </Paper>
             </Grid>
             <Dialog title='Insert new' onClose={dialogClose} open={open}>
-                <CentralGuildForm submitAware={submitAware} recordForUpdate={record}/>
+                <CentralGuildForm submitAware={submitAware} recordForUpdate={record} setNotify={setNotify}/>
             </Dialog>
+            <Notification
+                notify={notify}
+                setNotify={setNotify}
+            />
+            <ConfirmDialog
+                confirmDialog={confirmDialog}
+                setConfirmDialog={setConfirmDialog}
+            />
         </>
     );
 }
