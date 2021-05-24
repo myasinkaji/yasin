@@ -26,7 +26,7 @@ export const INITIAL_GUILD = {
 }
 export const DEFAULT_PAGE_REQUEST = {
     page: 0,
-    pageSize: Constants.DEFAULT_PAGE_SIZE,
+    pageSize: Constants.DEFAULT_ROWS_PER_PAGE,
     order: Constants.DEFAULT_ORDER,
     orderBy: 'code'
 }
