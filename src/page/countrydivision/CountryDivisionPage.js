@@ -62,7 +62,7 @@ const CountryDivisionPage = () => {
     }
 
     function dialogClose() {
-        setRecord(Service.INITIAL_GUILD);
+        setRecord(Service.INITIAL_COUNTRY_DIVISION);
         setOpen(false);
     }
 

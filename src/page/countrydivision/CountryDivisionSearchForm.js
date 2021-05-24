@@ -10,7 +10,7 @@ import Checkbox from "../../component/controls/Checkbox";
 
 const CountryDivisionSearchForm = (props) => {
 
-    const [searchCriteria, setSearchCriteria] = useState(Service.GUILD_SEARCH_CRITERIA)
+    const [searchCriteria, setSearchCriteria] = useState(Service.SEARCH_CRITERIA)
     const {setOpen, searchAction} = props;
 
     const onChange = event => {

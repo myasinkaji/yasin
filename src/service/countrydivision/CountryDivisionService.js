@@ -5,30 +5,24 @@ import * as Constants from "../Constants";
 const BASE_ADDRESS = '/cd';
 const SEARCH_ADDRESS = BASE_ADDRESS.concat('/search')
 
-export const GUILD_SEARCH_CRITERIA = {
-    uniqueId: '',
+export const SEARCH_CRITERIA = {
     code: '',
     name: '',
-    active: false,
-    phone: '',
-    mobile: ''
+    type: '',
+    parent: ''
 };
 
-export const INITIAL_GUILD = {
-    uniqueId: '',
+export const INITIAL_COUNTRY_DIVISION = {
     code: '',
-    managerName: '',
     name: '',
-    postalCode: '',
-    active: false,
-    phone: '',
-    mobile: ''
+    type: '',
+    parent: ''
 }
 export const DEFAULT_PAGE_REQUEST = {
     page: 0,
     pageSize: Constants.DEFAULT_ROWS_PER_PAGE,
     order: Constants.DEFAULT_ORDER,
-    orderBy: 'code'
+    orderBy: 'type'
 }
 
 export function getPage(pageRequest) {
@@ -38,30 +32,27 @@ export function getPage(pageRequest) {
     return RestService.get(url)
 }
 
-export function remove(guildCode) {
+export function remove(code) {
     const url = BASE_ADDRESS
         .concat('?')
         .concat('code=')
-        .concat(guildCode);
+        .concat(code);
     return RestService.delete(url);
 }
-export function save(guild) {
-    return RestService.post(BASE_ADDRESS, guild);
+export function save(countryDivision) {
+    return RestService.post(BASE_ADDRESS, countryDivision);
 }
 
 export function search(pageRequest, searchCriteria) {
     return BaseService.search(SEARCH_ADDRESS, pageRequest, searchCriteria);
 }
 
-export function validate(guild, setErrors) {
+export function validate(countryDivision, setErrors) {
     const errors = {};
-    errors.code = isBlank(String(guild.code)) ? 'code is required' : '';
-    errors.name = isBlank(guild.name) ? 'name is required' : '';
-    errors.uniqueId = isBlank(String(guild.uniqueId)) ? 'unique id is required' : '';
-    errors.postalCode = isBlank(String(guild.postalCode)) ? 'postal code is required' : '';
-    errors.managerName = isBlank(guild.managerName) ? 'manager name is required' : '';
-    errors.phone = isBlank(guild.phone) ? 'phone is required' : '';
-    errors.mobile = isBlank(guild.mobile) ? 'mobile is required' : '';
+    errors.code = isBlank(String(countryDivision.code)) ? 'code is required' : '';
+    errors.name = isBlank(countryDivision.name) ? 'name is required' : '';
+    errors.type = isBlank(String(countryDivision.type)) ? 'type is required' : '';
+    errors.parent = isBlank(String(countryDivision.parent)) ? 'parent is required' : '';
 
     setErrors({...errors})
     return Object.values(errors).every(isBlank);

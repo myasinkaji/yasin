@@ -19,7 +19,7 @@ const useStyle = makeStyles(theme => ({
 const CountryDivisionForm = (props) => {
     const classes = useStyle();
     const {recordForUpdate, submitAware, setNotify} = props;
-    const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_GUILD;
+    const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_COUNTRY_DIVISION;
     const [guild, setGuild] = useState(initialValue);
     const [errors, setErrors] = useState(Constants.NO_ERROR);
 
