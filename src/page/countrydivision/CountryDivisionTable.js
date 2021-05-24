@@ -96,7 +96,7 @@ const CountryDivisionTable = (props) => {
                             <TableCell align='center'>{countryDivision.code}</TableCell>
                             <TableCell align='center'>{countryDivision.name}</TableCell>
                             <TableCell align='center'>{countryDivision.type}</TableCell>
-                            <TableCell align='center'>{countryDivision.parent}</TableCell>
+                            <TableCell align='center'>{countryDivision.parentName}</TableCell>
                             <TableCell align='center'>
                                 <IconButton size='small' onClick={() => onDeleteClick(countryDivision)}>
                                     <DeleteIcon fontSize='small' color="primary"/>
