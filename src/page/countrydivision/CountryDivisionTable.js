@@ -30,14 +30,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const HEADERS = [
-    {id: 'uniqueId', title: 'Unique Id', sortable: true},
     {id: 'code', title: 'Code', sortable: true},
-    {id: 'managerName', title: 'Manager Name', sortable: true},
     {id: 'name', title: 'Name', sortable: true},
-    {id: 'postalCode', title: 'Postal Code', sortable: false},
-    {id: 'active', title: 'Active', sortable: true},
-    {id: 'phone', title: 'Phone', sortable: false},
-    {id: 'mobile', title: 'Mobile', sortable: false},
+    {id: 'type', title: 'Type', sortable: true},
+    {id: 'parent', title: 'Parent', sortable: false},
 ];
 
 const CountryDivisionTable = (props) => {
@@ -91,23 +87,18 @@ const CountryDivisionTable = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {pageData.data.map((guild, index) => (
-                        <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={guild.code}>
+                    {pageData.data.map((countryDivision, index) => (
+                        <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={countryDivision.code}>
                             <TableCell align='center'>{(page * rowsPerPage) + index+1}</TableCell>
-                            <TableCell align='center'>{guild.uniqueId}</TableCell>
-                            <TableCell align='center'>{guild.code}</TableCell>
-                            <TableCell align='center'>{guild.managerName}</TableCell>
-                            <TableCell align='center'>{guild.name}</TableCell>
-                            <TableCell align='center'>{guild.postalCode}</TableCell>
-                            <TableCell align='center'><Checkbox color='primary' checked={guild.active} disableRipple/>
-                            </TableCell>
-                            <TableCell align='center'>{guild.phone}</TableCell>
-                            <TableCell align='center'>{guild.mobile}</TableCell>
+                            <TableCell align='center'>{countryDivision.code}</TableCell>
+                            <TableCell align='center'>{countryDivision.name}</TableCell>
+                            <TableCell align='center'>{countryDivision.type}</TableCell>
+                            <TableCell align='center'>{countryDivision.parent}</TableCell>
                             <TableCell align='center'>
-                                <IconButton size='small' onClick={() => onDeleteClick(guild)}>
+                                <IconButton size='small' onClick={() => onDeleteClick(countryDivision)}>
                                     <DeleteIcon fontSize='small' color="primary"/>
                                 </IconButton>
-                                <IconButton size='small' onClick={() => onEditClick(guild)}>
+                                <IconButton size='small' onClick={() => onEditClick(countryDivision)}>
                                     <EditIcon fontSize='small' color="primary"/>
                                 </IconButton>
                             </TableCell>
