@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     Checkbox,
     IconButton,
@@ -8,11 +8,12 @@ import {
     TableBody,
     TableCell,
     TableContainer,
-    TableHead,
+    TableHead, TablePagination,
     TableRow
 } from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import * as Constants from '../../service/Constants';
 
 const useStyles = makeStyles(theme => ({
 
@@ -28,7 +29,31 @@ const useStyles = makeStyles(theme => ({
 }));
 const CentralGuildTable = (props) => {
     const classes = useStyles();
-    const {pageData, onEditClick, onDeleteClick} = props;
+    const {pageData, onEditClick, onDeleteClick, loadPage} = props;
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(Constants.DEFAULT_ROWS_PER_PAGE);
+    const [orderBy, setOrderBy] = useState('code');
+    const [order, setOrder] = useState(Constants.DEFAULT_ORDER);
+
+    function changePage(event, newPage) {
+        setPage(newPage);
+        loadPage({
+            page: newPage,
+            pageSize: rowsPerPage,
+            order,
+            orderBy
+        })
+    }
+
+    function changeRowsPerPage(event) {
+        setRowsPerPage(event.target.value);
+        loadPage({
+            page,
+            pageSize: event.target.value,
+            order,
+            orderBy
+        })
+    }
 
     return (
         <TableContainer component={Paper}>
@@ -72,6 +97,15 @@ const CentralGuildTable = (props) => {
                     ))}
                 </TableBody>
             </Table>
+            <TablePagination
+                component="div"
+                rowsPerPageOptions={Constants.DEFAULT_ROWS_PER_PAGE_OPTIONS}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                count={pageData.count}
+                onChangePage={changePage}
+                onChangeRowsPerPage={changeRowsPerPage}
+            />
         </TableContainer>
     );
 }
