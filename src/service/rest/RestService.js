@@ -1,6 +1,7 @@
 import Axios from 'axios';
 
 // const BASE_URL = 'http://192.168.50.27:8080/hoviat';
+// const BASE_URL = 'http://5.160.126.138:8080/hoviat';
 const BASE_URL = 'http://localhost:8080/hoviat';
 
 function getFunc(url) {
