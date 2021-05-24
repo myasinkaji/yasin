@@ -100,10 +100,10 @@ const CentralGuildForm = (props) => {
 
             <DialogActions>
                 <Grid container>
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12} sm={6}>
                         <Button label='Reset' color='secondary' onClick={reset} type='reset'/>
                     </Grid>
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12} sm={6}>
                         <Button label='Save Entity' onClick={register} type='submit'/>
                     </Grid>
                 </Grid>
