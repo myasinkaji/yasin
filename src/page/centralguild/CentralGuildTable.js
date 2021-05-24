@@ -35,6 +35,7 @@ const CentralGuildTable = (props) => {
             <Table size="small">
                 <TableHead className={classes.head}>
                     <TableRow>
+                        <TableCell align='center'>Id</TableCell>
                         <TableCell align='center'>uniqueId</TableCell>
                         <TableCell align='center'>code</TableCell>
                         <TableCell align='center'>managerName</TableCell>
@@ -49,6 +50,7 @@ const CentralGuildTable = (props) => {
                 <TableBody>
                     {page.data.map((guild, index) => (
                         <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={guild.code}>
+                            <TableCell align='center'>{index+1}</TableCell>
                             <TableCell align='center'>{guild.uniqueId}</TableCell>
                             <TableCell align='center'>{guild.code}</TableCell>
                             <TableCell align='center'>{guild.managerName}</TableCell>
