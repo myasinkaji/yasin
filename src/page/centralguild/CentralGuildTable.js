@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Checkbox,
     IconButton,
@@ -48,36 +48,25 @@ const CentralGuildTable = (props) => {
     const [orderBy, setOrderBy] = useState(Service.DEFAULT_PAGE_REQUEST.orderBy);
     const [order, setOrder] = useState(Constants.DEFAULT_ORDER);
 
-    function changePage(event, newPage) {
-        setPage(newPage);
+    useEffect(() => {
         loadPage({
-            page: newPage,
+            page,
             pageSize: rowsPerPage,
             order,
             orderBy
         })
+    }, [page, rowsPerPage, orderBy, order]);
+    function changePage(event, newPage) {
+        setPage(newPage);
     }
 
     function changeRowsPerPage(event) {
         setRowsPerPage(event.target.value);
-        loadPage({
-            page,
-            pageSize: event.target.value,
-            order,
-            orderBy
-        })
     }
 
     function orderChanged(newOrderBy) {
-        const newOrder = orderBy === newOrderBy ? (order === 'asc' ? 'desc' : 'asc') : 'asc';
-        setOrder(newOrder)
+        setOrder(orderBy === newOrderBy ? (order === 'asc' ? 'desc' : 'asc') : 'asc')
         setOrderBy(newOrderBy);
-        loadPage({
-            page,
-            pageSize: rowsPerPage,
-            order: newOrder,
-            orderBy: newOrderBy
-        })
     }
     return (
         <TableContainer component={Paper}>
@@ -86,7 +75,7 @@ const CentralGuildTable = (props) => {
                     <TableRow>
                         <TableCell align='center'>Id</TableCell>
                         {
-                            HEADERS.map(header => (<TableCell align='center'>
+                            HEADERS.map(header => (<TableCell align='center' key={header.id}>
                                     {header.sortable ?
                                         <TableSortLabel
                                             active={orderBy === header.id}

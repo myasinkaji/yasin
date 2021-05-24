@@ -34,10 +34,6 @@ const CentralGuildPage = () => {
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        loadPage(Service.DEFAULT_PAGE_REQUEST);
-    }, []);
-
     const loadPage = (pageRequest) => {
         setLoading(true)
         const promise = Service.getPage(pageRequest);
