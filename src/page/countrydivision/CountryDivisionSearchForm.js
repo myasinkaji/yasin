@@ -5,7 +5,6 @@ import Button from "../../component/controls/Button";
 import SaveIcon from '@material-ui/icons/Save';
 import SearchIcon from '@material-ui/icons/Search';
 import * as Service from '../../service/countrydivision/CountryDivisionService';
-import Checkbox from "../../component/controls/Checkbox";
 
 
 const CountryDivisionSearchForm = (props) => {
@@ -41,35 +40,20 @@ const CountryDivisionSearchForm = (props) => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField label='UniqueId'
-                                   name='uniqueId'
-                                   value={searchCriteria.uniqueId}
+                        <TextField label='Type'
+                                   name='type'
+                                   value={searchCriteria.type}
                                    onChange={onChange}
                         />
                     </Grid>
-                    <Grid item xs={12}>
-                        <Checkbox
-                            color='secondary'
-                            label='Active'
-                            name="active"
-                            checked={searchCriteria.active}
-                            onChange={onChange}
-                        />
-                    </Grid>
+
                 </Grid>
                 <Grid item container xs={12} md={6} spacing={3}>
 
                     <Grid item xs={12}>
-                        <TextField label='Phone'
-                                   name='phone'
-                                   value={searchCriteria.phone}
-                                   onChange={onChange}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField label='Mobile'
-                                   name='mobile'
-                                   value={searchCriteria.mobile}
+                        <TextField label='Parent'
+                                   name='parent'
+                                   value={searchCriteria.parent}
                                    onChange={onChange}
                         />
                     </Grid>
