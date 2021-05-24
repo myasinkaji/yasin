@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {
-    Checkbox,
     IconButton,
     makeStyles,
     Paper,
@@ -8,8 +7,10 @@ import {
     TableBody,
     TableCell,
     TableContainer,
-    TableHead, TablePagination,
-    TableRow, TableSortLabel
+    TableHead,
+    TablePagination,
+    TableRow,
+    TableSortLabel
 } from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
@@ -52,6 +53,7 @@ const CountryDivisionTable = (props) => {
             orderBy
         })
     }, [page, rowsPerPage, orderBy, order]);
+
     function changePage(event, newPage) {
         setPage(newPage);
     }
@@ -64,6 +66,7 @@ const CountryDivisionTable = (props) => {
         setOrder(orderBy === newOrderBy ? (order === 'asc' ? 'desc' : 'asc') : 'asc')
         setOrderBy(newOrderBy);
     }
+
     return (
         <TableContainer component={Paper}>
             <Table size="small">
@@ -72,15 +75,15 @@ const CountryDivisionTable = (props) => {
                         <TableCell align='center'>Id</TableCell>
                         {
                             HEADERS.map(header => (<TableCell align='center' key={header.id}>
-                                    {header.sortable ?
-                                        <TableSortLabel
-                                            active={orderBy === header.id}
-                                            direction={orderBy === header.id ? order : 'asc'}
-                                            onClick={() => orderChanged(header.id)}>
-                                            {header.title}
-                                        </TableSortLabel>
-                                        : header.title
-                                    }
+                                {header.sortable ?
+                                    <TableSortLabel
+                                        active={orderBy === header.id}
+                                        direction={orderBy === header.id ? order : 'asc'}
+                                        onClick={() => orderChanged(header.id)}>
+                                        {header.title}
+                                    </TableSortLabel>
+                                    : header.title
+                                }
                             </TableCell>))
                         }
                         <TableCell align='center'>Actions</TableCell>
@@ -89,7 +92,7 @@ const CountryDivisionTable = (props) => {
                 <TableBody>
                     {pageData.data.map((countryDivision, index) => (
                         <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={countryDivision.code}>
-                            <TableCell align='center'>{(page * rowsPerPage) + index+1}</TableCell>
+                            <TableCell align='center'>{(page * rowsPerPage) + index + 1}</TableCell>
                             <TableCell align='center'>{countryDivision.code}</TableCell>
                             <TableCell align='center'>{countryDivision.name}</TableCell>
                             <TableCell align='center'>{countryDivision.type}</TableCell>
