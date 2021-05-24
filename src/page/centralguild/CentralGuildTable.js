@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
 }));
 const CentralGuildTable = (props) => {
     const classes = useStyles();
-    const {page, onEditClick, onDeleteClick} = props;
+    const {pageData, onEditClick, onDeleteClick} = props;
 
     return (
         <TableContainer component={Paper}>
@@ -48,7 +48,7 @@ const CentralGuildTable = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {page.data.map((guild, index) => (
+                    {pageData.data.map((guild, index) => (
                         <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={guild.code}>
                             <TableCell align='center'>{index+1}</TableCell>
                             <TableCell align='center'>{guild.uniqueId}</TableCell>
