@@ -35,12 +35,12 @@ const CentralGuildPage = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        loadPage();
+        loadPage(Service.DEFAULT_PAGE_REQUEST);
     }, []);
 
-    const loadPage = () => {
+    const loadPage = (pageRequest) => {
         setLoading(true)
-        const promise = Service.getPage(Service.DEFAULT_PAGE_REQUEST);
+        const promise = Service.getPage(pageRequest);
         setPageData(promise);
     }
 
@@ -61,7 +61,7 @@ const CentralGuildPage = () => {
 
     const submitAware = (guild) => {
         dialogClose();
-        loadPage();
+        loadPage(Service.DEFAULT_PAGE_REQUEST);
         setNotify(BaseService.getSuccessMessageObject(`${guild.code} is registered Successfully`));
     }
 
@@ -81,7 +81,7 @@ const CentralGuildPage = () => {
 
     function removeGuild(guild) {
         Service.remove(guild.code).then(() => {
-            loadPage();
+            loadPage(Service.DEFAULT_PAGE_REQUEST);
             setNotify(BaseService.getWarningMessageObject(`${guild.code} is deleted Successfully`));
         }).catch(e => {
             setNotify(BaseService.getErrorMessageObject(`${guild.code} can not be delete. ${e.message}`));
@@ -108,7 +108,8 @@ const CentralGuildPage = () => {
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <CentralGuildTable page={page} onEditClick={onEditClick} onDeleteClick={onDeleteClick}/>
+                    <CentralGuildTable pageData={page} onEditClick={onEditClick}
+                                       onDeleteClick={onDeleteClick} loadPage={loadPage}/>
                 </Paper>
             </Grid>
             <Dialog title='Insert new' onClose={dialogClose} open={open}>
