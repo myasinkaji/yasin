@@ -17,6 +17,10 @@ const useStyles = makeStyles(theme => ({
         paddingRight: theme.spacing(10),
         paddingLeft: theme.spacing(10),
         textAlign: 'center',
+        [theme.breakpoints.down('xs')]: {
+            paddingRight: theme.spacing(3),
+            paddingLeft: theme.spacing(3),
+        },
     },
     dialogAction: {
         justifyContent: 'center'
@@ -30,6 +34,11 @@ const useStyles = makeStyles(theme => ({
         },
         '& .MuiSvgIcon-root': {
             fontSize: '8rem'
+        },
+        [theme.breakpoints.down('sm')]: {
+            '& .MuiSvgIcon-root': {
+                fontSize: '4rem'
+            }
         }
     }
 }));
