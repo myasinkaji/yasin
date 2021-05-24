@@ -27,7 +27,7 @@ const CentralGuildPage = () => {
     const [open, setOpen] = useState(false);
     const [record, setRecord] = useState(undefined);
     const [page, setPage] = useState(Constants.EMPTY_PAGE);
-    const [notify, setNotify] = useState({isOpen: true, title: '', message: '', type: ''});
+    const [notify, setNotify] = useState({isOpen: false, title: '', message: '', type: ''});
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
 
     useEffect(() => {
