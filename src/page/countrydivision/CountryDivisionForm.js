@@ -5,7 +5,6 @@ import Button from "../../component/controls/Button";
 import * as Service from '../../service/countrydivision/CountryDivisionService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
-import Checkbox from "../../component/controls/Checkbox";
 
 
 const useStyle = makeStyles(theme => ({
@@ -20,21 +19,21 @@ const CountryDivisionForm = (props) => {
     const classes = useStyle();
     const {recordForUpdate, submitAware, setNotify} = props;
     const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_COUNTRY_DIVISION;
-    const [guild, setGuild] = useState(initialValue);
+    const [countryDivision, setCountryDivision] = useState(initialValue);
     const [errors, setErrors] = useState(Constants.NO_ERROR);
 
     function onchange(event) {
         const {name, value} = event.target;
-        setGuild({
-            ...guild,
+        setCountryDivision({
+            ...countryDivision,
             [name]: value,
         });
     }
 
     function register() {
-        if (Service.validate(guild, setErrors)) {
-            Service.save(guild).then(() => {
-                submitAware(guild);
+        if (Service.validate(countryDivision, setErrors)) {
+            Service.save(countryDivision).then(() => {
+                submitAware(countryDivision);
             }).catch(e => {
                 setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`));
             })
@@ -42,55 +41,31 @@ const CountryDivisionForm = (props) => {
     }
 
     function reset() {
-        setGuild(initialValue);
+        setCountryDivision(initialValue);
     }
 
     return (
         <>
             <DialogContent className={classes.dialogContent}>
                 <Grid container spacing={3}>
-                    <Grid item container xs={12} md={6} spacing={3}>
+                    <Grid item container xs={12}>
                         <Grid item xs={12}>
                             <TextField error={errors.code}
-                                       onChange={onchange} name='code' label='Code' value={guild.code}/>
+                                       onChange={onchange} name='code' label='Code' value={countryDivision.code}/>
                         </Grid>
                         <Grid item xs={12}>
                             <TextField error={errors.name}
-                                       onChange={onchange} name='name' label='Name' value={guild.name}/>
+                                       onChange={onchange} name='name' label='Name' value={countryDivision.name}/>
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField error={errors.uniqueId}
-                                       onChange={onchange} name='uniqueId' label='UniqueId' value={guild.uniqueId}/>
+                            <TextField error={errors.type}
+                                       onChange={onchange} name='type' label='Type' value={countryDivision.type}/>
                         </Grid>
-                        <Grid item xs={12}>
-                            <TextField error={errors.postalCode}
-                                       onChange={onchange} name='postalCode' label='Postal Code'
-                                       value={guild.postalCode}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField error={errors.managerName}
-                                       onChange={onchange} name='managerName' label='Manager Name'
-                                       value={guild.managerName}/>
-                        </Grid>
-                    </Grid>
-                    <Grid item container xs={12} md={6} spacing={3}>
 
                         <Grid item xs={12}>
-                            <TextField error={errors.phone}
-                                       onChange={onchange} name='phone' label='Phone' value={guild.phone}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField error={errors.mobile}
-                                       onChange={onchange} name='mobile' label='Mobile' value={guild.mobile}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Checkbox
-                                name='active'
-                                label="Is Active"
-                                checked={guild.active}
-                                onChange={onchange}
-                            />
+                            <TextField error={errors.parent}
+                                       onChange={onchange} name='parent' label='Parent' value={countryDivision.parent}/>
                         </Grid>
                     </Grid>
 
