@@ -9,11 +9,12 @@ import {
     TableCell,
     TableContainer,
     TableHead, TablePagination,
-    TableRow
+    TableRow, TableSortLabel
 } from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import * as Constants from '../../service/Constants';
+import * as Service from '../../service/centralGuild/CentralGuildService';
 
 const useStyles = makeStyles(theme => ({
 
@@ -27,12 +28,24 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.secondary.light
     },
 }));
+
+const HEADERS = [
+    {id: 'uniqueId', title: 'Unique Id', sortable: true},
+    {id: 'code', title: 'Code', sortable: true},
+    {id: 'managerName', title: 'Manager Name', sortable: true},
+    {id: 'name', title: 'Name', sortable: true},
+    {id: 'postalCode', title: 'Postal Code', sortable: false},
+    {id: 'active', title: 'Active', sortable: true},
+    {id: 'phone', title: 'Phone', sortable: false},
+    {id: 'mobile', title: 'Mobile', sortable: false},
+];
+
 const CentralGuildTable = (props) => {
     const classes = useStyles();
     const {pageData, onEditClick, onDeleteClick, loadPage} = props;
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(Constants.DEFAULT_ROWS_PER_PAGE);
-    const [orderBy, setOrderBy] = useState('code');
+    const [orderBy, setOrderBy] = useState(Service.DEFAULT_PAGE_REQUEST.orderBy);
     const [order, setOrder] = useState(Constants.DEFAULT_ORDER);
 
     function changePage(event, newPage) {
@@ -55,20 +68,36 @@ const CentralGuildTable = (props) => {
         })
     }
 
+    function orderChanged(newOrderBy) {
+        const newOrder = orderBy === newOrderBy ? (order === 'asc' ? 'desc' : 'asc') : 'asc';
+        setOrder(newOrder)
+        setOrderBy(newOrderBy);
+        loadPage({
+            page,
+            pageSize: rowsPerPage,
+            order: newOrder,
+            orderBy: newOrderBy
+        })
+    }
     return (
         <TableContainer component={Paper}>
             <Table size="small">
                 <TableHead className={classes.head}>
                     <TableRow>
                         <TableCell align='center'>Id</TableCell>
-                        <TableCell align='center'>uniqueId</TableCell>
-                        <TableCell align='center'>code</TableCell>
-                        <TableCell align='center'>managerName</TableCell>
-                        <TableCell align='center'>name</TableCell>
-                        <TableCell align='center'>postalCode</TableCell>
-                        <TableCell align='center'>active</TableCell>
-                        <TableCell align='center'>phone</TableCell>
-                        <TableCell align='center'>mobile</TableCell>
+                        {
+                            HEADERS.map(header => (<TableCell align='center'>
+                                    {header.sortable ?
+                                        <TableSortLabel
+                                            active={orderBy === header.id}
+                                            direction={orderBy === header.id ? order : 'asc'}
+                                            onClick={() => orderChanged(header.id)}>
+                                            {header.title}
+                                        </TableSortLabel>
+                                        : header.title
+                                    }
+                            </TableCell>))
+                        }
                         <TableCell align='center'>Actions</TableCell>
                     </TableRow>
                 </TableHead>
