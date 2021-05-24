@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Grid, makeStyles, Paper} from "@material-ui/core";
+import {Backdrop, CircularProgress, Grid, makeStyles, Paper} from "@material-ui/core";
 import PageHeader from "../../component/PageHeader";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
 import CentralGuildSearchForm from "./CentralGuildSearchForm";
@@ -19,6 +19,9 @@ const useStyles = makeStyles(theme => ({
         color: theme.palette.text.secondary,
         backgroundColor: theme.palette.warning.main
     },
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+    },
 }));
 
 
@@ -29,12 +32,14 @@ const CentralGuildPage = () => {
     const [page, setPage] = useState(Constants.EMPTY_PAGE);
     const [notify, setNotify] = useState({isOpen: false, title: '', message: '', type: ''});
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         loadPage();
     }, []);
 
     const loadPage = () => {
+        setLoading(true)
         const promise = Service.getPage(Service.DEFAULT_PAGE_REQUEST);
         setPageData(promise);
     }
@@ -48,6 +53,7 @@ const CentralGuildPage = () => {
         promise
             .then(response => {
                 setPage(response.data);
+                setLoading(false);
             }).catch(error => {
             setNotify(BaseService.getErrorMessageObject(`Error Code: ${error.status}, Message: ${error.message}`))
         });
@@ -116,6 +122,9 @@ const CentralGuildPage = () => {
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />
+            <Backdrop className={classes.backdrop} open={loading}>
+                <CircularProgress color="secondary"/>
+            </Backdrop>
         </>
     );
 }
