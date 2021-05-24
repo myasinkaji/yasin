@@ -5,6 +5,7 @@ import PageThree from "../page/PageThree";
 import PageTwo from "../page/PageTwo";
 import CentralGuildPage from "../page/centralguild/CentralGuildPage";
 import ProvinceGuildPage from "../page/Provinceguild/ProvinceGuildPage";
+import CountryDivisionPage from "../page/countrydivision/CountryDivisionPage";
 
 
 const PageContent = () => {
@@ -21,6 +22,9 @@ const PageContent = () => {
             </Route>
             <Route path='/province-guild'>
                 <ProvinceGuildPage/>
+            </Route>
+            <Route path='/country-division'>
+                <CountryDivisionPage/>
             </Route>
             <Route exact path='/central-guild'>
                 <CentralGuildPage/>
