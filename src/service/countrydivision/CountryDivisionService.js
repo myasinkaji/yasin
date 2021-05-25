@@ -4,6 +4,7 @@ import * as Constants from "../Constants";
 
 const BASE_ADDRESS = '/cd';
 const SEARCH_ADDRESS = BASE_ADDRESS.concat('/search')
+const TREE_ADDRESS = BASE_ADDRESS.concat('/tree')
 
 export const SEARCH_CRITERIA = {
     code: '',
@@ -43,6 +44,9 @@ export function save(countryDivision) {
     return RestService.post(BASE_ADDRESS, countryDivision);
 }
 
+export function getTree() {
+    return RestService.get(TREE_ADDRESS);
+}
 export function search(pageRequest, searchCriteria) {
     return BaseService.search(SEARCH_ADDRESS, pageRequest, searchCriteria);
 }
