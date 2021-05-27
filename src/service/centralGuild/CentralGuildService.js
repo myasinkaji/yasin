@@ -4,6 +4,7 @@ import * as Constants from "../Constants";
 
 const BASE_ADDRESS = '/cg';
 const SEARCH_ADDRESS = BASE_ADDRESS.concat('/search')
+const LAZY_ADDRESS = BASE_ADDRESS.concat('/lazy')
 
 export const GUILD_SEARCH_CRITERIA = {
     uniqueId: '',
@@ -36,6 +37,10 @@ export function getPage(pageRequest) {
         .concat('?')
         .concat(BaseService.getPageRequestURLParams(pageRequest))
     return RestService.get(url)
+}
+
+export function getLazy() {
+    return RestService.get(LAZY_ADDRESS)
 }
 
 export function remove(guildCode) {
