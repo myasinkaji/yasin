@@ -46,7 +46,7 @@ const CountryDivisionDialog = (props) => {
                         <Button label='Close' onClick={close} color='secondary' type='reset'/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Button label='Save Entity' onClick={select} type='submit'/>
+                        <Button label='Select' onClick={select} type='submit'/>
                     </Grid>
                 </Grid>
             </DialogActions>
