@@ -18,7 +18,11 @@ import * as Constants from '../../service/Constants';
 import * as Service from '../../service/countrydivision/CountryDivisionService';
 
 const useStyles = makeStyles(theme => ({
-
+    cell: {
+        paddingLeft: theme.spacing(1),
+        paddingRight: theme.spacing(1),
+        padding: theme.spacing(0),
+    },
     head: {
         backgroundColor: theme.palette.primary.dark
     },
@@ -92,12 +96,12 @@ const CountryDivisionTable = (props) => {
                 <TableBody>
                     {pageData.data.map((countryDivision, index) => (
                         <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={countryDivision.code}>
-                            <TableCell align='center'>{(page * rowsPerPage) + index + 1}</TableCell>
-                            <TableCell align='center'>{countryDivision.code}</TableCell>
-                            <TableCell align='center'>{countryDivision.name}</TableCell>
-                            <TableCell align='center'>{countryDivision.type}</TableCell>
-                            <TableCell align='center'>{countryDivision.parentName}</TableCell>
-                            <TableCell align='center'>
+                            <TableCell className={classes.cell} align='center'>{(page * rowsPerPage) + index + 1}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{countryDivision.code}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{countryDivision.name}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{countryDivision.type}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{countryDivision.parentName}</TableCell>
+                            <TableCell className={classes.cell} align='center'>
                                 <IconButton size='small' onClick={() => onDeleteClick(countryDivision)}>
                                     <DeleteIcon fontSize='small' color="primary"/>
                                 </IconButton>

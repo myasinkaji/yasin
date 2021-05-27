@@ -17,7 +17,11 @@ import * as Constants from '../../service/Constants';
 import * as Service from '../../service/provinceGuild/ProvinceGuildService';
 
 const useStyles = makeStyles(theme => ({
-
+    cell: {
+        paddingLeft: theme.spacing(1),
+        paddingRight: theme.spacing(1),
+        padding: theme.spacing(0),
+    },
     head: {
         backgroundColor: theme.palette.primary.dark
     },
@@ -95,19 +99,19 @@ const ProvinceGuildTable = (props) => {
                 <TableBody>
                     {pageData.data.map((guild, index) => (
                         <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={guild.code}>
-                            <TableCell align='center'>{(page * rowsPerPage) + index+1}</TableCell>
-                            <TableCell align='center'>{guild.uniqueId}</TableCell>
-                            <TableCell align='center'>{guild.code}</TableCell>
-                            <TableCell align='center'>{guild.managerName}</TableCell>
-                            <TableCell align='center'>{guild.name}</TableCell>
-                            <TableCell align='center'>{guild.postalCode}</TableCell>
-                            <TableCell align='center'>{guild.centralGuildName}</TableCell>
-                            <TableCell align='center'>{guild.countryDivisionName}</TableCell>
-                            <TableCell align='center'><Checkbox color='primary' checked={guild.active} disableRipple/>
+                            <TableCell className={classes.cell} align='center'>{(page * rowsPerPage) + index+1}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{guild.uniqueId}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{guild.code}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{guild.managerName}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{guild.name}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{guild.postalCode}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{guild.centralGuildName}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{guild.countryDivisionName}</TableCell>
+                            <TableCell className={classes.cell} align='center'><Checkbox color='primary' checked={guild.active} disableRipple/>
                             </TableCell>
-                            <TableCell align='center'>{guild.phone}</TableCell>
-                            <TableCell align='center'>{guild.mobile}</TableCell>
-                            <TableCell align='center'>
+                            <TableCell className={classes.cell} align='center'>{guild.phone}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{guild.mobile}</TableCell>
+                            <TableCell className={classes.cell} align='center'>
                                 <IconButton size='small' onClick={() => onDeleteClick(guild)}>
                                     <DeleteIcon fontSize='small' color="primary"/>
                                 </IconButton>
