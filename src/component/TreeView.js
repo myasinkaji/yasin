@@ -23,7 +23,7 @@ const TreeView = (props) => {
     function generateTree(root) {
         if (root) {
             return (
-                <TreeItem nodeId={root.code} label={root.name}>
+                <TreeItem key={root.code} nodeId={root.code} label={root.name}>
                     {root.children.map(child => generateTree(child))}
                 </TreeItem>
             );
