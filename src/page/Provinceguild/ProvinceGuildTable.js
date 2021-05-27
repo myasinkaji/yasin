@@ -35,6 +35,8 @@ const HEADERS = [
     {id: 'managerName', title: 'Manager Name', sortable: true},
     {id: 'name', title: 'Name', sortable: true},
     {id: 'postalCode', title: 'Postal Code', sortable: false},
+    {id: 'centralGuild', title: 'Central Guild', sortable: true},
+    {id: 'countryDivision', title: 'Country Division', sortable: true},
     {id: 'active', title: 'Active', sortable: true},
     {id: 'phone', title: 'Phone', sortable: false},
     {id: 'mobile', title: 'Mobile', sortable: false},
@@ -99,6 +101,8 @@ const ProvinceGuildTable = (props) => {
                             <TableCell align='center'>{guild.managerName}</TableCell>
                             <TableCell align='center'>{guild.name}</TableCell>
                             <TableCell align='center'>{guild.postalCode}</TableCell>
+                            <TableCell align='center'>{guild.centralGuildName}</TableCell>
+                            <TableCell align='center'>{guild.countryDivisionName}</TableCell>
                             <TableCell align='center'><Checkbox color='primary' checked={guild.active} disableRipple/>
                             </TableCell>
                             <TableCell align='center'>{guild.phone}</TableCell>
