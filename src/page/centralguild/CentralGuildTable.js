@@ -17,6 +17,9 @@ import * as Constants from '../../service/Constants';
 import * as Service from '../../service/centralGuild/CentralGuildService';
 
 const useStyles = makeStyles(theme => ({
+    checkbox: {
+        padding: theme.spacing(0),
+    },
     cell: {
         paddingLeft: theme.spacing(1),
         paddingRight: theme.spacing(1),
@@ -103,7 +106,9 @@ const CentralGuildTable = (props) => {
                             <TableCell className={classes.cell} align='center'>{guild.managerName}</TableCell>
                             <TableCell className={classes.cell} align='center'>{guild.name}</TableCell>
                             <TableCell className={classes.cell} align='center'>{guild.postalCode}</TableCell>
-                            <TableCell className={classes.cell} align='center'><Checkbox color='primary' checked={guild.active} disableRipple/>
+                            <TableCell className={classes.cell} align='center'>
+                                <Checkbox className={classes.checkbox} color='primary'
+                                          size='small' checked={guild.active} disableRipple/>
                             </TableCell>
                             <TableCell className={classes.cell} align='center'>{guild.phone}</TableCell>
                             <TableCell className={classes.cell} align='center'>{guild.mobile}</TableCell>
