@@ -14,7 +14,11 @@ const useStyles = makeStyles({
 
 const TreeView = (props) => {
     const classes = useStyles();
-    const {tree} = props;
+    const {tree, setSelected} = props;
+
+    function onClick(event, nodeId) {
+        setSelected(nodeId);
+    }
 
     function generateTree(root) {
         if (root) {
@@ -29,6 +33,7 @@ const TreeView = (props) => {
 
     return (
         <MuiTreeView
+            onNodeSelect={onClick}
             className={classes.root}
             defaultExpandIcon={<ChevronRightIcon/>}
             defaultCollapseIcon={<ExpandMoreIcon/>}>
