@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {DialogActions, DialogContent, Grid, makeStyles} from "@material-ui/core";
 import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
 import * as Service from '../../service/countrydivision/CountryDivisionService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
+import AutoComplete from "../../component/controls/AutoComplete";
+import * as CountryDivisionService from '../../service/countrydivision/CountryDivisionService';
 
 
 const useStyle = makeStyles(theme => ({
@@ -20,7 +22,14 @@ const CountryDivisionForm = (props) => {
     const {recordForUpdate, submitAware, setNotify} = props;
     const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_COUNTRY_DIVISION;
     const [countryDivision, setCountryDivision] = useState(initialValue);
+    const [countryDivisions, setCountryDivisions] = useState([]);
     const [errors, setErrors] = useState(Constants.NO_ERROR);
+
+    useEffect(() => {
+        CountryDivisionService.getLazy()
+            .then(response => setCountryDivisions(response.data.data))
+            .catch(e => setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`)));
+    }, []);
 
     function onchange(event) {
         const {name, value} = event.target;
@@ -64,8 +73,10 @@ const CountryDivisionForm = (props) => {
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField error={errors.parent}
-                                       onChange={onchange} name='parent' label='Parent' value={countryDivision.parent}/>
+                            <AutoComplete error={errors.parent}
+                                          data={countryDivisions}
+                                          onChange={onchange} name='parent'
+                                          label='Parent'/>
                         </Grid>
                     </Grid>
 
