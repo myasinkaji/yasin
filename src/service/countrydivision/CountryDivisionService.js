@@ -5,6 +5,7 @@ import * as Constants from "../Constants";
 const BASE_ADDRESS = '/cd';
 const SEARCH_ADDRESS = BASE_ADDRESS.concat('/search')
 const TREE_ADDRESS = BASE_ADDRESS.concat('/tree')
+const LAZY_ADDRESS = BASE_ADDRESS.concat('/lazy')
 
 export const SEARCH_CRITERIA = {
     code: '',
@@ -42,6 +43,9 @@ export function remove(code) {
 }
 export function save(countryDivision) {
     return RestService.post(BASE_ADDRESS, countryDivision);
+}
+export function getLazy() {
+    return RestService.get(LAZY_ADDRESS)
 }
 
 export function getTree() {
