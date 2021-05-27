@@ -3,6 +3,17 @@ import {Dialog as MuiDialog, DialogTitle, IconButton, makeStyles, Typography} fr
 import CancelIcon from '@material-ui/icons/Cancel';
 
 const useStyles = makeStyles(theme => ({
+    //todo set width & height based on device screen
+    paper: {
+        [theme.breakpoints.up('xs')]: {
+            minWidth: theme.spacing(40),
+            minHeight: theme.spacing(80)
+        },
+        [theme.breakpoints.up('sm')]: {
+            minWidth: theme.spacing(80),
+            minHeight: theme.spacing(30)
+        },
+    },
     dialogTitle: {
         backgroundColor: theme.palette.secondary.dark,
         alignItems: 'center'
@@ -17,7 +28,7 @@ const Dialog = (props) => {
     const {open, onClose, title} = props;
 
     return (
-        <MuiDialog open={open}>
+        <MuiDialog classes={{paper: classes.paper}} open={open}>
             <DialogTitle className={classes.dialogTitle}>
                 <Typography component='span' variant='h6'>{title}</Typography>
                 <IconButton className={classes.closeIcon} size='small' onClick={onClose}>
