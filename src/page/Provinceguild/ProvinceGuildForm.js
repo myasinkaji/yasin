@@ -1,11 +1,14 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {DialogActions, DialogContent, Grid, makeStyles} from "@material-ui/core";
 import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
 import * as Service from '../../service/provinceGuild/ProvinceGuildService';
+import * as CountryDivisionService from '../../service/countrydivision/CountryDivisionService';
+import * as CentralGuildService from '../../service/centralGuild/CentralGuildService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
 import Checkbox from "../../component/controls/Checkbox";
+import AutoComplete from "../../component/controls/AutoComplete";
 
 
 const useStyle = makeStyles(theme => ({
@@ -22,6 +25,18 @@ const ProvinceGuildForm = (props) => {
     const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_GUILD;
     const [guild, setGuild] = useState(initialValue);
     const [errors, setErrors] = useState(Constants.NO_ERROR);
+    const [countryDivisions, setCountryDivisions] = useState([]);
+    const [centralGuilds, setCentralGuilds] = useState([]);
+
+    useEffect(() => {
+        CountryDivisionService.getLazy()
+            .then(response => setCountryDivisions(response.data.data))
+            .catch(e => setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`)));
+
+        CentralGuildService.getLazy()
+            .then(response => setCentralGuilds(response.data.data))
+            .catch(e => setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`)));
+    }, []);
 
     function onchange(event) {
         const {name, value} = event.target;
@@ -83,6 +98,18 @@ const ProvinceGuildForm = (props) => {
                         <Grid item xs={12}>
                             <TextField error={errors.mobile}
                                        onChange={onchange} name='mobile' label='Mobile' value={guild.mobile}/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <AutoComplete error={errors.centralGuildCode}
+                                          data={centralGuilds}
+                                          onChange={onchange} name='centralGuildCode'
+                                          label='Central Guild'/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <AutoComplete error={errors.countryDivisionId}
+                                          data={countryDivisions}
+                                          onChange={onchange} name='countryDivisionId'
+                                          label='Country Division'/>
                         </Grid>
                         <Grid item xs={12}>
                             <Checkbox
