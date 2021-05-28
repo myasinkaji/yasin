@@ -14,7 +14,7 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import * as Constants from '../../service/Constants';
-import * as Service from '../../service/centralGuild/CentralGuildService';
+import * as Service from '../../service/tagcompany/TagCompanyService';
 
 const useStyles = makeStyles(theme => ({
     checkbox: {
@@ -37,17 +37,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const HEADERS = [
-    {id: 'uniqueId', title: 'Unique Id', sortable: true},
-    {id: 'code', title: 'Code', sortable: true},
-    {id: 'managerName', title: 'Manager Name', sortable: true},
-    {id: 'name', title: 'Name', sortable: true},
-    {id: 'postalCode', title: 'Postal Code', sortable: false},
-    {id: 'active', title: 'Active', sortable: true},
-    {id: 'phone', title: 'Phone', sortable: false},
-    {id: 'mobile', title: 'Mobile', sortable: false},
+    {id: 'uniqueId', title: 'uniqueId', sortable: true},
+    {id: 'companyName', title: 'Company Name', sortable: true},
+    {id: 'postalCode', title: 'Postal Code', sortable: true},
+    {id: 'establishedYear', title: 'Established Year', sortable: true},
+    {id: 'managerName', title: 'Manager Name', sortable: false},
+    {id: 'producer', title: 'producer', sortable: true},
+    {id: 'importer', title: 'importer', sortable: false},
+    {id: 'active', title: 'active', sortable: false},
 ];
 
-const CentralGuildTable = (props) => {
+const TagCompanyTable = (props) => {
     const classes = useStyles();
     const {pageData, onEditClick, onDeleteClick, loadPage} = props;
     const [page, setPage] = useState(0);
@@ -98,25 +98,32 @@ const CentralGuildTable = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {pageData.data.map((guild, index) => (
-                        <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={guild.code}>
+                    {pageData.data.map((tagCompany, index) => (
+                        <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={tagCompany.companyName}>
                             <TableCell className={classes.cell} align='center'>{(page * rowsPerPage) + index+1}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.uniqueId}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.code}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.managerName}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.name}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.postalCode}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{tagCompany.uniqueId}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{tagCompany.companyName}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{tagCompany.postalCode}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{tagCompany.establishedYear}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{tagCompany.managerName}</TableCell>
                             <TableCell className={classes.cell} align='center'>
                                 <Checkbox className={classes.checkbox} color='primary'
-                                          size='small' checked={guild.active} disableRipple/>
+                                          size='small' checked={tagCompany.producer} disableRipple/>
                             </TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.phone}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.mobile}</TableCell>
                             <TableCell className={classes.cell} align='center'>
-                                <IconButton size='small' onClick={() => onDeleteClick(guild)}>
+                                <Checkbox className={classes.checkbox} color='primary'
+                                          size='small' checked={tagCompany.importer} disableRipple/>
+                            </TableCell>
+                            <TableCell className={classes.cell} align='center'>
+                                <Checkbox className={classes.checkbox} color='primary'
+                                          size='small' checked={tagCompany.active} disableRipple/>
+                            </TableCell>
+
+                            <TableCell className={classes.cell} align='center'>
+                                <IconButton size='small' onClick={() => onDeleteClick(tagCompany)}>
                                     <DeleteIcon fontSize='small' color="primary"/>
                                 </IconButton>
-                                <IconButton size='small' onClick={() => onEditClick(guild)}>
+                                <IconButton size='small' onClick={() => onEditClick(tagCompany)}>
                                     <EditIcon fontSize='small' color="primary"/>
                                 </IconButton>
                             </TableCell>
@@ -137,4 +144,4 @@ const CentralGuildTable = (props) => {
     );
 }
 
-export default CentralGuildTable;
+export default TagCompanyTable;

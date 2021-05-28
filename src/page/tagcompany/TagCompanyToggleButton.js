@@ -32,17 +32,8 @@ const StyledToggleButtonGroup = withStyles((theme) => ({
     },
 }))(ToggleButtonGroup);
 
-export default function TagCompanyToggleButton() {
-    const [tags, setTags] = React.useState([]);
-    const [producerImporter, setProducerImporter] = React.useState(() => []);
-
-    const handleProducerImporter = (event, array) => {
-        setProducerImporter(array);
-    };
-
-    const handleTags = (event, tags) => {
-        setTags(tags);
-    };
+export default function TagCompanyToggleButton(props) {
+    const {tags, setTags, producerImporter, setProducerImporter} = props;
 
     const classes = useStyles();
 
@@ -52,8 +43,7 @@ export default function TagCompanyToggleButton() {
                 <StyledToggleButtonGroup
                     size="small"
                     value={tags}
-                    // exclusive
-                    onChange={handleTags}
+                    onChange={(e, tags) => setTags(tags)}
                     aria-label="text alignment">
                     <MuiToggleButton value="visualTag">
                         <Typography color='inherit' variant='caption'>
@@ -80,7 +70,7 @@ export default function TagCompanyToggleButton() {
                 <StyledToggleButtonGroup
                     size="small"
                     value={producerImporter}
-                    onChange={handleProducerImporter}>
+                    onChange={(e, arr) => setProducerImporter(arr)}>
                     <MuiToggleButton value="importer">
                         <Typography color='inherit' variant='caption'>
                             Importer

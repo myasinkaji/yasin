@@ -5,6 +5,14 @@ import * as Constants from "../Constants";
 const BASE_ADDRESS = '/tc';
 const SEARCH_ADDRESS = BASE_ADDRESS.concat('/search')
 
+export const TagCompany_TOGGLES = [
+    'producer',
+    'importer',
+    'visualTag',
+    'rfidTag',
+    'microchipTag',
+    'bolusesTag',
+]
 export const TagCompany_SEARCH_CRITERIA = {
     uniqueId: '',
     companyName: '',

@@ -4,13 +4,13 @@ import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
 import SaveIcon from '@material-ui/icons/Save';
 import SearchIcon from '@material-ui/icons/Search';
-import * as Service from '../../service/centralGuild/CentralGuildService';
+import * as Service from '../../service/tagcompany/TagCompanyService';
 import Checkbox from "../../component/controls/Checkbox";
 
 
-const CentralGuildSearchForm = (props) => {
+const TagCompanySearchForm = (props) => {
 
-    const [searchCriteria, setSearchCriteria] = useState(Service.GUILD_SEARCH_CRITERIA)
+    const [searchCriteria, setSearchCriteria] = useState(Service.TagCompany_SEARCH_CRITERIA)
     const {setOpen, searchAction} = props;
 
     const onChange = event => {
@@ -26,24 +26,24 @@ const CentralGuildSearchForm = (props) => {
             <Grid container spacing={3}>
                 <Grid item container xs={12} md={6} spacing={3}>
                     <Grid item xs={12}>
-                        <TextField label='Code'
-                                   name='code'
-                                   value={searchCriteria.code}
+                        <TextField label='UniqueId'
+                                   name='uniqueId'
+                                   value={searchCriteria.uniqueId}
                                    onChange={onChange}
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField label='Name'
-                                   name='name'
-                                   value={searchCriteria.name}
+                        <TextField label='Postal Code'
+                                   name='postalCode'
+                                   value={searchCriteria.postalCode}
                                    onChange={onChange}
                         />
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField label='UniqueId'
-                                   name='uniqueId'
-                                   value={searchCriteria.uniqueId}
+                        <TextField label='Established Year'
+                                   name='establishedYear'
+                                   value={searchCriteria.establishedYear}
                                    onChange={onChange}
                         />
                     </Grid>
@@ -60,16 +60,16 @@ const CentralGuildSearchForm = (props) => {
                 <Grid item container xs={12} md={6} spacing={3}>
 
                     <Grid item xs={12}>
-                        <TextField label='Phone'
-                                   name='phone'
-                                   value={searchCriteria.phone}
+                        <TextField label='Manager Name'
+                                   name='managerName'
+                                   value={searchCriteria.managerName}
                                    onChange={onChange}
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField label='Mobile'
-                                   name='mobile'
-                                   value={searchCriteria.mobile}
+                        <TextField label='Company Name'
+                                   name='companyName'
+                                   value={searchCriteria.companyName}
                                    onChange={onChange}
                         />
                     </Grid>
@@ -105,4 +105,4 @@ const CentralGuildSearchForm = (props) => {
     );
 }
 
-export default CentralGuildSearchForm;
+export default TagCompanySearchForm;

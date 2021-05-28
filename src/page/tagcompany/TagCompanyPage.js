@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 import {Backdrop, CircularProgress, Grid, makeStyles, Paper} from "@material-ui/core";
 import PageHeader from "../../component/PageHeader";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
-import CentralGuildSearchForm from "./CentralGuildSearchForm";
-import CentralGuildForm from "./CentralGuildForm";
+import TagCompanySearchForm from "./TagCompanySearchForm";
+import TagCompanyForm from "./TagCompanyForm";
 import Dialog from "../../component/Dialog";
-import CentralGuildTable from "./CentralGuildTable";
-import * as Service from '../../service/centralGuild/CentralGuildService';
+import TagCompanyTable from "./TagCompanyTable";
+import * as Service from '../../service/tagcompany/TagCompanyService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
 import Notification from "../../component/Notification";
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const CentralGuildPage = () => {
+const TagCompanyPage = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [record, setRecord] = useState(undefined);
@@ -55,37 +55,37 @@ const CentralGuildPage = () => {
         });
     }
 
-    const submitAware = (guild) => {
+    const submitAware = (tagCompany) => {
         dialogClose();
         loadPage(Service.DEFAULT_PAGE_REQUEST);
-        setNotify(BaseService.getSuccessMessageObject(`${guild.code} is registered Successfully`));
+        setNotify(BaseService.getSuccessMessageObject(`${tagCompany.companyName} is registered Successfully`));
     }
 
     function dialogClose() {
-        setRecord(Service.INITIAL_GUILD);
+        setRecord(Service.INITIAL_TagCompany);
         setOpen(false);
     }
 
-    function onDeleteClick(guild) {
+    function onDeleteClick(tagCompany) {
         setConfirmDialog({
             isOpen: true,
             title: 'Are you sure to delete this record?',
             subTitle: "You can't undo this operation",
-            onConfirm: () => removeGuild(guild)
+            onConfirm: () => removeTagCompany(tagCompany)
         });
     }
 
-    function removeGuild(guild) {
-        Service.remove(guild.code).then(() => {
+    function removeTagCompany(tagCompany) {
+        Service.remove(tagCompany.id).then(() => {
             loadPage(Service.DEFAULT_PAGE_REQUEST);
-            setNotify(BaseService.getWarningMessageObject(`${guild.code} is deleted Successfully`));
+            setNotify(BaseService.getWarningMessageObject(`${tagCompany.companyName} is deleted Successfully`));
         }).catch(e => {
-            setNotify(BaseService.getErrorMessageObject(`${guild.code} can not be delete. ${e.message}`));
+            setNotify(BaseService.getErrorMessageObject(`${tagCompany.companyName} can not be delete. ${e.message}`));
         });
     }
 
-    function onEditClick(guild) {
-        setRecord(guild);
+    function onEditClick(tagCompany) {
+        setRecord(tagCompany);
         setOpen(true);
     }
 
@@ -94,22 +94,22 @@ const CentralGuildPage = () => {
             <Grid item xs={12}>
                 <PageHeader
                     icon={<PeopleOutlineIcon/>}
-                    title='Central-Guild Form'
-                    subtitle='central-guild subtitle is here'/>
+                    title='Tag Company Form'
+                    subtitle='Tag Company subtitle is here'/>
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <CentralGuildSearchForm setOpen={setOpen} searchAction={onSearchClick}/>
+                    <TagCompanySearchForm setOpen={setOpen} searchAction={onSearchClick}/>
                 </Paper>
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <CentralGuildTable pageData={page} onEditClick={onEditClick}
+                    <TagCompanyTable pageData={page} onEditClick={onEditClick}
                                        onDeleteClick={onDeleteClick} loadPage={loadPage}/>
                 </Paper>
             </Grid>
             <Dialog title='Insert new' onClose={dialogClose} open={open}>
-                <CentralGuildForm submitAware={submitAware} recordForUpdate={record} setNotify={setNotify}/>
+                <TagCompanyForm submitAware={submitAware} recordForUpdate={record} setNotify={setNotify}/>
             </Dialog>
             <Notification
                 notify={notify}
@@ -126,4 +126,4 @@ const CentralGuildPage = () => {
     );
 }
 
-export default CentralGuildPage;
+export default TagCompanyPage;
