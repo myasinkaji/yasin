@@ -45,3 +45,10 @@ function getMessage(title, type, message) {
         isOpen: true
     };
 }
+
+export const BASIC_INFORMATION_LINKS = [
+    {title: 'Central Guild', to: '/central-guild'},
+    {title: 'Province Guild', to: '/province-guild'},
+    {title: 'Country Division', to: '/country-division'},
+    {title: 'Tag Company', to: '/tag-company'},
+]
