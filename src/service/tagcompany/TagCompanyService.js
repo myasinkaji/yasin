@@ -51,7 +51,7 @@ export function getPage(pageRequest) {
 export function remove(tagCompanyId) {
     const url = BASE_ADDRESS
         .concat('?')
-        .concat('code=')
+        .concat('id=')
         .concat(tagCompanyId);
     return RestService.delete(url);
 }
