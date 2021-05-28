@@ -4,13 +4,14 @@ import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
 import SaveIcon from '@material-ui/icons/Save';
 import SearchIcon from '@material-ui/icons/Search';
+import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import * as Service from '../../service/countrydivision/CountryDivisionService';
 
 
 const CountryDivisionSearchForm = (props) => {
 
     const [searchCriteria, setSearchCriteria] = useState(Service.SEARCH_CRITERIA)
-    const {setOpen, searchAction} = props;
+    const {setOpen, setOpenCDTree, searchAction} = props;
 
     const onChange = event => {
         const {name, value} = event.target;
@@ -71,12 +72,17 @@ const CountryDivisionSearchForm = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                             <Button
-                                onClick={() => {
-                                    setOpen(true)
-                                }}
+                                onClick={() => setOpen(true)}
                                 label='جدید'
                                 color='primary'
                                 icon={<SaveIcon/>}/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Button
+                                onClick={() => setOpenCDTree(true)}
+                                label='نمایش ساختار درختی'
+                                color='secondary'
+                                icon={<AccountTreeIcon/>}/>
                         </Grid>
                     </Grid>
                 </Grid>
