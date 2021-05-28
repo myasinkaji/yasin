@@ -11,6 +11,7 @@ import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
 import Notification from "../../component/Notification";
 import ConfirmDialog from "../../component/ConfirmDialog";
+import CountryDivisionDialog from "./CountryDivisionDialog";
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -33,6 +34,8 @@ const CountryDivisionPage = () => {
     const [notify, setNotify] = useState({isOpen: false, title: '', message: '', type: ''});
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
     const [loading, setLoading] = useState(false);
+    const [selectedCD, setSelectedCD] = useState(undefined);
+    const [openCDSelectDialog, setOpenCDSelectDialog] = useState(false);
 
     const loadPage = (pageRequest) => {
         setLoading(true)
@@ -91,6 +94,8 @@ const CountryDivisionPage = () => {
 
     return (
         <>
+            <CountryDivisionDialog open={openCDSelectDialog} setOpen={setOpenCDSelectDialog}
+                                   setNotify={setNotify} setSelected={setSelectedCD}/>
             <Grid item xs={12}>
                 <PageHeader
                     icon={<PeopleOutlineIcon/>}
@@ -99,7 +104,9 @@ const CountryDivisionPage = () => {
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <CountryDivisionSearchForm setOpen={setOpen} searchAction={onSearchClick}/>
+                    <CountryDivisionSearchForm setOpen={setOpen}
+                                               setOpenCDTree={setOpenCDSelectDialog}
+                                               searchAction={onSearchClick}/>
                 </Paper>
             </Grid>
             <Grid item xs={12}>
