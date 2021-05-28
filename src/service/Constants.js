@@ -1,4 +1,5 @@
 export const DEFAULT_ORDER = 'asc';
+export const DESC_ORDER = 'desc';
 
 export const EMPTY_PAGE = {data: [], count: 0};
 export const NO_ERROR = {};
