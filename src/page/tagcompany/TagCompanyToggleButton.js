@@ -76,7 +76,7 @@ export default function TagCompanyToggleButton() {
                         </Typography>
                     </MuiToggleButton>
                 </StyledToggleButtonGroup>
-                <Divider flexItem orientation="horizontal" className={classes.divider}/>
+                <Divider flexItem orientation="vertical" className={classes.divider}/>
                 <StyledToggleButtonGroup
                     size="small"
                     value={producerImporter}
