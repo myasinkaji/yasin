@@ -66,7 +66,7 @@ export function search(pageRequest, searchCriteria) {
 export function validate(tagCompany, setErrors) {
     const errors = {};
     errors.uniqueId = isBlank(String(tagCompany.uniqueId)) ? 'unique id is required' : '';
-    errors.compnayName = isBlank(tagCompany.compnayName) ? 'company name is required' : '';
+    errors.companyName = isBlank(tagCompany.companyName) ? 'company name is required' : '';
     errors.postalCode = isBlank(String(tagCompany.postalCode)) ? 'postal code is required' : '';
     errors.establishedYear = isBlank(String(tagCompany.establishedYear)) ? 'established year is required' : '';
     errors.managerName = isBlank(tagCompany.managerName) ? 'manager name is required' : '';
