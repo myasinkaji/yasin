@@ -10,7 +10,6 @@ export function search(url, pageRequest, searchCriteria) {
         .concat('&')
         .concat(criteriaParams);
 
-    console.log(url);
     return RestService.get(url)
 }
 
