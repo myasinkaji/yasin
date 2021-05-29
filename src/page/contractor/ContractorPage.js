@@ -3,7 +3,7 @@ import {Backdrop, CircularProgress, Grid, makeStyles, Paper} from "@material-ui/
 import PageHeader from "../../component/PageHeader";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
 import ContractorSearchForm from "./ContractorSearchForm";
-import ProvinceGuildForm from "./ProvinceGuildForm";
+import ContractorForm from "./ContractorForm";
 import Dialog from "../../component/Dialog";
 import ContractorTable from "./ContractorTable";
 import * as Service from '../../service/contractor/ContractorService';
@@ -109,7 +109,7 @@ const ContractorPage = () => {
                 </Paper>
             </Grid>
             <Dialog title='Insert new' onClose={dialogClose} open={open}>
-                <ProvinceGuildForm submitAware={submitAware} recordForUpdate={record} setNotify={setNotify}/>
+                <ContractorForm submitAware={submitAware} recordForUpdate={record} setNotify={setNotify}/>
             </Dialog>
             <Notification
                 notify={notify}
