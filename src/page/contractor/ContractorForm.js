@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {DialogActions, DialogContent, Grid, makeStyles} from "@material-ui/core";
 import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
-import * as Service from '../../service/provinceGuild/ProvinceGuildService';
+import * as Service from '../../service/contractor/ContractorService';
 import * as CountryDivisionService from '../../service/countrydivision/CountryDivisionService';
-import * as CentralGuildService from '../../service/centralGuild/CentralGuildService';
+import * as ProvinceGuildService from '../../service/provinceGuild/ProvinceGuildService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
 import Checkbox from "../../component/controls/Checkbox";
@@ -19,7 +19,7 @@ const useStyle = makeStyles(theme => ({
 }));
 
 
-const ProvinceGuildForm = (props) => {
+const ContractorForm = (props) => {
     const classes = useStyle();
     const {recordForUpdate, submitAware, setNotify} = props;
     const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_GUILD;
@@ -33,7 +33,7 @@ const ProvinceGuildForm = (props) => {
             .then(response => setCountryDivisions(response.data.data))
             .catch(e => setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`)));
 
-        CentralGuildService.getLazy()
+        ProvinceGuildService.getLazy()
             .then(response => setCentralGuilds(response.data.data))
             .catch(e => setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`)));
     }, []);
@@ -139,4 +139,4 @@ const ProvinceGuildForm = (props) => {
     );
 }
 
-export default ProvinceGuildForm;
+export default ContractorForm;

@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 import {Backdrop, CircularProgress, Grid, makeStyles, Paper} from "@material-ui/core";
 import PageHeader from "../../component/PageHeader";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
-import ProvinceGuildSearchForm from "./ProvinceGuildSearchForm";
+import ContractorSearchForm from "./ContractorSearchForm";
 import ProvinceGuildForm from "./ProvinceGuildForm";
 import Dialog from "../../component/Dialog";
-import ProvinceGuildTable from "./ProvinceGuildTable";
-import * as Service from '../../service/provinceGuild/ProvinceGuildService';
+import ContractorTable from "./ContractorTable";
+import * as Service from '../../service/contractor/ContractorService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
 import Notification from "../../component/Notification";
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const ProvinceGuildPage = () => {
+const ContractorPage = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [record, setRecord] = useState(undefined);
@@ -99,12 +99,12 @@ const ProvinceGuildPage = () => {
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <ProvinceGuildSearchForm setOpen={setOpen} searchAction={onSearchClick}/>
+                    <ContractorSearchForm setOpen={setOpen} searchAction={onSearchClick}/>
                 </Paper>
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <ProvinceGuildTable pageData={page} onEditClick={onEditClick}
+                    <ContractorTable pageData={page} onEditClick={onEditClick}
                                         onDeleteClick={onDeleteClick} loadPage={loadPage}/>
                 </Paper>
             </Grid>
@@ -126,4 +126,4 @@ const ProvinceGuildPage = () => {
     );
 }
 
-export default ProvinceGuildPage;
+export default ContractorPage;

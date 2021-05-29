@@ -14,7 +14,7 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import * as Constants from '../../service/Constants';
-import * as Service from '../../service/provinceGuild/ProvinceGuildService';
+import * as Service from '../../service/contractor/ContractorService';
 
 const useStyles = makeStyles(theme => ({
     checkbox: {
@@ -49,7 +49,7 @@ const HEADERS = [
     {id: 'mobile', title: 'Mobile', sortable: false},
 ];
 
-const ProvinceGuildTable = (props) => {
+const ContractorTable = (props) => {
     const classes = useStyles();
     const {pageData, onEditClick, onDeleteClick, loadPage} = props;
     const [page, setPage] = useState(0);
@@ -141,4 +141,4 @@ const ProvinceGuildTable = (props) => {
     );
 }
 
-export default ProvinceGuildTable;
+export default ContractorTable;

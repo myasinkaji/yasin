@@ -4,11 +4,11 @@ import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
 import SaveIcon from '@material-ui/icons/Save';
 import SearchIcon from '@material-ui/icons/Search';
-import * as Service from '../../service/provinceGuild/ProvinceGuildService';
+import * as Service from '../../service/contractor/ContractorService';
 import Checkbox from "../../component/controls/Checkbox";
 
 
-const ProvinceGuildSearchForm = (props) => {
+const ContractorSearchForm = (props) => {
 
     const [searchCriteria, setSearchCriteria] = useState(Service.GUILD_SEARCH_CRITERIA)
     const {setOpen, searchAction} = props;
@@ -105,4 +105,4 @@ const ProvinceGuildSearchForm = (props) => {
     );
 }
 
-export default ProvinceGuildSearchForm;
+export default ContractorSearchForm;
