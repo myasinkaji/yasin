@@ -27,15 +27,19 @@ export function getPageRequestURLParams(pageRequest) {
 export function getSuccessMessageObject(message) {
     return getMessage('Success', 'success', message);
 }
+
 export function getInfoMessageObject(message) {
     return getMessage('Info', 'info', message);
 }
+
 export function getWarningMessageObject(message) {
     return getMessage('Warning', 'warning', message);
 }
+
 export function getErrorMessageObject(message) {
     return getMessage('Error', 'error', message);
 }
+
 function getMessage(title, type, message) {
     return {
         title,
@@ -50,4 +54,5 @@ export const BASIC_INFORMATION_LINKS = [
     {title: 'Province Guild', to: '/province-guild'},
     {title: 'Country Division', to: '/country-division'},
     {title: 'Tag Company', to: '/tag-company'},
+    {title: 'Contractor', to: '/contractor'},
 ]
