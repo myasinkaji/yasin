@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {
-    Checkbox,
     IconButton,
     makeStyles,
     Paper,
@@ -8,8 +7,10 @@ import {
     TableBody,
     TableCell,
     TableContainer,
-    TableHead, TablePagination,
-    TableRow, TableSortLabel
+    TableHead,
+    TablePagination,
+    TableRow,
+    TableSortLabel
 } from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
@@ -37,16 +38,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const HEADERS = [
-    {id: 'uniqueId', title: 'Unique Id', sortable: true},
-    {id: 'code', title: 'Code', sortable: true},
-    {id: 'managerName', title: 'Manager Name', sortable: true},
-    {id: 'name', title: 'Name', sortable: true},
-    {id: 'postalCode', title: 'Postal Code', sortable: false},
-    {id: 'centralGuild', title: 'Central Guild', sortable: true},
-    {id: 'countryDivision', title: 'Country Division', sortable: true},
-    {id: 'active', title: 'Active', sortable: true},
-    {id: 'phone', title: 'Phone', sortable: false},
-    {id: 'mobile', title: 'Mobile', sortable: false},
+    {id: 'uniqueId', title: 'uniqueId', sortable: true},
+    {id: 'nationalCode', title: 'National Code', sortable: true},
+    {id: 'firstname', title: 'Firstname', sortable: false},
+    {id: 'lastname', title: 'Lastname', sortable: false},
+    {id: 'companyName', title: 'Company Name', sortable: false},
+    {id: 'countryDivisionId', title: 'Country Division', sortable: false},
+    {id: 'provinceGuildId', title: 'Province Guild', sortable: false},
 ];
 
 const ContractorTable = (props) => {
@@ -65,6 +63,7 @@ const ContractorTable = (props) => {
             orderBy
         })
     }, [page, rowsPerPage, orderBy, order]);
+
     function changePage(event, newPage) {
         setPage(newPage);
     }
@@ -77,6 +76,7 @@ const ContractorTable = (props) => {
         setOrder(orderBy === newOrderBy ? (order === 'asc' ? 'desc' : 'asc') : 'asc')
         setOrderBy(newOrderBy);
     }
+
     return (
         <TableContainer component={Paper}>
             <Table size="small">
@@ -85,15 +85,15 @@ const ContractorTable = (props) => {
                         <TableCell align='center'>Id</TableCell>
                         {
                             HEADERS.map(header => (<TableCell align='center' key={header.id}>
-                                    {header.sortable ?
-                                        <TableSortLabel
-                                            active={orderBy === header.id}
-                                            direction={orderBy === header.id ? order : 'asc'}
-                                            onClick={() => orderChanged(header.id)}>
-                                            {header.title}
-                                        </TableSortLabel>
-                                        : header.title
-                                    }
+                                {header.sortable ?
+                                    <TableSortLabel
+                                        active={orderBy === header.id}
+                                        direction={orderBy === header.id ? order : 'asc'}
+                                        onClick={() => orderChanged(header.id)}>
+                                        {header.title}
+                                    </TableSortLabel>
+                                    : header.title
+                                }
                             </TableCell>))
                         }
                         <TableCell align='center'>Actions</TableCell>
@@ -102,20 +102,15 @@ const ContractorTable = (props) => {
                 <TableBody>
                     {pageData.data.map((guild, index) => (
                         <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={guild.code}>
-                            <TableCell className={classes.cell} align='center'>{(page * rowsPerPage) + index+1}</TableCell>
+                            <TableCell className={classes.cell}
+                                       align='center'>{(page * rowsPerPage) + index + 1}</TableCell>
                             <TableCell className={classes.cell} align='center'>{guild.uniqueId}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.code}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.managerName}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.name}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.postalCode}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.centralGuildName}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{guild.nationalCode}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{guild.firstname}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{guild.lastname}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{guild.companyName}</TableCell>
                             <TableCell className={classes.cell} align='center'>{guild.countryDivisionName}</TableCell>
-                            <TableCell className={classes.cell} align='center'>
-                                <Checkbox className={classes.checkbox} color='primary'
-                                          size='small' checked={guild.active} disableRipple/>
-                            </TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.phone}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.mobile}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{guild.provinceGuildName}</TableCell>
                             <TableCell className={classes.cell} align='center'>
                                 <IconButton size='small' onClick={() => onDeleteClick(guild)}>
                                     <DeleteIcon fontSize='small' color="primary"/>

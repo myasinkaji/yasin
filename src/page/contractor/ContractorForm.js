@@ -22,7 +22,7 @@ const useStyle = makeStyles(theme => ({
 const ContractorForm = (props) => {
     const classes = useStyle();
     const {recordForUpdate, submitAware, setNotify} = props;
-    const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_GUILD;
+    const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_CONTRACTOR;
     const [guild, setGuild] = useState(initialValue);
     const [errors, setErrors] = useState(Constants.NO_ERROR);
     const [countryDivisions, setCountryDivisions] = useState([]);

@@ -10,7 +10,7 @@ import Checkbox from "../../component/controls/Checkbox";
 
 const ContractorSearchForm = (props) => {
 
-    const [searchCriteria, setSearchCriteria] = useState(Service.GUILD_SEARCH_CRITERIA)
+    const [searchCriteria, setSearchCriteria] = useState(Service.CONTRACTOR_SEARCH_CRITERIA)
     const {setOpen, searchAction} = props;
 
     const onChange = event => {

@@ -62,7 +62,7 @@ const ContractorPage = () => {
     }
 
     function dialogClose() {
-        setRecord(Service.INITIAL_GUILD);
+        setRecord(Service.INITIAL_CONTRACTOR);
         setOpen(false);
     }
 
@@ -94,8 +94,8 @@ const ContractorPage = () => {
             <Grid item xs={12}>
                 <PageHeader
                     icon={<PeopleOutlineIcon/>}
-                    title='Province-Guild Form'
-                    subtitle='province-guild subtitle is here'/>
+                    title='Contractor Form'
+                    subtitle='contractor subtitle is here'/>
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
@@ -105,7 +105,7 @@ const ContractorPage = () => {
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
                     <ContractorTable pageData={page} onEditClick={onEditClick}
-                                        onDeleteClick={onDeleteClick} loadPage={loadPage}/>
+                                     onDeleteClick={onDeleteClick} loadPage={loadPage}/>
                 </Paper>
             </Grid>
             <Dialog title='Insert new' onClose={dialogClose} open={open}>
