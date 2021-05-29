@@ -44,7 +44,7 @@ const HEADERS = [
     {id: 'lastname', title: 'Lastname', sortable: false},
     {id: 'companyName', title: 'Company Name', sortable: false},
     {id: 'countryDivisionId', title: 'Country Division', sortable: false},
-    {id: 'provinceGuildId', title: 'Province Guild', sortable: false},
+    {id: 'provinceGuildCode', title: 'Province Guild', sortable: false},
 ];
 
 const ContractorTable = (props) => {

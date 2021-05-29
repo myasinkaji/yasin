@@ -16,7 +16,7 @@ export const CONTRACTOR_SEARCH_CRITERIA = {
     uniqueId: '',
     companyName: '',
     countryDivisionId: '',
-    provinceGuildId: '',
+    provinceGuildCode: '',
 };
 
 export const INITIAL_CONTRACTOR = {
@@ -30,7 +30,7 @@ export const INITIAL_CONTRACTOR = {
     uniqueId: '',
     companyName: '',
     countryDivisionId: '',
-    provinceGuildId: '',
+    provinceGuildCode: '',
 }
 export const DEFAULT_PAGE_REQUEST = {
     page: 0,
@@ -73,7 +73,7 @@ export function validate(contractor, setErrors) {
     errors.uniqueId = isBlank(String(contractor.uniqueId)) ? 'unique id is required' : '';
     errors.companyName = isBlank(contractor.companyName) ? 'companyName is required' : '';
     errors.countryDivisionId = isBlank(String(contractor.countryDivisionId)) ? 'country division is required' : '';
-    errors.provinceGuildId = isBlank(String(contractor.provinceGuildId)) ? 'province guild is required' : '';
+    errors.provinceGuildCode = isBlank(String(contractor.provinceGuildCode)) ? 'province guild is required' : '';
 
     setErrors({...errors})
     return Object.values(errors).every(isBlank);
