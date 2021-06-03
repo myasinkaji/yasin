@@ -14,6 +14,7 @@ export const CONTRACTOR_SEARCH_CRITERIA = {
     phone: '',
     email: '',
     uniqueId: '',
+    code: '',
     companyName: '',
     countryDivisionId: '',
     provinceGuildCode: '',
@@ -28,6 +29,7 @@ export const INITIAL_CONTRACTOR = {
     phone: '',
     email: '',
     uniqueId: '',
+    code: '',
     companyName: '',
     countryDivisionId: '',
     provinceGuildCode: '',
@@ -53,6 +55,7 @@ export function remove(contractorCode) {
         .concat(contractorCode);
     return RestService.delete(url);
 }
+
 export function save(contractor) {
     return RestService.post(BASE_ADDRESS, contractor);
 }
@@ -64,13 +67,14 @@ export function search(pageRequest, searchCriteria) {
 export function validate(contractor, setErrors) {
     const errors = {};
     errors.firstname = isBlank(contractor.firstname) ? 'firstname is required' : '';
-    errors.lastname = isBlank(contractor.lastname) ? 'firstname is required' : '';
+    errors.lastname = isBlank(contractor.lastname) ? 'lastname is required' : '';
     errors.nationalCode = isBlank(String(contractor.nationalCode)) ? 'national code is required' : '';
     errors.birthDate = isBlank(String(contractor.birthDate)) ? 'birth date is required' : '';
     errors.postalCode = isBlank(String(contractor.postalCode)) ? 'postal code is required' : '';
     errors.phone = isBlank(contractor.phone) ? 'phone is required' : '';
     errors.email = isBlank(contractor.email) ? 'email is required' : '';
     errors.uniqueId = isBlank(String(contractor.uniqueId)) ? 'unique id is required' : '';
+    errors.code = isBlank(String(contractor.code)) ? 'code is required' : '';
     errors.companyName = isBlank(contractor.companyName) ? 'companyName is required' : '';
     errors.countryDivisionId = isBlank(String(contractor.countryDivisionId)) ? 'country division is required' : '';
     errors.provinceGuildCode = isBlank(String(contractor.provinceGuildCode)) ? 'province guild is required' : '';

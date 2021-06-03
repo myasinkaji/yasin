@@ -7,7 +7,6 @@ import * as CountryDivisionService from '../../service/countrydivision/CountryDi
 import * as ProvinceGuildService from '../../service/provinceGuild/ProvinceGuildService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
-import Checkbox from "../../component/controls/Checkbox";
 import AutoComplete from "../../component/controls/AutoComplete";
 
 
@@ -26,7 +25,7 @@ const ContractorForm = (props) => {
     const [guild, setGuild] = useState(initialValue);
     const [errors, setErrors] = useState(Constants.NO_ERROR);
     const [countryDivisions, setCountryDivisions] = useState([]);
-    const [centralGuilds, setCentralGuilds] = useState([]);
+    const [provinceGuilds, setProvinceGuilds] = useState([]);
 
     useEffect(() => {
         CountryDivisionService.getLazy()
@@ -34,7 +33,7 @@ const ContractorForm = (props) => {
             .catch(e => setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`)));
 
         ProvinceGuildService.getLazy()
-            .then(response => setCentralGuilds(response.data.data))
+            .then(response => setProvinceGuilds(response.data.data))
             .catch(e => setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`)));
     }, []);
 
@@ -66,58 +65,96 @@ const ContractorForm = (props) => {
                 <Grid container spacing={3}>
                     <Grid item container xs={12} md={6} spacing={3}>
                         <Grid item xs={12}>
-                            <TextField error={errors.code}
-                                       onChange={onchange} name='code' label='Code' value={guild.code}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField error={errors.name}
-                                       onChange={onchange} name='name' label='Name' value={guild.name}/>
+                            <TextField error={errors.firstname}
+                                       onChange={onchange}
+                                       name='firstname'
+                                       label='Firstname'
+                                       value={guild.firstname}/>
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField error={errors.uniqueId}
-                                       onChange={onchange} name='uniqueId' label='UniqueId' value={guild.uniqueId}/>
+                            <TextField error={errors.lastname}
+                                       onChange={onchange}
+                                       name='lastname'
+                                       label='Lastname'
+                                       value={guild.lastname}/>
                         </Grid>
+
+                        <Grid item xs={12}>
+                            <TextField error={errors.nationalCode}
+                                       onChange={onchange}
+                                       name='nationalCode'
+                                       label='National Code'
+                                       value={guild.nationalCode}/>
+                        </Grid>
+
                         <Grid item xs={12}>
                             <TextField error={errors.postalCode}
-                                       onChange={onchange} name='postalCode' label='Postal Code'
+                                       onChange={onchange}
+                                       name='postalCode'
+                                       label='Postal Code'
                                        value={guild.postalCode}/>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField error={errors.managerName}
-                                       onChange={onchange} name='managerName' label='Manager Name'
-                                       value={guild.managerName}/>
+                            <TextField error={errors.uniqueId}
+                                       onChange={onchange}
+                                       name='uniqueId'
+                                       label='Unique Id'
+                                       value={guild.uniqueId}/>
                         </Grid>
+
+                        <Grid item xs={12}>
+                            <TextField error={errors.code}
+                                       onChange={onchange}
+                                       name='code'
+                                       label='Code'
+                                       value={guild.code}/>
+                        </Grid>
+
                     </Grid>
                     <Grid item container xs={12} md={6} spacing={3}>
 
                         <Grid item xs={12}>
                             <TextField error={errors.phone}
-                                       onChange={onchange} name='phone' label='Phone' value={guild.phone}/>
+                                       onChange={onchange}
+                                       name='phone'
+                                       label='Phone'
+                                       value={guild.phone}/>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField error={errors.mobile}
-                                       onChange={onchange} name='mobile' label='Mobile' value={guild.mobile}/>
+                            <TextField error={errors.email}
+                                       onChange={onchange}
+                                       name='email'
+                                       label='Email'
+                                       value={guild.email}/>
                         </Grid>
                         <Grid item xs={12}>
-                            <AutoComplete error={errors.centralGuildCode}
-                                          data={centralGuilds}
-                                          onChange={onchange} name='centralGuildCode'
-                                          label='Central Guild'/>
+                            <TextField error={errors.birthDate}
+                                       onChange={onchange}
+                                       name='birthDate'
+                                       label='Birth Date'
+                                       value={guild.birthDate}/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField error={errors.companyName}
+                                       onChange={onchange}
+                                       name='companyName'
+                                       label='Company Name'
+                                       value={guild.companyName}/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <AutoComplete error={errors.provinceGuildCode}
+                                          data={provinceGuilds}
+                                          onChange={onchange}
+                                          name='provinceGuildCode'
+                                          label='Province Guild'/>
                         </Grid>
                         <Grid item xs={12}>
                             <AutoComplete error={errors.countryDivisionId}
                                           data={countryDivisions}
-                                          onChange={onchange} name='countryDivisionId'
+                                          onChange={onchange}
+                                          name='countryDivisionId'
                                           label='Country Division'/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Checkbox
-                                name='active'
-                                label="Is Active"
-                                checked={guild.active}
-                                onChange={onchange}
-                            />
                         </Grid>
                     </Grid>
 
