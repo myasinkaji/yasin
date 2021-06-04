@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Autocomplete} from "@material-ui/lab";
 import TextField from "./TextField";
 
 const AutoComplete = (props) => {
 
-    const {data, error, onChange, name, label} = props;
+    const {value, data, error, onChange, name, label} = props;
+    const [selectedValue, setSelectedValue] = useState(value);
 
     function onChangeAction(e, newValue) {
         onChange({
@@ -13,6 +14,7 @@ const AutoComplete = (props) => {
                 value: newValue ? newValue.id : ""
             }
         })
+        setSelectedValue(newValue);
     }
 
     const renderInput = (params) => {
@@ -22,6 +24,7 @@ const AutoComplete = (props) => {
 
     return (
         <Autocomplete
+            value={selectedValue}
             onChange={onChangeAction}
             options={data}
             getOptionLabel={option => option.title}

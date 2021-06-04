@@ -84,3 +84,9 @@ export function validate(contractor, setErrors) {
 }
 
 const isBlank = message => !message.trim();
+
+export const getProvinceGuildOf = contractor => contractor.provinceGuildCode ?
+    {id: contractor.provinceGuildCode, title: contractor.provinceGuildName} : undefined;
+
+export const getCountryDivision = contractor => contractor.countryDivisionId ?
+    {id: contractor.countryDivisionId, title: contractor.countryDivisionName} : undefined;

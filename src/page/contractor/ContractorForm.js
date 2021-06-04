@@ -144,6 +144,7 @@ const ContractorForm = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                             <AutoComplete error={errors.provinceGuildCode}
+                                          value={Service.getProvinceGuildOf(guild)}
                                           data={provinceGuilds}
                                           onChange={onchange}
                                           name='provinceGuildCode'
@@ -151,6 +152,7 @@ const ContractorForm = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                             <AutoComplete error={errors.countryDivisionId}
+                                          value={Service.getCountryDivision(guild)}
                                           data={countryDivisions}
                                           onChange={onchange}
                                           name='countryDivisionId'
