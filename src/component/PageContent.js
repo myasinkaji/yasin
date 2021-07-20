@@ -9,6 +9,7 @@ import CountryDivisionPage from "../page/countrydivision/CountryDivisionPage";
 import TagCompanyPage from "../page/tagcompany/TagCompanyPage";
 import ContractorPage from "../page/contractor/ContractorPage";
 import AgentPage from "../page/agent/AgentPage";
+import SubUnitActivityPage from "../page/sub_unit_activity/SubUnitActivityPage";
 
 
 const PageContent = () => {
@@ -40,6 +41,9 @@ const PageContent = () => {
             </Route>
             <Route path='/agent'>
                 <AgentPage/>
+            </Route>
+            <Route path='/subunitactivity'>
+                <SubUnitActivityPage />
             </Route>
         </Switch>
     );
