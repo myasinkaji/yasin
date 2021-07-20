@@ -8,6 +8,7 @@ import ProvinceGuildPage from "../page/Provinceguild/ProvinceGuildPage";
 import CountryDivisionPage from "../page/countrydivision/CountryDivisionPage";
 import TagCompanyPage from "../page/tagcompany/TagCompanyPage";
 import ContractorPage from "../page/contractor/ContractorPage";
+import AgentPage from "../page/agent/AgentPage";
 
 
 const PageContent = () => {
@@ -36,6 +37,9 @@ const PageContent = () => {
             </Route>
             <Route path='/contractor'>
                 <ContractorPage/>
+            </Route>
+            <Route path='/agent'>
+                <AgentPage/>
             </Route>
         </Switch>
     );
