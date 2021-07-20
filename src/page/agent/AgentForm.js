@@ -18,7 +18,7 @@ const useStyle = makeStyles(theme => ({
 }));
 
 
-const ContractorForm = (props) => {
+const AgentForm = (props) => {
     const classes = useStyle();
     const {recordForUpdate, submitAware, setNotify} = props;
     const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_CONTRACTOR;
@@ -178,4 +178,4 @@ const ContractorForm = (props) => {
     );
 }
 
-export default ContractorForm;
+export default AgentForm;

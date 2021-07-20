@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import {Backdrop, CircularProgress, Grid, makeStyles, Paper} from "@material-ui/core";
 import PageHeader from "../../component/PageHeader";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
-import ContractorSearchForm from "./ContractorSearchForm";
-import ContractorForm from "./ContractorForm";
+import AgentSearchForm from "./AgentSearchForm";
+import AgentForm from "./AgentForm";
 import Dialog from "../../component/Dialog";
-import ContractorTable from "./ContractorTable";
+import AgentTable from "./AgentTable";
 import * as Service from '../../service/contractor/ContractorService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const ContractorPage = () => {
+const AgentPage = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [record, setRecord] = useState(undefined);
@@ -99,17 +99,17 @@ const ContractorPage = () => {
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <ContractorSearchForm setOpen={setOpen} searchAction={onSearchClick}/>
+                    <AgentSearchForm setOpen={setOpen} searchAction={onSearchClick}/>
                 </Paper>
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <ContractorTable pageData={page} onEditClick={onEditClick}
-                                     onDeleteClick={onDeleteClick} loadPage={loadPage}/>
+                    <AgentTable pageData={page} onEditClick={onEditClick}
+                                onDeleteClick={onDeleteClick} loadPage={loadPage}/>
                 </Paper>
             </Grid>
             <Dialog title='Insert new' onClose={dialogClose} open={open}>
-                <ContractorForm submitAware={submitAware} recordForUpdate={record} setNotify={setNotify}/>
+                <AgentForm submitAware={submitAware} recordForUpdate={record} setNotify={setNotify}/>
             </Dialog>
             <Notification
                 notify={notify}
@@ -126,4 +126,4 @@ const ContractorPage = () => {
     );
 }
 
-export default ContractorPage;
+export default AgentPage;

@@ -8,7 +8,7 @@ import * as Service from '../../service/contractor/ContractorService';
 import Checkbox from "../../component/controls/Checkbox";
 
 
-const ContractorSearchForm = (props) => {
+const AgentSearchForm = (props) => {
 
     const [searchCriteria, setSearchCriteria] = useState(Service.CONTRACTOR_SEARCH_CRITERIA)
     const {setOpen, searchAction} = props;
@@ -105,4 +105,4 @@ const ContractorSearchForm = (props) => {
     );
 }
 
-export default ContractorSearchForm;
+export default AgentSearchForm;
