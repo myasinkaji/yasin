@@ -2,7 +2,7 @@ import RestService from "../rest/RestService";
 import * as BaseService from '../../service/BaseService';
 import * as Constants from "../Constants";
 
-const BASE_ADDRESS = '/su';
+const BASE_ADDRESS = '/activity';
 const SEARCH_ADDRESS = BASE_ADDRESS.concat('/search')
 const LAZY_ADDRESS = BASE_ADDRESS.concat('/lazy')
 
