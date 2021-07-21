@@ -4,7 +4,7 @@ import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
 import * as Service from '../../service/herd/HerdService';
 import * as CountryDivisionService from '../../service/countrydivision/CountryDivisionService';
-import * as ProvinceGuildService from '../../service/provinceGuild/ProvinceGuildService';
+import * as ContractorService from '../../service/contractor/ContractorService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
 import AutoComplete from "../../component/controls/AutoComplete";
@@ -22,33 +22,33 @@ const HerdForm = (props) => {
     const classes = useStyle();
     const {recordForUpdate, submitAware, setNotify} = props;
     const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_HERD;
-    const [guild, setGuild] = useState(initialValue);
+    const [herd, setHerd] = useState(initialValue);
     const [errors, setErrors] = useState(Constants.NO_ERROR);
     const [countryDivisions, setCountryDivisions] = useState([]);
-    const [provinceGuilds, setProvinceGuilds] = useState([]);
+    const [contractors, setContractors] = useState([]);
 
     useEffect(() => {
         CountryDivisionService.getLazy()
             .then(response => setCountryDivisions(response.data.data))
             .catch(e => setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`)));
 
-        ProvinceGuildService.getLazy()
-            .then(response => setProvinceGuilds(response.data.data))
+        ContractorService.getLazy()
+            .then(response => setContractors(response.data.data))
             .catch(e => setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`)));
     }, []);
 
     function onchange(event) {
         const {name, value} = event.target;
-        setGuild({
-            ...guild,
+        setHerd({
+            ...herd,
             [name]: value,
         });
     }
 
     function register() {
-        if (Service.validate(guild, setErrors)) {
-            Service.save(guild).then(() => {
-                submitAware(guild);
+        if (Service.validate(herd, setErrors)) {
+            Service.save(herd).then(() => {
+                submitAware(herd);
             }).catch(e => {
                 setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`));
             })
@@ -56,7 +56,7 @@ const HerdForm = (props) => {
     }
 
     function reset() {
-        setGuild(initialValue);
+        setHerd(initialValue);
     }
 
     return (
@@ -65,27 +65,19 @@ const HerdForm = (props) => {
                 <Grid container spacing={3}>
                     <Grid item container xs={12} md={6} spacing={3}>
                         <Grid item xs={12}>
-                            <TextField error={errors.firstname}
+                            <TextField error={errors.code}
                                        onChange={onchange}
-                                       name='firstname'
-                                       label='Firstname'
-                                       value={guild.firstname}/>
+                                       name='code'
+                                       label='Code'
+                                       value={herd.code}/>
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField error={errors.lastname}
+                            <TextField error={errors.epidemiologicCode}
                                        onChange={onchange}
-                                       name='lastname'
-                                       label='Lastname'
-                                       value={guild.lastname}/>
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            <TextField error={errors.nationalCode}
-                                       onChange={onchange}
-                                       name='nationalCode'
-                                       label='National Code'
-                                       value={guild.nationalCode}/>
+                                       name='epidemiologicCode'
+                                       label='Epidemiologic Code'
+                                       value={herd.epidemiologicCode}/>
                         </Grid>
 
                         <Grid item xs={12}>
@@ -93,66 +85,46 @@ const HerdForm = (props) => {
                                        onChange={onchange}
                                        name='postalCode'
                                        label='Postal Code'
-                                       value={guild.postalCode}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField error={errors.uniqueId}
-                                       onChange={onchange}
-                                       name='uniqueId'
-                                       label='Unique Id'
-                                       value={guild.uniqueId}/>
+                                       value={herd.postalCode}/>
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField error={errors.code}
+                            <TextField error={errors.name}
                                        onChange={onchange}
-                                       name='code'
-                                       label='Code'
-                                       value={guild.code}/>
+                                       name='name'
+                                       label='Name'
+                                       value={herd.name}/>
                         </Grid>
+
 
                     </Grid>
                     <Grid item container xs={12} md={6} spacing={3}>
+                        <Grid item xs={12}>
+                            <TextField error={errors.lng}
+                                       onChange={onchange}
+                                       name='lng'
+                                       label='Lng'
+                                       value={herd.lng}/>
+                        </Grid>
 
                         <Grid item xs={12}>
-                            <TextField error={errors.phone}
+                            <TextField error={errors.lat}
                                        onChange={onchange}
-                                       name='phone'
-                                       label='Phone'
-                                       value={guild.phone}/>
+                                       name='lat'
+                                       label='Lat'
+                                       value={herd.lat}/>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField error={errors.email}
-                                       onChange={onchange}
-                                       name='email'
-                                       label='Email'
-                                       value={guild.email}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField error={errors.birthDate}
-                                       onChange={onchange}
-                                       name='birthDate'
-                                       label='Birth Date'
-                                       value={guild.birthDate}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField error={errors.companyName}
-                                       onChange={onchange}
-                                       name='companyName'
-                                       label='Company Name'
-                                       value={guild.companyName}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <AutoComplete error={errors.provinceGuildCode}
-                                          value={Service.getContractorOf(guild)}
-                                          data={provinceGuilds}
+                            <AutoComplete error={errors.contractorNationalCode}
+                                          value={Service.getContractorOf(herd)}
+                                          data={contractors}
                                           onChange={onchange}
-                                          name='provinceGuildCode'
-                                          label='Province Guild'/>
+                                          name='contractorNationalCode'
+                                          label='Contractor'/>
                         </Grid>
                         <Grid item xs={12}>
                             <AutoComplete error={errors.countryDivisionId}
-                                          value={Service.getCountryDivision(guild)}
+                                          value={Service.getCountryDivision(herd)}
                                           data={countryDivisions}
                                           onChange={onchange}
                                           name='countryDivisionId'

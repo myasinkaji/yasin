@@ -73,7 +73,7 @@ export function validate(herd, setErrors) {
 const isBlank = message => !message.trim();
 
 export const getContractorOf = herd => herd.provinceGuildCode ?
-    {id: herd.provinceGuildCode, title: herd.contractorNationalCode} : undefined;
+        {id: herd.contractorNationalCode, title: herd.contractorName} : undefined;
 
 export const getCountryDivision = herd => herd.countryDivisionId ?
     {id: herd.countryDivisionId, title: herd.countryDivisionName} : undefined;
