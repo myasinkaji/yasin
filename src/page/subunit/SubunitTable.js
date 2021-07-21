@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
+    Checkbox,
     IconButton,
     makeStyles,
     Paper,
@@ -38,14 +39,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const HEADERS = [
-    {id: 'code', title: 'Code', sortable: true},
-    {id: 'epidemiologicCode', title: 'Epidemiologic Code', sortable: true},
-    {id: 'postalCode', title: 'PostalCode', sortable: false},
-    {id: 'name', title: 'Name', sortable: false},
-    {id: 'lng', title: 'Lng', sortable: false},
-    {id: 'lat', title: 'Lat', sortable: false},
-    {id: 'countryDivisionId', title: 'Country Division', sortable: false},
-    {id: 'contractorNationalCode', title: 'Contractor', sortable: false},
+    {id: 'uniqueId', title: 'Unique Id', sortable: true},
+    {id: 'capacity', title: 'capacity', sortable: true},
+    {id: 'licenseNumber', title: 'License Number', sortable: false},
+    {id: 'licenseIssueDate', title: 'License Issue Date', sortable: true},
+    {id: 'licenseExpireDate', title: 'License Expire Date', sortable: true},
+    {id: 'activity', title: 'Activity', sortable: false},
+    {id: 'herd', title: 'Herd', sortable: false},
+    {id: 'active', title: 'Active', sortable: true},
+    {id: 'hasLicense', title: 'Has License', sortable: true},
 ];
 
 const SubunitTable = (props) => {
@@ -101,23 +103,30 @@ const SubunitTable = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {pageData.data.map((herd, index) => (
-                        <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={herd.code}>
+                    {pageData.data.map((subunit, index) => (
+                        <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={subunit.code}>
                             <TableCell className={classes.cell}
                                        align='center'>{(page * rowsPerPage) + index + 1}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{herd.code}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{herd.epidemiologicCode}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{herd.postalCode}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{herd.name}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{herd.lng}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{herd.lat}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{herd.countryDivisionName}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{herd.contractorName}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{subunit.uniqueId}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{subunit.capacity}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{subunit.licenseNumber}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{subunit.licenseIssueDate}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{subunit.licenseExpireDate}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{subunit.activityName}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{subunit.herdName}</TableCell>
                             <TableCell className={classes.cell} align='center'>
-                                <IconButton size='small' onClick={() => onDeleteClick(herd)}>
+                                <Checkbox className={classes.checkbox} color='primary'
+                                          size='small' checked={subunit.active} disableRipple/>
+                            </TableCell>
+                            <TableCell className={classes.cell} align='center'>
+                                <Checkbox className={classes.checkbox} color='primary'
+                                          size='small' checked={subunit.hasLicense} disableRipple/>
+                            </TableCell>
+                            <TableCell className={classes.cell} align='center'>
+                                <IconButton size='small' onClick={() => onDeleteClick(subunit)}>
                                     <DeleteIcon fontSize='small' color="primary"/>
                                 </IconButton>
-                                <IconButton size='small' onClick={() => onEditClick(herd)}>
+                                <IconButton size='small' onClick={() => onEditClick(subunit)}>
                                     <EditIcon fontSize='small' color="primary"/>
                                 </IconButton>
                             </TableCell>
