@@ -76,11 +76,11 @@ const SubunitPage = () => {
     }
 
     function removeSubunit(subunit) {
-        Service.remove(subunit.code).then(() => {
+        Service.remove(subunit.id).then(() => {
             loadPage(Service.DEFAULT_PAGE_REQUEST);
-            setNotify(BaseService.getWarningMessageObject(`${subunit.code} is deleted Successfully`));
+            setNotify(BaseService.getWarningMessageObject(`${subunit.id} is deleted Successfully`));
         }).catch(e => {
-            setNotify(BaseService.getErrorMessageObject(`${subunit.code} can not be delete. ${e.message}`));
+            setNotify(BaseService.getErrorMessageObject(`${subunit.id} can not be delete. ${e.message}`));
         });
     }
 
