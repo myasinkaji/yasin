@@ -114,11 +114,11 @@ const RancherTable = (props) => {
                             <TableCell className={classes.cell} align='center'>{rancher.phone}</TableCell>
                             <TableCell className={classes.cell} align='center'>{rancher.mobile}</TableCell>
                             <TableCell className={classes.cell} align='center'>{rancher.companyName}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{rancher.countryDivisionName}</TableCell>
                             <TableCell className={classes.cell} align='center'>
                                 <Checkbox className={classes.checkbox} color='primary'
                                           size='small' checked={rancher.legal} disableRipple/>
                             </TableCell>
-                            <TableCell className={classes.cell} align='center'>{rancher.countryDivisionName}</TableCell>
                             <TableCell className={classes.cell} align='center'>
                                 <IconButton size='small' onClick={() => onDeleteClick(rancher)}>
                                     <DeleteIcon fontSize='small' color="primary"/>
