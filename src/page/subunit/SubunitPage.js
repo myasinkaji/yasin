@@ -55,10 +55,10 @@ const SubunitPage = () => {
         });
     }
 
-    const submitAware = (herd) => {
+    const submitAware = (subunit) => {
         dialogClose();
         loadPage(Service.DEFAULT_PAGE_REQUEST);
-        setNotify(BaseService.getSuccessMessageObject(`${herd.code} is registered Successfully`));
+        setNotify(BaseService.getSuccessMessageObject(`${subunit.code} is registered Successfully`));
     }
 
     function dialogClose() {
@@ -66,26 +66,26 @@ const SubunitPage = () => {
         setOpen(false);
     }
 
-    function onDeleteClick(herd) {
+    function onDeleteClick(subunit) {
         setConfirmDialog({
             isOpen: true,
-            title: `Are you sure to delete herd: ${herd.name}?`,
+            title: `Are you sure to delete subunit: ${subunit.name}?`,
             subTitle: "You can't undo this operation",
-            onConfirm: () => removeHerd(herd)
+            onConfirm: () => removeHerd(subunit)
         });
     }
 
-    function removeHerd(herd) {
-        Service.remove(herd.code).then(() => {
+    function removeHerd(subunit) {
+        Service.remove(subunit.code).then(() => {
             loadPage(Service.DEFAULT_PAGE_REQUEST);
-            setNotify(BaseService.getWarningMessageObject(`${herd.code} is deleted Successfully`));
+            setNotify(BaseService.getWarningMessageObject(`${subunit.code} is deleted Successfully`));
         }).catch(e => {
-            setNotify(BaseService.getErrorMessageObject(`${herd.code} can not be delete. ${e.message}`));
+            setNotify(BaseService.getErrorMessageObject(`${subunit.code} can not be delete. ${e.message}`));
         });
     }
 
-    function onEditClick(herd) {
-        setRecord(herd);
+    function onEditClick(subunit) {
+        setRecord(subunit);
         setOpen(true);
     }
 
@@ -94,8 +94,8 @@ const SubunitPage = () => {
             <Grid item xs={12}>
                 <PageHeader
                     icon={<PeopleOutlineIcon/>}
-                    title='Herd Form'
-                    subtitle='herd subtitle is here'/>
+                    title='Subunit Form'
+                    subtitle='subunit subtitle is here'/>
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
