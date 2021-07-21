@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {DialogActions, DialogContent, Grid, makeStyles} from "@material-ui/core";
 import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
-import * as Service from '../../service/herd/HerdService';
+import * as Service from '../../service/subunit/SubunitService';
 import * as CountryDivisionService from '../../service/countrydivision/CountryDivisionService';
 import * as ContractorService from '../../service/contractor/ContractorService';
 import * as BaseService from '../../service/BaseService';
@@ -21,7 +21,7 @@ const useStyle = makeStyles(theme => ({
 const HerdForm = (props) => {
     const classes = useStyle();
     const {recordForUpdate, submitAware, setNotify} = props;
-    const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_HERD;
+    const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_SUBUNIT;
     const [herd, setHerd] = useState(initialValue);
     const [errors, setErrors] = useState(Constants.NO_ERROR);
     const [countryDivisions, setCountryDivisions] = useState([]);
@@ -116,7 +116,7 @@ const HerdForm = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                             <AutoComplete error={errors.contractorNationalCode}
-                                          value={Service.getContractorOf(herd)}
+                                          value={Service.getActivityOf(herd)}
                                           data={contractors}
                                           onChange={onchange}
                                           name='contractorNationalCode'
@@ -124,7 +124,7 @@ const HerdForm = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                             <AutoComplete error={errors.countryDivisionId}
-                                          value={Service.getCountryDivision(herd)}
+                                          value={Service.getHerdOf(herd)}
                                           data={countryDivisions}
                                           onChange={onchange}
                                           name='countryDivisionId'

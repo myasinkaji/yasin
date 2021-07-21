@@ -6,7 +6,7 @@ import HerdSearchForm from "./HerdSearchForm";
 import HerdForm from "./HerdForm";
 import Dialog from "../../component/Dialog";
 import HerdTable from "./HerdTable";
-import * as Service from '../../service/herd/HerdService';
+import * as Service from '../../service/subunit/SubunitService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
 import Notification from "../../component/Notification";
@@ -62,7 +62,7 @@ const HerdPage = () => {
     }
 
     function dialogClose() {
-        setRecord(Service.INITIAL_HERD);
+        setRecord(Service.INITIAL_SUBUNIT);
         setOpen(false);
     }
 

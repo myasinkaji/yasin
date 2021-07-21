@@ -4,13 +4,13 @@ import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
 import SaveIcon from '@material-ui/icons/Save';
 import SearchIcon from '@material-ui/icons/Search';
-import * as Service from '../../service/herd/HerdService';
+import * as Service from '../../service/subunit/SubunitService';
 import Checkbox from "../../component/controls/Checkbox";
 
 
 const HerdSearchForm = (props) => {
 
-    const [searchCriteria, setSearchCriteria] = useState(Service.HERD_SEARCH_CRITERIA)
+    const [searchCriteria, setSearchCriteria] = useState(Service.SUBUNIT_SEARCH_CRITERIA)
     const {setOpen, searchAction} = props;
 
     const onChange = event => {
