@@ -5,7 +5,6 @@ import Button from "../../component/controls/Button";
 import SaveIcon from '@material-ui/icons/Save';
 import SearchIcon from '@material-ui/icons/Search';
 import * as Service from '../../service/subunit/SubunitService';
-import Checkbox from "../../component/controls/Checkbox";
 
 
 const SubunitSearchForm = (props) => {
@@ -26,21 +25,21 @@ const SubunitSearchForm = (props) => {
             <Grid container spacing={3}>
                 <Grid item container xs={12} md={6} spacing={3}>
                     <Grid item xs={12}>
-                        <TextField onChange={onchange}
+                        <TextField onChange={onChange}
                                    name='uniqueId'
                                    label='Unique Id'
                                    value={searchCriteria.uniqueId}/>
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField onChange={onchange}
+                        <TextField onChange={onChange}
                                    name='capacity'
                                    label='Capacity'
                                    value={searchCriteria.capacity}/>
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField onChange={onchange}
+                        <TextField onChange={onChange}
                                    name='licenseNumber'
                                    label='License Number'
                                    value={searchCriteria.licenseNumber}/>
@@ -50,14 +49,14 @@ const SubunitSearchForm = (props) => {
                 <Grid item container xs={12} md={6} spacing={3}>
 
                     <Grid item xs={12}>
-                        <TextField onChange={onchange}
+                        <TextField onChange={onChange}
                                    name='licenseIssueDate'
                                    label='License Issue Date'
                                    value={searchCriteria.licenseIssueDate}/>
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField onChange={onchange}
+                        <TextField onChange={onChange}
                                    name='licenseExpireDate'
                                    label='License Expire Date'
                                    value={searchCriteria.licenseExpireDate}/>
