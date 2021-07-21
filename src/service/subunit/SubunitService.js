@@ -19,8 +19,8 @@ export const INITIAL_SUBUNIT = {
     capacity: '',
     hasLicense: '',
     licenseNumber: '',
-    licenseIssueDate: '',
-    licenseExpireDate: '',
+    licenseIssueDate: new Date(),
+    licenseExpireDate: new Date(),
     activityCode: '',
     activityName: '',
     herdCode: '',
@@ -59,9 +59,7 @@ export function search(pageRequest, searchCriteria) {
 export function validate(subunit, setErrors) {
     const errors = {};
     errors.uniqueId = isBlank(String(subunit.uniqueId)) ? 'uniqueId is required' : '';
-    errors.active = isBlank(String(subunit.active)) ? 'active is required' : '';
     errors.capacity = isBlank(String(subunit.capacity)) ? 'capacity is required' : '';
-    errors.hasLicense = isBlank(String(subunit.hasLicense)) ? 'hasLicense is required' : '';
     errors.licenseNumber = isBlank(String(subunit.licenseNumber)) ? 'licenseNumber is required' : '';
     errors.licenseIssueDate = isBlank(String(subunit.licenseIssueDate)) ? 'licenseIssueDate is required' : '';
     errors.licenseExpireDate = isBlank(String(subunit.licenseExpireDate)) ? 'licenseExpireDate is required' : '';
