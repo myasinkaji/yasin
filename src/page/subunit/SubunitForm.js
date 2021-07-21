@@ -3,11 +3,12 @@ import {DialogActions, DialogContent, Grid, makeStyles} from "@material-ui/core"
 import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
 import * as Service from '../../service/subunit/SubunitService';
-import * as CountryDivisionService from '../../service/countrydivision/CountryDivisionService';
-import * as ContractorService from '../../service/contractor/ContractorService';
+import * as HerdService from '../../service/herd/HerdService';
+import * as ActivityService from '../../service/subunit_activity/SubUnitActivityService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
 import AutoComplete from "../../component/controls/AutoComplete";
+import Checkbox from "../../component/controls/Checkbox";
 
 
 const useStyle = makeStyles(theme => ({
@@ -22,33 +23,33 @@ const SubunitForm = (props) => {
     const classes = useStyle();
     const {recordForUpdate, submitAware, setNotify} = props;
     const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_SUBUNIT;
-    const [herd, setHerd] = useState(initialValue);
+    const [subunit, setSubunit] = useState(initialValue);
     const [errors, setErrors] = useState(Constants.NO_ERROR);
-    const [countryDivisions, setCountryDivisions] = useState([]);
-    const [contractors, setContractors] = useState([]);
+    const [herds, setHerds] = useState([]);
+    const [activities, setActivities] = useState([]);
 
     useEffect(() => {
-        CountryDivisionService.getLazy()
-            .then(response => setCountryDivisions(response.data.data))
+        HerdService.getLazy()
+            .then(response => setHerds(response.data.data))
             .catch(e => setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`)));
 
-        ContractorService.getLazy()
-            .then(response => setContractors(response.data.data))
+        ActivityService.getLazy()
+            .then(response => setActivities(response.data.data))
             .catch(e => setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`)));
     }, []);
 
     function onchange(event) {
         const {name, value} = event.target;
-        setHerd({
-            ...herd,
+        setSubunit({
+            ...subunit,
             [name]: value,
         });
     }
 
     function register() {
-        if (Service.validate(herd, setErrors)) {
-            Service.save(herd).then(() => {
-                submitAware(herd);
+        if (Service.validate(subunit, setErrors)) {
+            Service.save(subunit).then(() => {
+                submitAware(subunit);
             }).catch(e => {
                 setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`));
             })
@@ -56,7 +57,7 @@ const SubunitForm = (props) => {
     }
 
     function reset() {
-        setHerd(initialValue);
+        setSubunit(initialValue);
     }
 
     return (
@@ -65,70 +66,78 @@ const SubunitForm = (props) => {
                 <Grid container spacing={3}>
                     <Grid item container xs={12} md={6} spacing={3}>
                         <Grid item xs={12}>
-                            <TextField error={errors.code}
+                            <TextField error={errors.uniqueId}
                                        onChange={onchange}
-                                       name='code'
-                                       label='Code'
-                                       value={herd.code}/>
+                                       name='uniqueId'
+                                       label='Unique Id'
+                                       value={subunit.uniqueId}/>
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField error={errors.epidemiologicCode}
+                            <TextField error={errors.capacity}
                                        onChange={onchange}
-                                       name='epidemiologicCode'
-                                       label='Epidemiologic Code'
-                                       value={herd.epidemiologicCode}/>
+                                       name='capacity'
+                                       label='Capacity'
+                                       value={subunit.capacity}/>
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField error={errors.postalCode}
+                            <TextField error={errors.licenseNumber}
                                        onChange={onchange}
-                                       name='postalCode'
-                                       label='Postal Code'
-                                       value={herd.postalCode}/>
+                                       name='licenseNumber'
+                                       label='License Number'
+                                       value={subunit.licenseNumber}/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField error={errors.licenseIssueDate}
+                                       onChange={onchange}
+                                       name='licenseIssueDate'
+                                       label='License Issue Date'
+                                       value={subunit.licenseIssueDate}/>
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField error={errors.name}
+                            <TextField error={errors.licenseExpireDate}
                                        onChange={onchange}
-                                       name='name'
-                                       label='Name'
-                                       value={herd.name}/>
+                                       name='licenseExpireDate'
+                                       label='License Expire Date'
+                                       value={subunit.licenseExpireDate}/>
                         </Grid>
-
-
                     </Grid>
                     <Grid item container xs={12} md={6} spacing={3}>
-                        <Grid item xs={12}>
-                            <TextField error={errors.lng}
-                                       onChange={onchange}
-                                       name='lng'
-                                       label='Lng'
-                                       value={herd.lng}/>
-                        </Grid>
+
 
                         <Grid item xs={12}>
-                            <TextField error={errors.lat}
-                                       onChange={onchange}
-                                       name='lat'
-                                       label='Lat'
-                                       value={herd.lat}/>
+                            <AutoComplete error={errors.activityCode}
+                                          value={Service.getActivityOf(subunit)}
+                                          data={activities}
+                                          onChange={onchange}
+                                          name='activityCode'
+                                          label='Activity'/>
                         </Grid>
                         <Grid item xs={12}>
-                            <AutoComplete error={errors.contractorNationalCode}
-                                          value={Service.getActivityOf(herd)}
-                                          data={contractors}
+                            <AutoComplete error={errors.herdCode}
+                                          value={Service.getHerdOf(subunit)}
+                                          data={herds}
                                           onChange={onchange}
-                                          name='contractorNationalCode'
-                                          label='Contractor'/>
+                                          name='herdCode'
+                                          label='Herd'/>
                         </Grid>
                         <Grid item xs={12}>
-                            <AutoComplete error={errors.countryDivisionId}
-                                          value={Service.getHerdOf(herd)}
-                                          data={countryDivisions}
-                                          onChange={onchange}
-                                          name='countryDivisionId'
-                                          label='Country Division'/>
+                            <Checkbox
+                                name='active'
+                                label="Is Active"
+                                checked={subunit.active}
+                                onChange={onchange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Checkbox
+                                name='hasLicense'
+                                label="Has License"
+                                checked={subunit.hasLicense}
+                                onChange={onchange}
+                            />
                         </Grid>
                     </Grid>
 
