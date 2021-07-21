@@ -2,6 +2,7 @@ import RestService from "./rest/RestService";
 import LocalActivityIcon from '@material-ui/icons/LocalActivity';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
 import PetsIcon from '@material-ui/icons/Pets';
+import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import ApartmentIcon from '@material-ui/icons/Apartment';
 import BusinessIcon from '@material-ui/icons/Business';
 import TransferWithinAStationIcon from '@material-ui/icons/TransferWithinAStation';
@@ -70,6 +71,7 @@ export const BASIC_INFORMATION_LINKS = [
     {title: 'agent', to: '/agent', icon:<TransferWithinAStationIcon /> },
     {title: 'Subunit Activity', to: '/subunitactivity', icon:<LocalActivityIcon /> },
     {title: 'Subunit', to: '/subunit', icon:<AcUnitIcon /> },
+    {title: 'Rancher', to: '/rancher', icon:<AccessibilityIcon /> },
     {title: 'Herd', to: '/herd', icon:<PetsIcon /> },
     {title: 'Tag Company', to: '/tag-company', icon:<LabelIcon /> }
 ]
