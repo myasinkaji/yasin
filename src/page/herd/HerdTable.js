@@ -38,13 +38,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const HEADERS = [
-    {id: 'uniqueId', title: 'uniqueId', sortable: true},
-    {id: 'nationalCode', title: 'National Code', sortable: true},
-    {id: 'firstname', title: 'Firstname', sortable: false},
-    {id: 'lastname', title: 'Lastname', sortable: false},
-    {id: 'companyName', title: 'Company Name', sortable: false},
+    {id: 'code', title: 'Code', sortable: true},
+    {id: 'epidemiologicCode', title: 'Epidemiologic Code', sortable: true},
+    {id: 'postalCode', title: 'PostalCode', sortable: false},
+    {id: 'name', title: 'Name', sortable: false},
+    {id: 'lng', title: 'Lng', sortable: false},
+    {id: 'lat', title: 'Lat', sortable: false},
     {id: 'countryDivisionId', title: 'Country Division', sortable: false},
-    {id: 'provinceGuildCode', title: 'Province Guild', sortable: false},
+    {id: 'contractorNationalCode', title: 'Contractor', sortable: false},
 ];
 
 const HerdTable = (props) => {
@@ -100,22 +101,23 @@ const HerdTable = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {pageData.data.map((guild, index) => (
-                        <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={guild.code}>
+                    {pageData.data.map((herd, index) => (
+                        <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={herd.code}>
                             <TableCell className={classes.cell}
                                        align='center'>{(page * rowsPerPage) + index + 1}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.uniqueId}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.nationalCode}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.firstname}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.lastname}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.companyName}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.countryDivisionName}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.provinceGuildName}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{herd.code}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{herd.epidemiologicCode}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{herd.postalCode}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{herd.name}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{herd.lng}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{herd.lat}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{herd.countryDivisionName}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{herd.contractorName}</TableCell>
                             <TableCell className={classes.cell} align='center'>
-                                <IconButton size='small' onClick={() => onDeleteClick(guild)}>
+                                <IconButton size='small' onClick={() => onDeleteClick(herd)}>
                                     <DeleteIcon fontSize='small' color="primary"/>
                                 </IconButton>
-                                <IconButton size='small' onClick={() => onEditClick(guild)}>
+                                <IconButton size='small' onClick={() => onEditClick(herd)}>
                                     <EditIcon fontSize='small' color="primary"/>
                                 </IconButton>
                             </TableCell>
