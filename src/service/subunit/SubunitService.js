@@ -29,8 +29,8 @@ export const INITIAL_SUBUNIT = {
 export const DEFAULT_PAGE_REQUEST = {
     page: 0,
     pageSize: Constants.DEFAULT_ROWS_PER_PAGE,
-    order: Constants.DEFAULT_ORDER,
-    orderBy: 'code'
+    order: Constants.DESC_ORDER,
+    orderBy: 'id'
 }
 
 export function getPage(pageRequest) {
