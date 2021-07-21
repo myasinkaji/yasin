@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import {Backdrop, CircularProgress, Grid, makeStyles, Paper} from "@material-ui/core";
 import PageHeader from "../../component/PageHeader";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
-import AgentSearchForm from "./AgentSearchForm";
-import AgentForm from "./AgentForm";
+import RancherSearchForm from "./RancherSearchForm";
+import RancherForm from "./RancherForm";
 import Dialog from "../../component/Dialog";
-import AgentTable from "./AgentTable";
+import RancherTable from "./RancherTable";
 import * as Service from '../../service/contractor/ContractorService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const AgentPage = () => {
+const RancherPage = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [record, setRecord] = useState(undefined);
@@ -99,17 +99,17 @@ const AgentPage = () => {
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <AgentSearchForm setOpen={setOpen} searchAction={onSearchClick}/>
+                    <RancherSearchForm setOpen={setOpen} searchAction={onSearchClick}/>
                 </Paper>
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <AgentTable pageData={page} onEditClick={onEditClick}
-                                onDeleteClick={onDeleteClick} loadPage={loadPage}/>
+                    <RancherTable pageData={page} onEditClick={onEditClick}
+                                  onDeleteClick={onDeleteClick} loadPage={loadPage}/>
                 </Paper>
             </Grid>
             <Dialog title='Insert new' onClose={dialogClose} open={open}>
-                <AgentForm submitAware={submitAware} recordForUpdate={record} setNotify={setNotify}/>
+                <RancherForm submitAware={submitAware} recordForUpdate={record} setNotify={setNotify}/>
             </Dialog>
             <Notification
                 notify={notify}
@@ -126,4 +126,4 @@ const AgentPage = () => {
     );
 }
 
-export default AgentPage;
+export default RancherPage;

@@ -18,7 +18,7 @@ const useStyle = makeStyles(theme => ({
 }));
 
 
-const AgentForm = (props) => {
+const RancherForm = (props) => {
     const classes = useStyle();
     const {recordForUpdate, submitAware, setNotify} = props;
     const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_CONTRACTOR;
@@ -178,4 +178,4 @@ const AgentForm = (props) => {
     );
 }
 
-export default AgentForm;
+export default RancherForm;

@@ -47,7 +47,7 @@ const HEADERS = [
     {id: 'provinceGuildCode', title: 'Province Guild', sortable: false},
 ];
 
-const AgentTable = (props) => {
+const RancherTable = (props) => {
     const classes = useStyles();
     const {pageData, onEditClick, onDeleteClick, loadPage} = props;
     const [page, setPage] = useState(0);
@@ -136,4 +136,4 @@ const AgentTable = (props) => {
     );
 }
 
-export default AgentTable;
+export default RancherTable;
