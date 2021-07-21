@@ -71,11 +71,11 @@ const SubunitPage = () => {
             isOpen: true,
             title: `Are you sure to delete subunit: ${subunit.name}?`,
             subTitle: "You can't undo this operation",
-            onConfirm: () => removeHerd(subunit)
+            onConfirm: () => removeSubunit(subunit)
         });
     }
 
-    function removeHerd(subunit) {
+    function removeSubunit(subunit) {
         Service.remove(subunit.code).then(() => {
             loadPage(Service.DEFAULT_PAGE_REQUEST);
             setNotify(BaseService.getWarningMessageObject(`${subunit.code} is deleted Successfully`));
