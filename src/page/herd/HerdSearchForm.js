@@ -10,7 +10,7 @@ import Checkbox from "../../component/controls/Checkbox";
 
 const HerdSearchForm = (props) => {
 
-    const [searchCriteria, setSearchCriteria] = useState(Service.CONTRACTOR_SEARCH_CRITERIA)
+    const [searchCriteria, setSearchCriteria] = useState(Service.HERD_SEARCH_CRITERIA)
     const {setOpen, searchAction} = props;
 
     const onChange = event => {

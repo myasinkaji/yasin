@@ -2,37 +2,28 @@ import RestService from "../rest/RestService";
 import * as BaseService from '../../service/BaseService';
 import * as Constants from "../Constants";
 
-const BASE_ADDRESS = '/contractor';
+const BASE_ADDRESS = '/herd';
 const SEARCH_ADDRESS = BASE_ADDRESS.concat('/search')
 
-export const CONTRACTOR_SEARCH_CRITERIA = {
-    firstname: '',
-    lastname: '',
-    nationalCode: '',
-    birthDate: '',
-    postalCode: '',
-    phone: '',
-    email: '',
-    uniqueId: '',
+export const HERD_SEARCH_CRITERIA = {
     code: '',
-    companyName: '',
+    epidemiologicCode: '',
+    postalCode: '',
+    name: '',
+    lng: '',
+    lat: '',
     countryDivisionId: '',
-    provinceGuildCode: '',
-};
+    contractorNationalCode: '',};
 
-export const INITIAL_CONTRACTOR = {
-    firstname: '',
-    lastname: '',
-    nationalCode: '',
-    birthDate: '',
-    postalCode: '',
-    phone: '',
-    email: '',
-    uniqueId: '',
+export const INITIAL_HERD = {
     code: '',
-    companyName: '',
+    epidemiologicCode: '',
+    postalCode: '',
+    name: '',
+    lng: '',
+    lat: '',
     countryDivisionId: '',
-    provinceGuildCode: '',
+    contractorNationalCode: '',
 }
 export const DEFAULT_PAGE_REQUEST = {
     page: 0,
@@ -48,36 +39,32 @@ export function getPage(pageRequest) {
     return RestService.get(url)
 }
 
-export function remove(contractorCode) {
+export function remove(herdCode) {
     const url = BASE_ADDRESS
         .concat('?')
         .concat('code=')
-        .concat(contractorCode);
+        .concat(herdCode);
     return RestService.delete(url);
 }
 
-export function save(contractor) {
-    return RestService.post(BASE_ADDRESS, contractor);
+export function save(herd) {
+    return RestService.post(BASE_ADDRESS, herd);
 }
 
 export function search(pageRequest, searchCriteria) {
     return BaseService.search(SEARCH_ADDRESS, pageRequest, searchCriteria);
 }
 
-export function validate(contractor, setErrors) {
+export function validate(herd, setErrors) {
     const errors = {};
-    errors.firstname = isBlank(contractor.firstname) ? 'firstname is required' : '';
-    errors.lastname = isBlank(contractor.lastname) ? 'lastname is required' : '';
-    errors.nationalCode = isBlank(String(contractor.nationalCode)) ? 'national code is required' : '';
-    errors.birthDate = isBlank(String(contractor.birthDate)) ? 'birth date is required' : '';
-    errors.postalCode = isBlank(String(contractor.postalCode)) ? 'postal code is required' : '';
-    errors.phone = isBlank(contractor.phone) ? 'phone is required' : '';
-    errors.email = isBlank(contractor.email) ? 'email is required' : '';
-    errors.uniqueId = isBlank(String(contractor.uniqueId)) ? 'unique id is required' : '';
-    errors.code = isBlank(String(contractor.code)) ? 'code is required' : '';
-    errors.companyName = isBlank(contractor.companyName) ? 'companyName is required' : '';
-    errors.countryDivisionId = isBlank(String(contractor.countryDivisionId)) ? 'country division is required' : '';
-    errors.provinceGuildCode = isBlank(String(contractor.provinceGuildCode)) ? 'province guild is required' : '';
+    errors.code = isBlank(String(herd.code)) ? 'code is required' : '';
+    errors.epidemiologicCode = isBlank(herd.epidemiologicCode) ? 'epidemiologic Code is required' : '';
+    errors.postalCode = isBlank(String(herd.postalCode)) ? 'postal code is required' : '';
+    errors.name = isBlank(herd.name) ? 'name is required' : '';
+    errors.lng = isBlank(String(herd.lng)) ? 'lng is required' : '';
+    errors.lat = isBlank(String(herd.lat)) ? 'lat is required' : '';
+    errors.countryDivisionId = isBlank(String(herd.countryDivisionId)) ? 'country division is required' : '';
+    errors.contractorNationalCode = isBlank(String(herd.contractorNationalCode)) ? 'contractor is required' : '';
 
     setErrors({...errors})
     return Object.values(errors).every(isBlank);
@@ -85,8 +72,8 @@ export function validate(contractor, setErrors) {
 
 const isBlank = message => !message.trim();
 
-export const getProvinceGuildOf = contractor => contractor.provinceGuildCode ?
-    {id: contractor.provinceGuildCode, title: contractor.provinceGuildName} : undefined;
+export const getContractorOf = herd => herd.provinceGuildCode ?
+    {id: herd.provinceGuildCode, title: herd.contractorNationalCode} : undefined;
 
-export const getCountryDivision = contractor => contractor.countryDivisionId ?
-    {id: contractor.countryDivisionId, title: contractor.countryDivisionName} : undefined;
+export const getCountryDivision = herd => herd.countryDivisionId ?
+    {id: herd.countryDivisionId, title: herd.countryDivisionName} : undefined;

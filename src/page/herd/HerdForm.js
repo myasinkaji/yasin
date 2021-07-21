@@ -21,7 +21,7 @@ const useStyle = makeStyles(theme => ({
 const HerdForm = (props) => {
     const classes = useStyle();
     const {recordForUpdate, submitAware, setNotify} = props;
-    const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_CONTRACTOR;
+    const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_HERD;
     const [guild, setGuild] = useState(initialValue);
     const [errors, setErrors] = useState(Constants.NO_ERROR);
     const [countryDivisions, setCountryDivisions] = useState([]);
@@ -144,7 +144,7 @@ const HerdForm = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                             <AutoComplete error={errors.provinceGuildCode}
-                                          value={Service.getProvinceGuildOf(guild)}
+                                          value={Service.getContractorOf(guild)}
                                           data={provinceGuilds}
                                           onChange={onchange}
                                           name='provinceGuildCode'

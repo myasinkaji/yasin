@@ -62,7 +62,7 @@ const HerdPage = () => {
     }
 
     function dialogClose() {
-        setRecord(Service.INITIAL_CONTRACTOR);
+        setRecord(Service.INITIAL_HERD);
         setOpen(false);
     }
 
