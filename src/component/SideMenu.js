@@ -126,7 +126,7 @@ export default function SideMenu(props) {
                         <List>
                             {BasicService.BASIC_INFORMATION_LINKS.map((link, index) => (
                                 <ListItem button key={link.to}>
-                                    <ListItemIcon><MailIcon/></ListItemIcon>
+                                    <ListItemIcon>{link.icon}</ListItemIcon>
                                     <Link onClick={() => setOpen(false)}
                                           className={classes.link}
                                           to={link.to}>{link.title}</Link>
@@ -145,9 +145,9 @@ export default function SideMenu(props) {
                     </AccordionSummary>
                     <AccordionDetails>
                         <List>
-                            {BasicService.BASIC_INFORMATION_LINKS.map((link, index) => (
+                            {BasicService.IDENTITY_LINKS.map((link, index) => (
                                 <ListItem button key={link.to}>
-                                    <ListItemIcon><MailIcon/></ListItemIcon>
+                                    <ListItemIcon>{link.icon}</ListItemIcon>
                                     <Link onClick={() => setOpen(false)}
                                           className={classes.link}
                                           to={link.to}>{link.title}</Link>
