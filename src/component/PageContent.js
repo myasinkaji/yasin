@@ -11,6 +11,7 @@ import ContractorPage from "../page/contractor/ContractorPage";
 import AgentPage from "../page/agent/AgentPage";
 import SubUnitActivityPage from "../page/subunit_activity/SubUnitActivityPage";
 import HerdPage from "../page/herd/HerdPage";
+import SubunitPage from "../page/subunit/SubunitPage";
 
 
 const PageContent = () => {
@@ -45,6 +46,9 @@ const PageContent = () => {
             </Route>
             <Route path='/subunitactivity'>
                 <SubUnitActivityPage />
+            </Route>
+            <Route path='/subunit'>
+                <SubunitPage />
             </Route>
             <Route path='/herd'>
                 <HerdPage />
