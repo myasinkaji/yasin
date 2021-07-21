@@ -48,7 +48,7 @@ const HEADERS = [
     {id: 'contractorNationalCode', title: 'Contractor', sortable: false},
 ];
 
-const HerdTable = (props) => {
+const SubunitTable = (props) => {
     const classes = useStyles();
     const {pageData, onEditClick, onDeleteClick, loadPage} = props;
     const [page, setPage] = useState(0);
@@ -138,4 +138,4 @@ const HerdTable = (props) => {
     );
 }
 
-export default HerdTable;
+export default SubunitTable;

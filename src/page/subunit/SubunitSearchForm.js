@@ -8,7 +8,7 @@ import * as Service from '../../service/subunit/SubunitService';
 import Checkbox from "../../component/controls/Checkbox";
 
 
-const HerdSearchForm = (props) => {
+const SubunitSearchForm = (props) => {
 
     const [searchCriteria, setSearchCriteria] = useState(Service.SUBUNIT_SEARCH_CRITERIA)
     const {setOpen, searchAction} = props;
@@ -105,4 +105,4 @@ const HerdSearchForm = (props) => {
     );
 }
 
-export default HerdSearchForm;
+export default SubunitSearchForm;

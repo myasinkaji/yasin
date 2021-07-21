@@ -18,7 +18,7 @@ const useStyle = makeStyles(theme => ({
 }));
 
 
-const HerdForm = (props) => {
+const SubunitForm = (props) => {
     const classes = useStyle();
     const {recordForUpdate, submitAware, setNotify} = props;
     const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_SUBUNIT;
@@ -150,4 +150,4 @@ const HerdForm = (props) => {
     );
 }
 
-export default HerdForm;
+export default SubunitForm;
