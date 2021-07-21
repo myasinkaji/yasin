@@ -99,7 +99,7 @@ const HerdPage = () => {
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <HerdSearchForm setOpen={setOpen} searchAction={onSearchClick}/>
+                    <HerdSearchForm setOpen={setOpen} searchAction={onSearchClick} setNotify={setNotify}/>
                 </Paper>
             </Grid>
             <Grid item xs={12}>

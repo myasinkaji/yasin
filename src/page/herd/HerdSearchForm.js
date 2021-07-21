@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Grid} from "@material-ui/core";
 import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
@@ -6,12 +6,28 @@ import SaveIcon from '@material-ui/icons/Save';
 import SearchIcon from '@material-ui/icons/Search';
 import * as Service from '../../service/herd/HerdService';
 import Checkbox from "../../component/controls/Checkbox";
+import AutoComplete from "../../component/controls/AutoComplete";
+import * as CountryDivisionService from "../../service/countrydivision/CountryDivisionService";
+import * as BaseService from "../../service/BaseService";
+import * as ContractorService from "../../service/contractor/ContractorService";
 
 
 const HerdSearchForm = (props) => {
 
     const [searchCriteria, setSearchCriteria] = useState(Service.HERD_SEARCH_CRITERIA)
-    const {setOpen, searchAction} = props;
+    const {setOpen, searchAction, setNotify} = props;
+    const [countryDivisions, setCountryDivisions] = useState([]);
+    const [contractors, setContractors] = useState([]);
+
+    useEffect(() => {
+        CountryDivisionService.getLazy()
+            .then(response => setCountryDivisions(response.data.data))
+            .catch(e => setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`)));
+
+        ContractorService.getLazy()
+            .then(response => setContractors(response.data.data))
+            .catch(e => setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`)));
+    }, []);
 
     const onChange = event => {
         const {name, value} = event.target;
@@ -33,17 +49,17 @@ const HerdSearchForm = (props) => {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField label='Name'
-                                   name='name'
-                                   value={searchCriteria.name}
+                        <TextField label='Epidemiologic Code'
+                                   name='epidemiologicCode'
+                                   value={searchCriteria.epidemiologicCode}
                                    onChange={onChange}
                         />
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField label='UniqueId'
-                                   name='uniqueId'
-                                   value={searchCriteria.uniqueId}
+                        <TextField label='Postal Code'
+                                   name='postalCode'
+                                   value={searchCriteria.postalCode}
                                    onChange={onChange}
                         />
                     </Grid>
@@ -60,18 +76,16 @@ const HerdSearchForm = (props) => {
                 <Grid item container xs={12} md={6} spacing={3}>
 
                     <Grid item xs={12}>
-                        <TextField label='Phone'
-                                   name='phone'
-                                   value={searchCriteria.phone}
-                                   onChange={onChange}
-                        />
+                        <AutoComplete data={contractors}
+                                      onChange={onChange}
+                                      name='contractorNationalCode'
+                                      label='Contractor'/>
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField label='Mobile'
-                                   name='mobile'
-                                   value={searchCriteria.mobile}
-                                   onChange={onChange}
-                        />
+                        <AutoComplete data={countryDivisions}
+                                      onChange={onChange}
+                                      name='countryDivisionId'
+                                      label='Country Division'/>
                     </Grid>
 
 

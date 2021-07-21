@@ -10,11 +10,9 @@ export const HERD_SEARCH_CRITERIA = {
     code: '',
     epidemiologicCode: '',
     postalCode: '',
-    name: '',
-    lng: '',
-    lat: '',
     countryDivisionId: '',
-    contractorNationalCode: '',};
+    contractorNationalCode: ''
+};
 
 export const INITIAL_HERD = {
     code: '',
