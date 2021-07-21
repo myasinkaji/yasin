@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {DialogActions, DialogContent, Grid, makeStyles} from "@material-ui/core";
 import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
-import * as Service from '../../service/contractor/ContractorService';
+import * as Service from '../../service/rancher/RancherService';
 import * as CountryDivisionService from '../../service/countrydivision/CountryDivisionService';
 import * as ProvinceGuildService from '../../service/provinceGuild/ProvinceGuildService';
 import * as BaseService from '../../service/BaseService';

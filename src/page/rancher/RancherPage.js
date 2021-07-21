@@ -6,7 +6,7 @@ import RancherSearchForm from "./RancherSearchForm";
 import RancherForm from "./RancherForm";
 import Dialog from "../../component/Dialog";
 import RancherTable from "./RancherTable";
-import * as Service from '../../service/contractor/ContractorService';
+import * as Service from '../../service/rancher/RancherService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
 import Notification from "../../component/Notification";

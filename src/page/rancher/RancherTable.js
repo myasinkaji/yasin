@@ -15,7 +15,7 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import * as Constants from '../../service/Constants';
-import * as Service from '../../service/contractor/ContractorService';
+import * as Service from '../../service/rancher/RancherService';
 
 const useStyles = makeStyles(theme => ({
     checkbox: {

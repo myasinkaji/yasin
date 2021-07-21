@@ -4,7 +4,7 @@ import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
 import SaveIcon from '@material-ui/icons/Save';
 import SearchIcon from '@material-ui/icons/Search';
-import * as Service from '../../service/contractor/ContractorService';
+import * as Service from '../../service/rancher/RancherService';
 import Checkbox from "../../component/controls/Checkbox";
 
 
