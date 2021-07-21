@@ -29,7 +29,7 @@ export const DEFAULT_PAGE_REQUEST = {
     page: 0,
     pageSize: Constants.DEFAULT_ROWS_PER_PAGE,
     order: Constants.DESC_ORDER,
-    orderBy: 'grade'
+    orderBy: 'legal'
 }
 
 export function getPage(pageRequest) {
