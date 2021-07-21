@@ -52,7 +52,9 @@ function getMessage(title, type, message) {
 export const BASIC_INFORMATION_LINKS = [
     {title: 'Contractor', to: '/contractor'},
     {title: 'agent', to: '/agent'},
-    {title: 'subUnit Activity', to: '/subunitactivity'},
+    {title: 'Subunit Activity', to: '/subunitactivity'},
+    {title: 'Subunit', to: '/subunit'},
+    {title: 'Herd', to: '/herd'},
     {title: 'Central Guild', to: '/central-guild'},
     {title: 'Province Guild', to: '/province-guild'},
     {title: 'Country Division', to: '/country-division'},
