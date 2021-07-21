@@ -4,11 +4,11 @@ import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
 import SaveIcon from '@material-ui/icons/Save';
 import SearchIcon from '@material-ui/icons/Search';
-import * as Service from '../../service/contractor/ContractorService';
+import * as Service from '../../service/herd/HerdService';
 import Checkbox from "../../component/controls/Checkbox";
 
 
-const ContractorSearchForm = (props) => {
+const HerdSearchForm = (props) => {
 
     const [searchCriteria, setSearchCriteria] = useState(Service.CONTRACTOR_SEARCH_CRITERIA)
     const {setOpen, searchAction} = props;
@@ -105,4 +105,4 @@ const ContractorSearchForm = (props) => {
     );
 }
 
-export default ContractorSearchForm;
+export default HerdSearchForm;

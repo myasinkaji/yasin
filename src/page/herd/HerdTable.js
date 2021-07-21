@@ -15,7 +15,7 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import * as Constants from '../../service/Constants';
-import * as Service from '../../service/contractor/ContractorService';
+import * as Service from '../../service/herd/HerdService';
 
 const useStyles = makeStyles(theme => ({
     checkbox: {
@@ -47,7 +47,7 @@ const HEADERS = [
     {id: 'provinceGuildCode', title: 'Province Guild', sortable: false},
 ];
 
-const ContractorTable = (props) => {
+const HerdTable = (props) => {
     const classes = useStyles();
     const {pageData, onEditClick, onDeleteClick, loadPage} = props;
     const [page, setPage] = useState(0);
@@ -136,4 +136,4 @@ const ContractorTable = (props) => {
     );
 }
 
-export default ContractorTable;
+export default HerdTable;
