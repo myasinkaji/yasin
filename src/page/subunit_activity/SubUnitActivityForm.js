@@ -34,7 +34,7 @@ const SubUnitActivityForm = props => {
         <>
             <DialogContent className={classes.dialogContent}>
                 <Grid container spacing={3}>
-                    <Grid item container xs={12} md={6} spacing={3}>
+                    <Grid item container xs={12} spacing={3}>
                         <Grid item xs={12}>
                             <TextField error={errors.code}
                                        onChange={onchange} name='code' label='Code' value={activity.code}/>
