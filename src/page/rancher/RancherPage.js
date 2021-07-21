@@ -55,37 +55,37 @@ const RancherPage = () => {
         });
     }
 
-    const submitAware = (guild) => {
+    const submitAware = (rancher) => {
         dialogClose();
         loadPage(Service.DEFAULT_PAGE_REQUEST);
-        setNotify(BaseService.getSuccessMessageObject(`${guild.code} is registered Successfully`));
+        setNotify(BaseService.getSuccessMessageObject(`${rancher.code} is registered Successfully`));
     }
 
     function dialogClose() {
-        setRecord(Service.INITIAL_CONTRACTOR);
+        setRecord(Service.INITIAL_RANCHER);
         setOpen(false);
     }
 
-    function onDeleteClick(guild) {
+    function onDeleteClick(rancher) {
         setConfirmDialog({
             isOpen: true,
-            title: `Are you sure to delete guild: ${guild.name}?`,
+            title: `Are you sure to delete rancher: ${rancher.name}?`,
             subTitle: "You can't undo this operation",
-            onConfirm: () => removeGuild(guild)
+            onConfirm: () => removeRancher(rancher)
         });
     }
 
-    function removeGuild(guild) {
-        Service.remove(guild.code).then(() => {
+    function removeRancher(rancher) {
+        Service.remove(rancher.nationalCode).then(() => {
             loadPage(Service.DEFAULT_PAGE_REQUEST);
-            setNotify(BaseService.getWarningMessageObject(`${guild.code} is deleted Successfully`));
+            setNotify(BaseService.getWarningMessageObject(`${rancher.nationalCode} is deleted Successfully`));
         }).catch(e => {
-            setNotify(BaseService.getErrorMessageObject(`${guild.code} can not be delete. ${e.message}`));
+            setNotify(BaseService.getErrorMessageObject(`${rancher.nationalCode} can not be delete. ${e.message}`));
         });
     }
 
-    function onEditClick(guild) {
-        setRecord(guild);
+    function onEditClick(rancher) {
+        setRecord(rancher);
         setOpen(true);
     }
 
@@ -94,12 +94,12 @@ const RancherPage = () => {
             <Grid item xs={12}>
                 <PageHeader
                     icon={<PeopleOutlineIcon/>}
-                    title='Contractor Form'
-                    subtitle='contractor subtitle is here'/>
+                    title='Rancher Form'
+                    subtitle='rancher subtitle is here'/>
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <RancherSearchForm setOpen={setOpen} searchAction={onSearchClick}/>
+                    <RancherSearchForm setOpen={setOpen} searchAction={onSearchClick} setNotify={setNotify}/>
                 </Paper>
             </Grid>
             <Grid item xs={12}>

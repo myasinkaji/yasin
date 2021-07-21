@@ -1,17 +1,27 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Grid} from "@material-ui/core";
 import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
 import SaveIcon from '@material-ui/icons/Save';
 import SearchIcon from '@material-ui/icons/Search';
 import * as Service from '../../service/rancher/RancherService';
-import Checkbox from "../../component/controls/Checkbox";
+import AutoComplete from "../../component/controls/AutoComplete";
+import * as CountryDivisionService from "../../service/countrydivision/CountryDivisionService";
+import * as BaseService from "../../service/BaseService";
 
 
 const RancherSearchForm = (props) => {
 
-    const [searchCriteria, setSearchCriteria] = useState(Service.CONTRACTOR_SEARCH_CRITERIA)
-    const {setOpen, searchAction} = props;
+    const [searchCriteria, setSearchCriteria] = useState(Service.SEARCH_CRITERIA)
+    const {setOpen, searchAction, setNotify} = props;
+    const [countryDivisions, setCountryDivisions] = useState([]);
+
+    useEffect(() => {
+        CountryDivisionService.getLazy()
+            .then(response => setCountryDivisions(response.data.data))
+            .catch(e => setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`)));
+
+    }, []);
 
     const onChange = event => {
         const {name, value} = event.target;
@@ -26,52 +36,37 @@ const RancherSearchForm = (props) => {
             <Grid container spacing={3}>
                 <Grid item container xs={12} md={6} spacing={3}>
                     <Grid item xs={12}>
-                        <TextField label='Code'
-                                   name='code'
-                                   value={searchCriteria.code}
-                                   onChange={onChange}
-                        />
+                        <TextField onChange={onChange}
+                                   name='nationalCode'
+                                   label='National Code'
+                                   value={searchCriteria.nationalCode}/>
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField label='Name'
-                                   name='name'
-                                   value={searchCriteria.name}
-                                   onChange={onChange}
-                        />
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <TextField label='UniqueId'
-                                   name='uniqueId'
-                                   value={searchCriteria.uniqueId}
-                                   onChange={onChange}
-                        />
+                        <TextField onChange={onChange}
+                                   name='companyName'
+                                   label='Company Name'
+                                   value={searchCriteria.companyName}/>
                     </Grid>
                     <Grid item xs={12}>
-                        <Checkbox
-                            color='secondary'
-                            label='Active'
-                            name="active"
-                            checked={searchCriteria.active}
-                            onChange={onChange}
-                        />
+                        <TextField onChange={onChange}
+                                   name='companyNationalId'
+                                   label='Company National Code'
+                                   value={searchCriteria.companyNationalId}/>
                     </Grid>
                 </Grid>
                 <Grid item container xs={12} md={6} spacing={3}>
 
                     <Grid item xs={12}>
-                        <TextField label='Phone'
-                                   name='phone'
-                                   value={searchCriteria.phone}
-                                   onChange={onChange}
-                        />
+                        <TextField onChange={onChange}
+                                   name='mobile'
+                                   label='Mobile'
+                                   value={searchCriteria.mobile}/>
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField label='Mobile'
-                                   name='mobile'
-                                   value={searchCriteria.mobile}
-                                   onChange={onChange}
-                        />
+                        <AutoComplete data={countryDivisions}
+                                      onChange={onChange}
+                                      name='countryDivisionId'
+                                      label='Country Division'/>
                     </Grid>
 
 

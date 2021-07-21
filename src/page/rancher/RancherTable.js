@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
+    Checkbox,
     IconButton,
     makeStyles,
     Paper,
@@ -38,13 +39,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const HEADERS = [
-    {id: 'uniqueId', title: 'uniqueId', sortable: true},
     {id: 'nationalCode', title: 'National Code', sortable: true},
+    {id: 'birthDate', title: 'Birth Date', sortable: true},
     {id: 'firstname', title: 'Firstname', sortable: false},
     {id: 'lastname', title: 'Lastname', sortable: false},
-    {id: 'companyName', title: 'Company Name', sortable: false},
+    {id: 'phone', title: 'Phone', sortable: false},
+    {id: 'mobile', title: 'Mobile', sortable: false},
+    {id: 'companyName', title: 'Company Name', sortable: true},
     {id: 'countryDivisionId', title: 'Country Division', sortable: false},
-    {id: 'provinceGuildCode', title: 'Province Guild', sortable: false},
+    {id: 'legal', title: 'legal', sortable: true}
 ];
 
 const RancherTable = (props) => {
@@ -100,22 +103,27 @@ const RancherTable = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {pageData.data.map((guild, index) => (
-                        <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={guild.code}>
+                    {pageData.data.map((rancher, index) => (
+                        <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={rancher.code}>
                             <TableCell className={classes.cell}
                                        align='center'>{(page * rowsPerPage) + index + 1}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.uniqueId}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.nationalCode}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.firstname}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.lastname}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.companyName}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.countryDivisionName}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.provinceGuildName}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{rancher.nationalCode}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{rancher.birthDate}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{rancher.firstname}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{rancher.lastname}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{rancher.phone}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{rancher.mobile}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{rancher.companyName}</TableCell>
                             <TableCell className={classes.cell} align='center'>
-                                <IconButton size='small' onClick={() => onDeleteClick(guild)}>
+                                <Checkbox className={classes.checkbox} color='primary'
+                                          size='small' checked={rancher.legal} disableRipple/>
+                            </TableCell>
+                            <TableCell className={classes.cell} align='center'>{rancher.countryDivisionName}</TableCell>
+                            <TableCell className={classes.cell} align='center'>
+                                <IconButton size='small' onClick={() => onDeleteClick(rancher)}>
                                     <DeleteIcon fontSize='small' color="primary"/>
                                 </IconButton>
-                                <IconButton size='small' onClick={() => onEditClick(guild)}>
+                                <IconButton size='small' onClick={() => onEditClick(rancher)}>
                                     <EditIcon fontSize='small' color="primary"/>
                                 </IconButton>
                             </TableCell>
