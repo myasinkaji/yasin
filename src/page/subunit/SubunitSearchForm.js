@@ -26,52 +26,41 @@ const SubunitSearchForm = (props) => {
             <Grid container spacing={3}>
                 <Grid item container xs={12} md={6} spacing={3}>
                     <Grid item xs={12}>
-                        <TextField label='Code'
-                                   name='code'
-                                   value={searchCriteria.code}
-                                   onChange={onChange}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField label='Name'
-                                   name='name'
-                                   value={searchCriteria.name}
-                                   onChange={onChange}
-                        />
+                        <TextField onChange={onchange}
+                                   name='uniqueId'
+                                   label='Unique Id'
+                                   value={searchCriteria.uniqueId}/>
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField label='UniqueId'
-                                   name='uniqueId'
-                                   value={searchCriteria.uniqueId}
-                                   onChange={onChange}
-                        />
+                        <TextField onChange={onchange}
+                                   name='capacity'
+                                   label='Capacity'
+                                   value={searchCriteria.capacity}/>
                     </Grid>
+
                     <Grid item xs={12}>
-                        <Checkbox
-                            color='secondary'
-                            label='Active'
-                            name="active"
-                            checked={searchCriteria.active}
-                            onChange={onChange}
-                        />
+                        <TextField onChange={onchange}
+                                   name='licenseNumber'
+                                   label='License Number'
+                                   value={searchCriteria.licenseNumber}/>
                     </Grid>
+
                 </Grid>
                 <Grid item container xs={12} md={6} spacing={3}>
 
                     <Grid item xs={12}>
-                        <TextField label='Phone'
-                                   name='phone'
-                                   value={searchCriteria.phone}
-                                   onChange={onChange}
-                        />
+                        <TextField onChange={onchange}
+                                   name='licenseIssueDate'
+                                   label='License Issue Date'
+                                   value={searchCriteria.licenseIssueDate}/>
                     </Grid>
+
                     <Grid item xs={12}>
-                        <TextField label='Mobile'
-                                   name='mobile'
-                                   value={searchCriteria.mobile}
-                                   onChange={onChange}
-                        />
+                        <TextField onChange={onchange}
+                                   name='licenseExpireDate'
+                                   label='License Expire Date'
+                                   value={searchCriteria.licenseExpireDate}/>
                     </Grid>
 
 
