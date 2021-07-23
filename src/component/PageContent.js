@@ -13,6 +13,7 @@ import SubUnitActivityPage from "../page/subunit_activity/SubUnitActivityPage";
 import HerdPage from "../page/herd/HerdPage";
 import SubunitPage from "../page/subunit/SubunitPage";
 import RancherPage from "../page/rancher/RancherPage";
+import AgentContractorAssignmentPage from "../page/agent_contractor_assignment/AgentContractorAssignmentPage";
 
 
 const PageContent = () => {
@@ -56,6 +57,9 @@ const PageContent = () => {
             </Route>
             <Route path='/rancher'>
                 <RancherPage />
+            </Route>
+            <Route path='/agent-contractor'>
+                <AgentContractorAssignmentPage />
             </Route>
         </Switch>
     );

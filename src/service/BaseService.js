@@ -6,6 +6,7 @@ import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import ApartmentIcon from '@material-ui/icons/Apartment';
 import BusinessIcon from '@material-ui/icons/Business';
 import TransferWithinAStationIcon from '@material-ui/icons/TransferWithinAStation';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import LabelIcon from '@material-ui/icons/Label';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
@@ -69,6 +70,7 @@ export const BASIC_INFORMATION_LINKS = [
     {title: 'Country Division', to: '/country-division', icon:<LocationOnIcon /> },
     {title: 'Contractor', to: '/contractor', icon:<SupervisorAccountIcon /> },
     {title: 'agent', to: '/agent', icon:<TransferWithinAStationIcon /> },
+    {title: 'Assign Agent', to: '/agent-contractor', icon:<AssignmentIcon /> },
     {title: 'Subunit Activity', to: '/subunitactivity', icon:<LocalActivityIcon /> },
     {title: 'Subunit', to: '/subunit', icon:<AcUnitIcon /> },
     {title: 'Rancher', to: '/rancher', icon:<AccessibilityIcon /> },
