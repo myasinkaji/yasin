@@ -2,10 +2,8 @@ import React, {useState} from 'react';
 import {Backdrop, CircularProgress, Grid, makeStyles, Paper} from "@material-ui/core";
 import PageHeader from "../../component/PageHeader";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
-import SubunitSearchForm from "./SubunitSearchForm";
-import SubunitForm from "./SubunitForm";
+import AgentContractorAssignmentForm from "./AgentContractorAssignmentForm";
 import Dialog from "../../component/Dialog";
-import SubunitTable from "./SubunitTable";
 import * as Service from '../../service/subunit/SubunitService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
@@ -25,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const SubunitPage = () => {
+const AgentContractorAssignmentPage = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [record, setRecord] = useState(undefined);
@@ -99,17 +97,22 @@ const SubunitPage = () => {
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <SubunitSearchForm setOpen={setOpen} searchAction={onSearchClick}/>
+                    <AgentContractorAssignmentForm setOpen={setOpen} searchAction={onSearchClick}/>
                 </Paper>
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <SubunitTable pageData={page} onEditClick={onEditClick}
-                                  onDeleteClick={onDeleteClick} loadPage={loadPage}/>
+                    <AgentContractorAssignmentForm setOpen={setOpen} searchAction={onSearchClick}/>
+                </Paper>
+            </Grid>
+            <Grid item xs={12}>
+                <Paper square className={classes.paper}>
+                    {/*<SubunitTable pageData={page} onEditClick={onEditClick}
+                                  onDeleteClick={onDeleteClick} loadPage={loadPage}/>*/}
                 </Paper>
             </Grid>
             <Dialog title='Insert new' onClose={dialogClose} open={open}>
-                <SubunitForm submitAware={submitAware} recordForUpdate={record} setNotify={setNotify}/>
+                {/*<SubunitForm submitAware={submitAware} recordForUpdate={record} setNotify={setNotify}/>*/}
             </Dialog>
             <Notification
                 notify={notify}
@@ -126,4 +129,4 @@ const SubunitPage = () => {
     );
 }
 
-export default SubunitPage;
+export default AgentContractorAssignmentPage;
