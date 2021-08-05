@@ -15,7 +15,7 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import * as Constants from '../../service/Constants';
-import * as Service from '../../service/contractor/ContractorService';
+import * as Service from '../../service/agent/AgentService';
 
 const useStyles = makeStyles(theme => ({
     checkbox: {
@@ -40,11 +40,11 @@ const useStyles = makeStyles(theme => ({
 const HEADERS = [
     {id: 'uniqueId', title: 'uniqueId', sortable: true},
     {id: 'nationalCode', title: 'National Code', sortable: true},
+    {id: 'postalCode', title: 'Postal Code', sortable: true},
     {id: 'firstname', title: 'Firstname', sortable: false},
     {id: 'lastname', title: 'Lastname', sortable: false},
-    {id: 'companyName', title: 'Company Name', sortable: false},
+    {id: 'gradeId', title: 'Grade', sortable: false},
     {id: 'countryDivisionId', title: 'Country Division', sortable: false},
-    {id: 'provinceGuildCode', title: 'Province Guild', sortable: false},
 ];
 
 const AgentTable = (props) => {
@@ -100,22 +100,22 @@ const AgentTable = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {pageData.data.map((guild, index) => (
-                        <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={guild.code}>
+                    {pageData.data.map((agent, index) => (
+                        <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={agent.code}>
                             <TableCell className={classes.cell}
                                        align='center'>{(page * rowsPerPage) + index + 1}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.uniqueId}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.nationalCode}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.firstname}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.lastname}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.companyName}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.countryDivisionName}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{guild.provinceGuildName}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{agent.uniqueId}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{agent.nationalCode}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{agent.postalCode}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{agent.firstname}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{agent.lastname}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{agent.gradeTitle}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{agent.countryDivisionName}</TableCell>
                             <TableCell className={classes.cell} align='center'>
-                                <IconButton size='small' onClick={() => onDeleteClick(guild)}>
+                                <IconButton size='small' onClick={() => onDeleteClick(agent)}>
                                     <DeleteIcon fontSize='small' color="primary"/>
                                 </IconButton>
-                                <IconButton size='small' onClick={() => onEditClick(guild)}>
+                                <IconButton size='small' onClick={() => onEditClick(agent)}>
                                     <EditIcon fontSize='small' color="primary"/>
                                 </IconButton>
                             </TableCell>

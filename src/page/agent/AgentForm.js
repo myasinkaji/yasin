@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {DialogActions, DialogContent, Grid, makeStyles} from "@material-ui/core";
 import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
-import * as Service from '../../service/contractor/ContractorService';
+import * as Service from '../../service/agent/AgentService';
+import * as GradeService from '../../service/grade/GradeService';
 import * as CountryDivisionService from '../../service/countrydivision/CountryDivisionService';
-import * as ProvinceGuildService from '../../service/provinceGuild/ProvinceGuildService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
 import AutoComplete from "../../component/controls/AutoComplete";
@@ -21,34 +21,30 @@ const useStyle = makeStyles(theme => ({
 const AgentForm = (props) => {
     const classes = useStyle();
     const {recordForUpdate, submitAware, setNotify} = props;
-    const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_CONTRACTOR;
-    const [guild, setGuild] = useState(initialValue);
+    const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_AGENT;
+    const [agent, setAgent] = useState(initialValue);
     const [errors, setErrors] = useState(Constants.NO_ERROR);
     const [countryDivisions, setCountryDivisions] = useState([]);
-    const [provinceGuilds, setProvinceGuilds] = useState([]);
 
     useEffect(() => {
         CountryDivisionService.getLazy()
             .then(response => setCountryDivisions(response.data.data))
             .catch(e => setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`)));
 
-        ProvinceGuildService.getLazy()
-            .then(response => setProvinceGuilds(response.data.data))
-            .catch(e => setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`)));
     }, []);
 
     function onchange(event) {
         const {name, value} = event.target;
-        setGuild({
-            ...guild,
+        setAgent({
+            ...agent,
             [name]: value,
         });
     }
 
     function register() {
-        if (Service.validate(guild, setErrors)) {
-            Service.save(guild).then(() => {
-                submitAware(guild);
+        if (Service.validate(agent, setErrors)) {
+            Service.save(agent).then(() => {
+                submitAware(agent);
             }).catch(e => {
                 setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`));
             })
@@ -56,7 +52,7 @@ const AgentForm = (props) => {
     }
 
     function reset() {
-        setGuild(initialValue);
+        setAgent(initialValue);
     }
 
     return (
@@ -69,7 +65,7 @@ const AgentForm = (props) => {
                                        onChange={onchange}
                                        name='firstname'
                                        label='Firstname'
-                                       value={guild.firstname}/>
+                                       value={agent.firstname}/>
                         </Grid>
 
                         <Grid item xs={12}>
@@ -77,7 +73,7 @@ const AgentForm = (props) => {
                                        onChange={onchange}
                                        name='lastname'
                                        label='Lastname'
-                                       value={guild.lastname}/>
+                                       value={agent.lastname}/>
                         </Grid>
 
                         <Grid item xs={12}>
@@ -85,7 +81,7 @@ const AgentForm = (props) => {
                                        onChange={onchange}
                                        name='nationalCode'
                                        label='National Code'
-                                       value={guild.nationalCode}/>
+                                       value={agent.nationalCode}/>
                         </Grid>
 
                         <Grid item xs={12}>
@@ -93,66 +89,52 @@ const AgentForm = (props) => {
                                        onChange={onchange}
                                        name='postalCode'
                                        label='Postal Code'
-                                       value={guild.postalCode}/>
+                                       value={agent.postalCode}/>
                         </Grid>
                         <Grid item xs={12}>
                             <TextField error={errors.uniqueId}
                                        onChange={onchange}
                                        name='uniqueId'
                                        label='Unique Id'
-                                       value={guild.uniqueId}/>
+                                       value={agent.uniqueId}/>
                         </Grid>
 
-                        <Grid item xs={12}>
-                            <TextField error={errors.code}
-                                       onChange={onchange}
-                                       name='code'
-                                       label='Code'
-                                       value={guild.code}/>
-                        </Grid>
 
                     </Grid>
                     <Grid item container xs={12} md={6} spacing={3}>
 
                         <Grid item xs={12}>
+                            <TextField error={errors.mobile}
+                                       onChange={onchange}
+                                       name='mobile'
+                                       label='Mobile'
+                                       value={agent.mobile}/>
+                        </Grid>
+                        <Grid item xs={12}>
                             <TextField error={errors.phone}
                                        onChange={onchange}
                                        name='phone'
                                        label='Phone'
-                                       value={guild.phone}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField error={errors.email}
-                                       onChange={onchange}
-                                       name='email'
-                                       label='Email'
-                                       value={guild.email}/>
+                                       value={agent.phone}/>
                         </Grid>
                         <Grid item xs={12}>
                             <TextField error={errors.birthDate}
                                        onChange={onchange}
                                        name='birthDate'
                                        label='Birth Date'
-                                       value={guild.birthDate}/>
+                                       value={agent.birthDate}/>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField error={errors.companyName}
-                                       onChange={onchange}
-                                       name='companyName'
-                                       label='Company Name'
-                                       value={guild.companyName}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <AutoComplete error={errors.provinceGuildCode}
-                                          value={Service.getProvinceGuildOf(guild)}
-                                          data={provinceGuilds}
+                            <AutoComplete error={errors.gradeId}
+                                          value={Service.getGrade(agent)}
+                                          data={GradeService.Grades}
                                           onChange={onchange}
-                                          name='provinceGuildCode'
-                                          label='Province Guild'/>
+                                          name='gradeId'
+                                          label='Grade'/>
                         </Grid>
                         <Grid item xs={12}>
                             <AutoComplete error={errors.countryDivisionId}
-                                          value={Service.getCountryDivision(guild)}
+                                          value={Service.getCountryDivision(agent)}
                                           data={countryDivisions}
                                           onChange={onchange}
                                           name='countryDivisionId'

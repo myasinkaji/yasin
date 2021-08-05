@@ -6,7 +6,7 @@ import AgentSearchForm from "./AgentSearchForm";
 import AgentForm from "./AgentForm";
 import Dialog from "../../component/Dialog";
 import AgentTable from "./AgentTable";
-import * as Service from '../../service/contractor/ContractorService';
+import * as Service from '../../service/agent/AgentService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
 import Notification from "../../component/Notification";
@@ -55,37 +55,37 @@ const AgentPage = () => {
         });
     }
 
-    const submitAware = (guild) => {
+    const submitAware = (agent) => {
         dialogClose();
         loadPage(Service.DEFAULT_PAGE_REQUEST);
-        setNotify(BaseService.getSuccessMessageObject(`${guild.code} is registered Successfully`));
+        setNotify(BaseService.getSuccessMessageObject(`${agent.code} is registered Successfully`));
     }
 
     function dialogClose() {
-        setRecord(Service.INITIAL_CONTRACTOR);
+        setRecord(Service.INITIAL_AGENT);
         setOpen(false);
     }
 
-    function onDeleteClick(guild) {
+    function onDeleteClick(agent) {
         setConfirmDialog({
             isOpen: true,
-            title: `Are you sure to delete guild: ${guild.name}?`,
+            title: `Are you sure to delete agent: ${agent.name}?`,
             subTitle: "You can't undo this operation",
-            onConfirm: () => removeGuild(guild)
+            onConfirm: () => removeAgent(agent)
         });
     }
 
-    function removeGuild(guild) {
-        Service.remove(guild.code).then(() => {
+    function removeAgent(agent) {
+        Service.remove(agent.code).then(() => {
             loadPage(Service.DEFAULT_PAGE_REQUEST);
-            setNotify(BaseService.getWarningMessageObject(`${guild.code} is deleted Successfully`));
+            setNotify(BaseService.getWarningMessageObject(`${agent.code} is deleted Successfully`));
         }).catch(e => {
-            setNotify(BaseService.getErrorMessageObject(`${guild.code} can not be delete. ${e.message}`));
+            setNotify(BaseService.getErrorMessageObject(`${agent.code} can not be delete. ${e.message}`));
         });
     }
 
-    function onEditClick(guild) {
-        setRecord(guild);
+    function onEditClick(agent) {
+        setRecord(agent);
         setOpen(true);
     }
 
@@ -94,8 +94,8 @@ const AgentPage = () => {
             <Grid item xs={12}>
                 <PageHeader
                     icon={<PeopleOutlineIcon/>}
-                    title='Contractor Form'
-                    subtitle='contractor subtitle is here'/>
+                    title='Agent Form'
+                    subtitle='agent subtitle is here'/>
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>

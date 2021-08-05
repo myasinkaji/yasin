@@ -47,15 +47,6 @@ const AgentSearchForm = (props) => {
                                    onChange={onChange}
                         />
                     </Grid>
-                    <Grid item xs={12}>
-                        <Checkbox
-                            color='secondary'
-                            label='Active'
-                            name="active"
-                            checked={searchCriteria.active}
-                            onChange={onChange}
-                        />
-                    </Grid>
                 </Grid>
                 <Grid item container xs={12} md={6} spacing={3}>
 

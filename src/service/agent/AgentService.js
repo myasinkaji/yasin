@@ -26,7 +26,6 @@ export const INITIAL_AGENT = {
     mobile: '',
     gradeId: '',
     countryDivisionId: '',
-    contractorNationalCode: ''
 }
 export const DEFAULT_PAGE_REQUEST = {
     page: 0,
@@ -68,16 +67,17 @@ export function validate(agent, setErrors) {
     errors.lastname = isBlank(agent.lastname) ? 'lastname is required' : '';
     errors.phone = isBlank(agent.phone) ? 'phone is required' : '';
     errors.mobile = isBlank(agent.mobile) ? 'mobile is required' : '';
-    errors.email = isBlank(agent.email) ? 'email is required' : '';
     errors.gradeId = isBlank(String(agent.gradeId)) ? 'grade is required' : '';
     errors.countryDivisionId = isBlank(String(agent.countryDivisionId)) ? 'country division is required' : '';
-    // errors.contractorNationalCode = isBlank(String(agent.contractorNationalCode)) ? 'contractor is required' : '';
 
     setErrors({...errors})
     return Object.values(errors).every(isBlank);
 }
 
 const isBlank = message => !message.trim();
+
+export const getGrade = agent => agent.gradeId ?
+    {id: agent.gradeId, title: agent.gradeTitle} : undefined;
 
 export const getCountryDivision = agent => agent.countryDivisionId ?
     {id: agent.countryDivisionId, title: agent.countryDivisionName} : undefined;
