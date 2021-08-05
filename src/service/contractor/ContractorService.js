@@ -3,6 +3,7 @@ import * as BaseService from '../../service/BaseService';
 import * as Constants from "../Constants";
 
 const BASE_ADDRESS = '/contractor';
+const ASSIGN_ADDRESS = BASE_ADDRESS.concat('/assign');
 const SEARCH_ADDRESS = BASE_ADDRESS.concat('/search')
 const LAZY_ADDRESS = BASE_ADDRESS.concat('/lazy')
 
@@ -63,6 +64,15 @@ export function remove(contractorCode) {
 
 export function save(contractor) {
     return RestService.post(BASE_ADDRESS, contractor);
+}
+
+export function assignAgents(contractor, agents) {
+    const agentsNationalCode = agents.map(agent => agent.nationalCode)
+    const object = {
+        contractorNationalCode: contractor.nationalCode,
+        agentsNationalCodes: agentsNationalCode
+    }
+    return RestService.post(ASSIGN_ADDRESS, object)
 }
 
 export function search(pageRequest, searchCriteria) {
