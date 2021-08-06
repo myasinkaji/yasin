@@ -20,7 +20,7 @@ const useStyle = makeStyles(theme => ({
 }));
 
 
-const TagRequestForm = (props) => {
+const CentralGuildCartableForm = (props) => {
     const classes = useStyle();
     const {recordForUpdate, submitAware, setNotify} = props;
     const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_TAG_REQUEST;
@@ -126,4 +126,4 @@ const TagRequestForm = (props) => {
     );
 }
 
-export default TagRequestForm;
+export default CentralGuildCartableForm;

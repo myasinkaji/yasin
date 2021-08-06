@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import {Backdrop, CircularProgress, Grid, makeStyles, Paper} from "@material-ui/core";
 import PageHeader from "../../component/PageHeader";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
-import TagRequestSearchForm from "./TagRequestSearchForm";
-import TagRequestForm from "./TagRequestForm";
+import CentralGuildCartableSearchForm from "./CentralGuildCartableSearchForm";
+import CentralGuildCartableForm from "./CentralGuildCartableForm";
 import Dialog from "../../component/Dialog";
-import TagRequestTable from "./TagRequestTable";
+import CentralGuildCartableTable from "./CentralGuildCartableTable";
 import * as Service from '../../service/tagrequest/TagRequestService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const TagRequestPage = () => {
+const CentralGuildCartablePage = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [record, setRecord] = useState(undefined);
@@ -99,17 +99,17 @@ const TagRequestPage = () => {
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <TagRequestSearchForm setOpen={setOpen} searchAction={onSearchClick}/>
+                    <CentralGuildCartableSearchForm setOpen={setOpen} searchAction={onSearchClick}/>
                 </Paper>
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <TagRequestTable pageData={page} onEditClick={onEditClick}
-                                     onDeleteClick={onDeleteClick} loadPage={loadPage}/>
+                    <CentralGuildCartableTable pageData={page} onEditClick={onEditClick}
+                                               onDeleteClick={onDeleteClick} loadPage={loadPage}/>
                 </Paper>
             </Grid>
             <Dialog title='Insert new' onClose={dialogClose} open={open}>
-                <TagRequestForm submitAware={submitAware} recordForUpdate={record} setNotify={setNotify}/>
+                <CentralGuildCartableForm submitAware={submitAware} recordForUpdate={record} setNotify={setNotify}/>
             </Dialog>
             <Notification
                 notify={notify}
@@ -126,4 +126,4 @@ const TagRequestPage = () => {
     );
 }
 
-export default TagRequestPage;
+export default CentralGuildCartablePage;

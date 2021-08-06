@@ -47,7 +47,7 @@ const HEADERS = [
     {id: 'centralGuildCode', title: 'Central Guild', sortable: false},
 ];
 
-const TagRequestTable = (props) => {
+const CentralGuildCartableTable = (props) => {
     const classes = useStyles();
     const {pageData, onEditClick, onDeleteClick, loadPage} = props;
     const [page, setPage] = useState(0);
@@ -134,4 +134,4 @@ const TagRequestTable = (props) => {
     );
 }
 
-export default TagRequestTable;
+export default CentralGuildCartableTable;
