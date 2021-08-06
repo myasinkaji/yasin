@@ -2,9 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {DialogActions, DialogContent, Grid, makeStyles} from "@material-ui/core";
 import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
-import * as Service from '../../service/agent/AgentService';
-import * as GradeService from '../../service/grade/GradeService';
-import * as CountryDivisionService from '../../service/countrydivision/CountryDivisionService';
+import * as Service from '../../service/tagrequest/TagRequestService';
+import * as AnimalKindEnum from '../../service/enums/AnimalKind';
+import * as TagTypeEnum from '../../service/enums/TagType';
+import * as TagCompanyService from '../../service/tagcompany/TagCompanyService';
+import * as CentralGuildService from '../../service/centralGuild/CentralGuildService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
 import AutoComplete from "../../component/controls/AutoComplete";
@@ -21,30 +23,35 @@ const useStyle = makeStyles(theme => ({
 const TagRequestForm = (props) => {
     const classes = useStyle();
     const {recordForUpdate, submitAware, setNotify} = props;
-    const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_AGENT;
-    const [agent, setAgent] = useState(initialValue);
+    const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_TAG_REQUEST;
+    const [tagRequest, setTagRequest] = useState(initialValue);
     const [errors, setErrors] = useState(Constants.NO_ERROR);
-    const [countryDivisions, setCountryDivisions] = useState([]);
+    const [centralGuilds, setCentralGuilds] = useState([]);
+    const [tagCompanies, setTagCompanies] = useState([]);
 
     useEffect(() => {
-        CountryDivisionService.getLazy()
-            .then(response => setCountryDivisions(response.data.data))
+        CentralGuildService.getLazy()
+            .then(response => setCentralGuilds(response.data.data))
+            .catch(e => setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`)));
+
+        TagCompanyService.getLazy()
+            .then(response => setTagCompanies(response.data.data))
             .catch(e => setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`)));
 
     }, []);
 
     function onchange(event) {
         const {name, value} = event.target;
-        setAgent({
-            ...agent,
+        setTagRequest({
+            ...tagRequest,
             [name]: value,
         });
     }
 
     function register() {
-        if (Service.validate(agent, setErrors)) {
-            Service.save(agent).then(() => {
-                submitAware(agent);
+        if (Service.validate(tagRequest, setErrors)) {
+            Service.save(tagRequest).then(() => {
+                submitAware(tagRequest);
             }).catch(e => {
                 setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`));
             })
@@ -52,7 +59,7 @@ const TagRequestForm = (props) => {
     }
 
     function reset() {
-        setAgent(initialValue);
+        setTagRequest(initialValue);
     }
 
     return (
@@ -61,88 +68,47 @@ const TagRequestForm = (props) => {
                 <Grid container spacing={3}>
                     <Grid item container xs={12} md={6} spacing={3}>
                         <Grid item xs={12}>
-                            <TextField error={errors.firstname}
-                                       onChange={onchange}
-                                       name='firstname'
-                                       label='Firstname'
-                                       value={agent.firstname}/>
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            <TextField error={errors.lastname}
-                                       onChange={onchange}
-                                       name='lastname'
-                                       label='Lastname'
-                                       value={agent.lastname}/>
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            <TextField error={errors.nationalCode}
-                                       onChange={onchange}
-                                       name='nationalCode'
-                                       label='National Code'
-                                       value={agent.nationalCode}/>
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            <TextField error={errors.postalCode}
-                                       onChange={onchange}
-                                       name='postalCode'
-                                       label='Postal Code'
-                                       value={agent.postalCode}/>
+                            <AutoComplete error={errors.centralGuildCode}
+                                          value={Service.getCentralGuildOf(tagRequest)}
+                                          data={centralGuilds}
+                                          onChange={onchange}
+                                          name='centralGuildCode'
+                                          label='Central Guild'/>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField error={errors.uniqueId}
-                                       onChange={onchange}
-                                       name='uniqueId'
-                                       label='Unique Id'
-                                       value={agent.uniqueId}/>
+                            <AutoComplete error={errors.animalKind}
+                                          value={AnimalKindEnum.AnimalKind[tagRequest.animalKind]}
+                                          data={AnimalKindEnum.AnimalKind}
+                                          onChange={onchange}
+                                          name='animalKind'
+                                          label='Animal Kind'/>
                         </Grid>
-
-
+                        <Grid item xs={12}>
+                            <AutoComplete error={errors.tagType}
+                                          value={TagTypeEnum.TagType[tagRequest.tagType]}
+                                          data={TagTypeEnum.TagType}
+                                          onChange={onchange}
+                                          name='tagType'
+                                          label='Tag Type'/>
+                        </Grid>
                     </Grid>
                     <Grid item container xs={12} md={6} spacing={3}>
-
                         <Grid item xs={12}>
-                            <TextField error={errors.mobile}
-                                       onChange={onchange}
-                                       name='mobile'
-                                       label='Mobile'
-                                       value={agent.mobile}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField error={errors.phone}
-                                       onChange={onchange}
-                                       name='phone'
-                                       label='Phone'
-                                       value={agent.phone}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField error={errors.birthDate}
-                                       onChange={onchange}
-                                       name='birthDate'
-                                       label='Birth Date'
-                                       value={agent.birthDate}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <AutoComplete error={errors.gradeId}
-                                          value={Service.getGrade(agent)}
-                                          data={GradeService.Grades}
+                            <AutoComplete error={errors.tagCompanyId}
+                                          value={Service.getTagCompanyOf(tagRequest)}
+                                          data={tagCompanies}
                                           onChange={onchange}
-                                          name='gradeId'
-                                          label='Grade'/>
+                                          name='tagCompanyId'
+                                          label='Tag Company'/>
                         </Grid>
                         <Grid item xs={12}>
-                            <AutoComplete error={errors.countryDivisionId}
-                                          value={Service.getCountryDivision(agent)}
-                                          data={countryDivisions}
-                                          onChange={onchange}
-                                          name='countryDivisionId'
-                                          label='Country Division'/>
+                            <TextField error={errors.count}
+                                       onChange={onchange}
+                                       name='count'
+                                       label='Count'
+                                       value={tagRequest.count}/>
                         </Grid>
                     </Grid>
-
-
                 </Grid>
             </DialogContent>
 

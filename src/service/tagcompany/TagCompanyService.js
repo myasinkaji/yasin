@@ -3,6 +3,7 @@ import * as BaseService from '../../service/BaseService';
 import * as Constants from "../Constants";
 
 const BASE_ADDRESS = '/tc';
+const LAZY_ADDRESS = BASE_ADDRESS.concat('/lazy')
 const SEARCH_ADDRESS = BASE_ADDRESS.concat('/search')
 
 export const TagCompany_TOGGLES = [
@@ -67,6 +68,9 @@ export function save(tagCompany) {
     return RestService.post(BASE_ADDRESS, tagCompany);
 }
 
+export function getLazy() {
+    return RestService.get(LAZY_ADDRESS)
+}
 export function search(pageRequest, searchCriteria) {
     return BaseService.search(SEARCH_ADDRESS, pageRequest, searchCriteria);
 }

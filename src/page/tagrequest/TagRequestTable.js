@@ -15,7 +15,9 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import * as Constants from '../../service/Constants';
-import * as Service from '../../service/agent/AgentService';
+import * as Service from '../../service/tagrequest/TagRequestService';
+import {AnimalKind} from "../../service/enums/AnimalKind";
+import {TagType} from "../../service/enums/TagType";
 
 const useStyles = makeStyles(theme => ({
     checkbox: {
@@ -38,13 +40,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const HEADERS = [
-    {id: 'uniqueId', title: 'uniqueId', sortable: true},
-    {id: 'nationalCode', title: 'National Code', sortable: true},
-    {id: 'postalCode', title: 'Postal Code', sortable: true},
-    {id: 'firstname', title: 'Firstname', sortable: false},
-    {id: 'lastname', title: 'Lastname', sortable: false},
-    {id: 'gradeId', title: 'Grade', sortable: false},
-    {id: 'countryDivisionId', title: 'Country Division', sortable: false},
+    {id: 'animalKind', title: 'Animal Kind', sortable: true},
+    {id: 'tagType', title: 'Tag Type', sortable: true},
+    {id: 'count', title: 'Count', sortable: true},
+    {id: 'tagCompanyId', title: 'Tag Company', sortable: false},
+    {id: 'centralGuildCode', title: 'Central Guild', sortable: false},
 ];
 
 const TagRequestTable = (props) => {
@@ -100,22 +100,20 @@ const TagRequestTable = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {pageData.data.map((agent, index) => (
-                        <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={agent.code}>
+                    {pageData.data.map((tagRequest, index) => (
+                        <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={index}>
                             <TableCell className={classes.cell}
                                        align='center'>{(page * rowsPerPage) + index + 1}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{agent.uniqueId}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{agent.nationalCode}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{agent.postalCode}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{agent.firstname}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{agent.lastname}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{agent.gradeTitle}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{agent.countryDivisionName}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{AnimalKind[tagRequest.animalKind].title}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{TagType[tagRequest.tagType].title}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{tagRequest.count}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{tagRequest.tagCompanyName}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{tagRequest.centralGuildName}</TableCell>
                             <TableCell className={classes.cell} align='center'>
-                                <IconButton size='small' onClick={() => onDeleteClick(agent)}>
+                                <IconButton size='small' onClick={() => onDeleteClick(tagRequest)}>
                                     <DeleteIcon fontSize='small' color="primary"/>
                                 </IconButton>
-                                <IconButton size='small' onClick={() => onEditClick(agent)}>
+                                <IconButton size='small' onClick={() => onEditClick(tagRequest)}>
                                     <EditIcon fontSize='small' color="primary"/>
                                 </IconButton>
                             </TableCell>

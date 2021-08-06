@@ -6,7 +6,7 @@ import TagRequestSearchForm from "./TagRequestSearchForm";
 import TagRequestForm from "./TagRequestForm";
 import Dialog from "../../component/Dialog";
 import TagRequestTable from "./TagRequestTable";
-import * as Service from '../../service/agent/AgentService';
+import * as Service from '../../service/tagrequest/TagRequestService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
 import Notification from "../../component/Notification";
@@ -55,37 +55,37 @@ const TagRequestPage = () => {
         });
     }
 
-    const submitAware = (agent) => {
+    const submitAware = (tagRequest) => {
         dialogClose();
         loadPage(Service.DEFAULT_PAGE_REQUEST);
-        setNotify(BaseService.getSuccessMessageObject(`${agent.code} is registered Successfully`));
+        setNotify(BaseService.getSuccessMessageObject(`${tagRequest.code} is registered Successfully`));
     }
 
     function dialogClose() {
-        setRecord(Service.INITIAL_AGENT);
+        setRecord(Service.INITIAL_TAG_REQUEST);
         setOpen(false);
     }
 
-    function onDeleteClick(agent) {
+    function onDeleteClick(tagRequest) {
         setConfirmDialog({
             isOpen: true,
-            title: `Are you sure to delete agent: ${agent.name}?`,
+            title: `Are you sure to delete tag request: ${tagRequest.name}?`,
             subTitle: "You can't undo this operation",
-            onConfirm: () => removeAgent(agent)
+            onConfirm: () => removeTagRequest(tagRequest)
         });
     }
 
-    function removeAgent(agent) {
-        Service.remove(agent.code).then(() => {
+    function removeTagRequest(tagRequest) {
+        Service.remove(tagRequest.code).then(() => {
             loadPage(Service.DEFAULT_PAGE_REQUEST);
-            setNotify(BaseService.getWarningMessageObject(`${agent.code} is deleted Successfully`));
+            setNotify(BaseService.getWarningMessageObject(`${tagRequest.code} is deleted Successfully`));
         }).catch(e => {
-            setNotify(BaseService.getErrorMessageObject(`${agent.code} can not be delete. ${e.message}`));
+            setNotify(BaseService.getErrorMessageObject(`${tagRequest.code} can not be delete. ${e.message}`));
         });
     }
 
-    function onEditClick(agent) {
-        setRecord(agent);
+    function onEditClick(tagRequest) {
+        setRecord(tagRequest);
         setOpen(true);
     }
 
@@ -94,8 +94,8 @@ const TagRequestPage = () => {
             <Grid item xs={12}>
                 <PageHeader
                     icon={<PeopleOutlineIcon/>}
-                    title='Agent Form'
-                    subtitle='agent subtitle is here'/>
+                    title='Tag Request Form'
+                    subtitle='tag request subtitle is here'/>
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
