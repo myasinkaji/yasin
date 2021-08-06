@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import {Backdrop, CircularProgress, Grid, makeStyles, Paper} from "@material-ui/core";
 import PageHeader from "../../component/PageHeader";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
-import CentralGuildCartableSearchForm from "./CentralGuildCartableSearchForm";
-import CentralGuildCartableForm from "./CentralGuildCartableForm";
+import CompanyCartableSearchForm from "./CompanyCartableSearchForm";
+import CompanyCartableForm from "./CompanyCartableForm";
 import Dialog from "../../component/Dialog";
-import CentralGuildCartableTable from "./CentralGuildCartableTable";
+import CompanyCartableTable from "./CompanyCartableTable";
 import * as Service from '../../service/tagrequest/TagRequestService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const CentralGuildCartablePage = () => {
+const CompanyCartablePage = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [record, setRecord] = useState(undefined);
@@ -99,17 +99,17 @@ const CentralGuildCartablePage = () => {
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <CentralGuildCartableSearchForm setOpen={setOpen} searchAction={onSearchClick}/>
+                    <CompanyCartableSearchForm setOpen={setOpen} searchAction={onSearchClick}/>
                 </Paper>
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <CentralGuildCartableTable pageData={page} onEditClick={onEditClick}
-                                               onDeleteClick={onDeleteClick} loadPage={loadPage}/>
+                    <CompanyCartableTable pageData={page} onEditClick={onEditClick}
+                                          onDeleteClick={onDeleteClick} loadPage={loadPage}/>
                 </Paper>
             </Grid>
             <Dialog title='Insert new' onClose={dialogClose} open={open}>
-                <CentralGuildCartableForm submitAware={submitAware} recordForUpdate={record} setNotify={setNotify}/>
+                <CompanyCartableForm submitAware={submitAware} recordForUpdate={record} setNotify={setNotify}/>
             </Dialog>
             <Notification
                 notify={notify}
@@ -126,4 +126,4 @@ const CentralGuildCartablePage = () => {
     );
 }
 
-export default CentralGuildCartablePage;
+export default CompanyCartablePage;
