@@ -12,6 +12,7 @@ import SubunitPage from "../page/subunit/SubunitPage";
 import RancherPage from "../page/rancher/RancherPage";
 import AgentContractorAssignmentPage from "../page/agent_contractor_assignment/AgentContractorAssignmentPage";
 import TagRequestPage from "../page/tagrequest/TagRequestPage";
+import CentralGuildCartablePage from "../page/centralguildcartable/CentralGuildCartablePage";
 
 
 const PageContent = () => {
@@ -55,6 +56,9 @@ const PageContent = () => {
             </Route>
             <Route path='/tag-request'>
                 <TagRequestPage />
+            </Route>
+            <Route path='/cguild-cartable'>
+                <CentralGuildCartablePage />
             </Route>
         </Switch>
     );

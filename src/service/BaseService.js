@@ -92,3 +92,9 @@ export const TAG_LINKS = [
     {title: 'Transport', to: '/transportIdentity', icon:<SendIcon />},
     {title: 'Edit', to: '/editIdentity', icon:<EditIcon />},
 ]
+
+export const CARTABLE_LINKS = [
+    {title: 'Central Cartable', to: '/cguild-cartable', icon:<LabelIcon />},
+    {title: 'Company Cartable', to: '/comp-cartable', icon:<DeleteIcon />},
+]
+

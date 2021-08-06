@@ -17,6 +17,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {Link} from "react-router-dom";
 import * as BasicService from '../service/BaseService';
+import {CARTABLE_LINKS} from "../service/BaseService";
 
 const drawerWidth = 240;
 
@@ -187,7 +188,7 @@ export default function SideMenu(props) {
                     </AccordionSummary>
                     <AccordionDetails>
                         <List>
-                            {BasicService.TAG_LINKS.map((link, index) => (
+                            {BasicService.CARTABLE_LINKS.map((link, index) => (
                                 <ListItem button key={link.to}>
                                     <ListItemIcon><MailIcon/></ListItemIcon>
                                     <Link onClick={() => setOpen(false)}
