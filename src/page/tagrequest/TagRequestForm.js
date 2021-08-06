@@ -18,7 +18,7 @@ const useStyle = makeStyles(theme => ({
 }));
 
 
-const AgentForm = (props) => {
+const TagRequestForm = (props) => {
     const classes = useStyle();
     const {recordForUpdate, submitAware, setNotify} = props;
     const initialValue = recordForUpdate ? recordForUpdate : Service.INITIAL_AGENT;
@@ -160,4 +160,4 @@ const AgentForm = (props) => {
     );
 }
 
-export default AgentForm;
+export default TagRequestForm;

@@ -5,10 +5,9 @@ import Button from "../../component/controls/Button";
 import SaveIcon from '@material-ui/icons/Save';
 import SearchIcon from '@material-ui/icons/Search';
 import * as Service from '../../service/agent/AgentService';
-import Checkbox from "../../component/controls/Checkbox";
 
 
-const AgentSearchForm = (props) => {
+const TagRequestSearchForm = (props) => {
 
     const [searchCriteria, setSearchCriteria] = useState(Service.SEARCH_CRITERIA)
     const {setOpen, searchAction} = props;
@@ -96,4 +95,4 @@ const AgentSearchForm = (props) => {
     );
 }
 
-export default AgentSearchForm;
+export default TagRequestSearchForm;

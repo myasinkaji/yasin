@@ -47,7 +47,7 @@ const HEADERS = [
     {id: 'countryDivisionId', title: 'Country Division', sortable: false},
 ];
 
-const AgentTable = (props) => {
+const TagRequestTable = (props) => {
     const classes = useStyles();
     const {pageData, onEditClick, onDeleteClick, loadPage} = props;
     const [page, setPage] = useState(0);
@@ -136,4 +136,4 @@ const AgentTable = (props) => {
     );
 }
 
-export default AgentTable;
+export default TagRequestTable;
