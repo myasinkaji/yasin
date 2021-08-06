@@ -76,7 +76,7 @@ const TagRequestPage = () => {
     }
 
     function removeTagRequest(tagRequest) {
-        Service.remove(tagRequest.code).then(() => {
+        Service.remove(tagRequest.id).then(() => {
             loadPage(Service.DEFAULT_PAGE_REQUEST);
             setNotify(BaseService.getWarningMessageObject(`${tagRequest.code} is deleted Successfully`));
         }).catch(e => {
