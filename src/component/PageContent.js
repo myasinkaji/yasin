@@ -14,6 +14,7 @@ import HerdPage from "../page/herd/HerdPage";
 import SubunitPage from "../page/subunit/SubunitPage";
 import RancherPage from "../page/rancher/RancherPage";
 import AgentContractorAssignmentPage from "../page/agent_contractor_assignment/AgentContractorAssignmentPage";
+import TagRequestPage from "../page/tagrequest/TagRequestPage";
 
 
 const PageContent = () => {
@@ -60,6 +61,9 @@ const PageContent = () => {
             </Route>
             <Route path='/agent-contractor'>
                 <AgentContractorAssignmentPage />
+            </Route>
+            <Route path='/tag-request'>
+                <TagRequestPage />
             </Route>
         </Switch>
     );

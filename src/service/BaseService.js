@@ -85,3 +85,10 @@ export const IDENTITY_LINKS = [
     {title: 'Transport', to: '/transportIdentity', icon:<SendIcon />},
     {title: 'Edit', to: '/editIdentity', icon:<EditIcon />},
 ]
+
+export const TAG_LINKS = [
+    {title: 'Tag Request', to: '/tag-request', icon:<LabelIcon />},
+    {title: 'Delete', to: '/deleteIdentity', icon:<DeleteIcon />},
+    {title: 'Transport', to: '/transportIdentity', icon:<SendIcon />},
+    {title: 'Edit', to: '/editIdentity', icon:<EditIcon />},
+]

@@ -118,7 +118,7 @@ export default function SideMenu(props) {
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon/>}
                         aria-controls="panel1a-content"
-                        id="panel1a-header"
+                        id="basic-information-header"
                     >
                         <Typography className={classes.heading}>Basic Information</Typography>
                     </AccordionSummary>
@@ -139,7 +139,7 @@ export default function SideMenu(props) {
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon/>}
                         aria-controls="panel2a-content"
-                        id="panel2a-header"
+                        id="identity-header"
                     >
                         <Typography className={classes.heading}>Identity</Typography>
                     </AccordionSummary>
@@ -160,15 +160,15 @@ export default function SideMenu(props) {
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon/>}
                         aria-controls="panel2a-content"
-                        id="panel2a-header"
+                        id="tag-header"
                     >
                         <Typography className={classes.heading}>Tag</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <List>
-                            {BasicService.BASIC_INFORMATION_LINKS.map((link, index) => (
+                            {BasicService.TAG_LINKS.map((link, index) => (
                                 <ListItem button key={link.to}>
-                                    <ListItemIcon><MailIcon/></ListItemIcon>
+                                    <ListItemIcon>{link.icon}</ListItemIcon>
                                     <Link onClick={() => setOpen(false)}
                                           className={classes.link}
                                           to={link.to}>{link.title}</Link>
@@ -183,11 +183,11 @@ export default function SideMenu(props) {
                         aria-controls="panel2a-content"
                         id="panel2a-header"
                     >
-                        <Typography className={classes.heading}>Tag Warehouse</Typography>
+                        <Typography className={classes.heading}>Cartable</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <List>
-                            {BasicService.BASIC_INFORMATION_LINKS.map((link, index) => (
+                            {BasicService.TAG_LINKS.map((link, index) => (
                                 <ListItem button key={link.to}>
                                     <ListItemIcon><MailIcon/></ListItemIcon>
                                     <Link onClick={() => setOpen(false)}
@@ -208,7 +208,7 @@ export default function SideMenu(props) {
                     </AccordionSummary>
                     <AccordionDetails>
                         <List>
-                            {BasicService.BASIC_INFORMATION_LINKS.map((link, index) => (
+                            {BasicService.TAG_LINKS.map((link, index) => (
                                 <ListItem button key={link.to}>
                                     <ListItemIcon><MailIcon/></ListItemIcon>
                                     <Link onClick={() => setOpen(false)}
@@ -229,7 +229,7 @@ export default function SideMenu(props) {
                     </AccordionSummary>
                     <AccordionDetails>
                         <List>
-                            {BasicService.BASIC_INFORMATION_LINKS.map((link, index) => (
+                            {BasicService.TAG_LINKS.map((link, index) => (
                                 <ListItem button key={link.to}>
                                     <ListItemIcon><MailIcon/></ListItemIcon>
                                     <Link onClick={() => setOpen(false)}
@@ -250,7 +250,7 @@ export default function SideMenu(props) {
                     </AccordionSummary>
                     <AccordionDetails>
                         <List>
-                            {BasicService.BASIC_INFORMATION_LINKS.map((link, index) => (
+                            {BasicService.TAG_LINKS.map((link, index) => (
                                 <ListItem button key={link.to}>
                                     <ListItemIcon><MailIcon/></ListItemIcon>
                                     <Link onClick={() => setOpen(false)}
