@@ -13,6 +13,7 @@ import RancherPage from "../page/rancher/RancherPage";
 import AgentContractorAssignmentPage from "../page/agent_contractor_assignment/AgentContractorAssignmentPage";
 import TagRequestPage from "../page/tagrequest/TagRequestPage";
 import CentralGuildCartablePage from "../page/centralguildcartable/CentralGuildCartablePage";
+import CompanyCartablePage from "../page/companycartable/CompanyCartablePage";
 
 
 const PageContent = () => {
@@ -59,6 +60,9 @@ const PageContent = () => {
             </Route>
             <Route path='/cguild-cartable'>
                 <CentralGuildCartablePage />
+            </Route>
+            <Route path='/comp-cartable'>
+                <CompanyCartablePage />
             </Route>
         </Switch>
     );
