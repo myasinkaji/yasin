@@ -6,7 +6,7 @@ import CompanyTagStoreSearchForm from "./CompanyTagStoreSearchForm";
 import CompanyTagStoreForm from "./CompanyTagStoreForm";
 import Dialog from "../../component/Dialog";
 import CompanyTagStoreTable from "./CompanyTagStoreTable";
-import * as Service from '../../service/centralguildcartable/CentralGuildCartableService';
+import * as Service from '../../service/centralGuildTagStore/CentralGuildTagStoreService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
 import Notification from "../../component/Notification";
@@ -36,7 +36,7 @@ const CompanyTagStorePage = () => {
 
     const loadPage = (pageRequest) => {
         setLoading(true)
-        const promise = Service.getPage(pageRequest);
+        const promise = Service.getDeliveredTagRequests(pageRequest);
         setPageData(promise);
     }
 
@@ -66,23 +66,11 @@ const CompanyTagStorePage = () => {
         setOpen(false);
     }
 
-    function confirm(tagRequest) {
-        Service.confirm(tagRequest, true).then(() => {
-            loadPage(Service.DEFAULT_PAGE_REQUEST);
-            setNotify(BaseService.getSuccessMessageObject(`${tagRequest.code} is confirmed Successfully`));
-        }).catch(e => {
-            setNotify(BaseService.getErrorMessageObject(`${tagRequest.code} can not be delete. ${e.message}`));
-        });
+    function distribute(tagRequest) {
+        setRecord(tagRequest)
+        setOpen(true)
     }
 
-    function reject(tagRequest) {
-        Service.confirm(tagRequest, false).then(() => {
-            loadPage(Service.DEFAULT_PAGE_REQUEST);
-            setNotify(BaseService.getWarningMessageObject(`${tagRequest.code} is rejected Successfully`));
-        }).catch(e => {
-            setNotify(BaseService.getErrorMessageObject(`${tagRequest.code} can not be delete. ${e.message}`));
-        });
-    }
 
     return (
         <>
@@ -99,11 +87,10 @@ const CompanyTagStorePage = () => {
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <CompanyTagStoreTable pageData={page} confirm={confirm}
-                                          reject={reject} loadPage={loadPage}/>
+                    <CompanyTagStoreTable pageData={page} distribute={distribute} loadPage={loadPage}/>
                 </Paper>
             </Grid>
-            <Dialog title='Insert new' onClose={dialogClose} open={open}>
+            <Dialog title='Distribute' onClose={dialogClose} open={open}>
                 <CompanyTagStoreForm submitAware={submitAware} recordForUpdate={record} setNotify={setNotify}/>
             </Dialog>
             <Notification

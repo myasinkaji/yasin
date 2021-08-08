@@ -5,6 +5,7 @@ import * as Constants from "../Constants";
 const BASE_ADDRESS = '/pg';
 const SEARCH_ADDRESS = BASE_ADDRESS.concat('/search')
 const LAZY_ADDRESS = BASE_ADDRESS.concat('/lazy')
+const LAZY_ADDRESS_CHILDREN_OF = BASE_ADDRESS.concat('/lazy/child/of')
 
 export const GUILD_SEARCH_CRITERIA = {
     uniqueId: '',
@@ -43,6 +44,9 @@ export function getPage(pageRequest) {
     return RestService.get(url)
 }
 
+export function getLazyProvinceGuildChildren(tagRequest) {
+    return RestService.get(LAZY_ADDRESS_CHILDREN_OF.concat('?centralGuildCode=').concat(tagRequest.centralGuildCode))
+}
 export function getLazy() {
     return RestService.get(LAZY_ADDRESS)
 }

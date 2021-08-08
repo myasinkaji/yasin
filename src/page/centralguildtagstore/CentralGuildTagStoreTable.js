@@ -16,8 +16,7 @@ import * as Constants from '../../service/Constants';
 import * as Service from '../../service/centralguildcartable/CentralGuildCartableService';
 import {AnimalKind} from "../../service/enums/AnimalKind";
 import {TagType} from "../../service/enums/TagType";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import CancelIcon from "@material-ui/icons/Cancel";
+import LabelIcon from '@material-ui/icons/Label';
 
 const useStyles = makeStyles(theme => ({
     checkbox: {
@@ -43,6 +42,7 @@ const HEADERS = [
     {id: 'animalKind', title: 'Animal Kind', sortable: true},
     {id: 'tagType', title: 'Tag Type', sortable: true},
     {id: 'count', title: 'Count', sortable: true},
+    {id: 'remained', title: 'Remained', sortable: true},
     {id: 'from', title: 'From', sortable: true},
     {id: 'to', title: 'To', sortable: true},
     {id: 'createdTime', title: 'Created Time', sortable: false},
@@ -52,7 +52,7 @@ const HEADERS = [
 
 const CentralGuildTagStoreTable = (props) => {
     const classes = useStyles();
-    const {pageData, confirm, reject, loadPage} = props;
+    const {pageData, distribute, loadPage} = props;
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(Constants.DEFAULT_ROWS_PER_PAGE);
     const [orderBy, setOrderBy] = useState(Service.DEFAULT_PAGE_REQUEST.orderBy);
@@ -78,24 +78,6 @@ const CentralGuildTagStoreTable = (props) => {
     function orderChanged(newOrderBy) {
         setOrder(orderBy === newOrderBy ? (order === 'asc' ? 'desc' : 'asc') : 'asc')
         setOrderBy(newOrderBy);
-    }
-
-    function getActionComponents(tagRequest) {
-        let component = (<></>);
-        if (tagRequest.status === 1) { // COMPANY_ACCEPTED
-            component = (
-                <>
-                    <IconButton size='small' onClick={() => confirm(tagRequest)}>
-                        <CheckCircleIcon fontSize='small' color="primary"/>
-                    </IconButton>
-                    <IconButton size='small' onClick={() => reject(tagRequest)}>
-                        <CancelIcon fontSize='small' color="primary"/>
-                    </IconButton>
-                </>
-            )
-        }
-
-        return component;
     }
 
     return (
@@ -125,9 +107,12 @@ const CentralGuildTagStoreTable = (props) => {
                         <TableRow className={index % 2 === 0 ? classes.evenRow : ''} key={index}>
                             <TableCell className={classes.cell}
                                        align='center'>{(page * rowsPerPage) + index + 1}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{AnimalKind[tagRequest.animalKind].title}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{TagType[tagRequest.tagType].title}</TableCell>
+                            <TableCell className={classes.cell}
+                                       align='center'>{AnimalKind[tagRequest.animalKind].title}</TableCell>
+                            <TableCell className={classes.cell}
+                                       align='center'>{TagType[tagRequest.tagType].title}</TableCell>
                             <TableCell className={classes.cell} align='center'>{tagRequest.count}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{tagRequest.remained}</TableCell>
                             <TableCell className={classes.cell}
                                        align='center'>{tagRequest.from === 0 ? '' : tagRequest.from}</TableCell>
                             <TableCell className={classes.cell}
@@ -135,8 +120,11 @@ const CentralGuildTagStoreTable = (props) => {
                             <TableCell className={classes.cell} align='center'>{tagRequest.createdTime}</TableCell>
                             <TableCell className={classes.cell} align='center'>{tagRequest.tagCompanyName}</TableCell>
                             <TableCell className={classes.cell} align='center'>{tagRequest.centralGuildName}</TableCell>
-                            <TableCell className={classes.cell}
-                                       align='center'>{getActionComponents(tagRequest)}</TableCell>
+                            <TableCell className={classes.cell} align='center'>
+                                <IconButton size='small' onClick={() => distribute(tagRequest)}>
+                                    <LabelIcon fontSize='small' color="primary"/>
+                                </IconButton>
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
