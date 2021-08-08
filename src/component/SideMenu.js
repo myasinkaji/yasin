@@ -17,7 +17,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {Link} from "react-router-dom";
 import * as BasicService from '../service/BaseService';
-import {CARTABLE_LINKS} from "../service/BaseService";
+import {CARTABLE_LINKS, TAG_STORE_LINKS} from "../service/BaseService";
 
 const drawerWidth = 240;
 
@@ -182,7 +182,7 @@ export default function SideMenu(props) {
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon/>}
                         aria-controls="panel2a-content"
-                        id="panel2a-header"
+                        id="cartable-header"
                     >
                         <Typography className={classes.heading}>Cartable</Typography>
                     </AccordionSummary>
@@ -190,7 +190,28 @@ export default function SideMenu(props) {
                         <List>
                             {BasicService.CARTABLE_LINKS.map((link, index) => (
                                 <ListItem button key={link.to}>
-                                    <ListItemIcon><MailIcon/></ListItemIcon>
+                                    <ListItemIcon>{link.icon}</ListItemIcon>
+                                    <Link onClick={() => setOpen(false)}
+                                          className={classes.link}
+                                          to={link.to}>{link.title}</Link>
+                                </ListItem>
+                            ))}
+                        </List>
+                    </AccordionDetails>
+                </Accordion>
+                <Accordion>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreIcon/>}
+                        aria-controls="panel2a-content"
+                        id="tagStore-header"
+                    >
+                        <Typography className={classes.heading}>Tag Store</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <List>
+                            {BasicService.TAG_STORE_LINKS.map((link, index) => (
+                                <ListItem button key={link.to}>
+                                    <ListItemIcon>{link.icon}</ListItemIcon>
                                     <Link onClick={() => setOpen(false)}
                                           className={classes.link}
                                           to={link.to}>{link.title}</Link>

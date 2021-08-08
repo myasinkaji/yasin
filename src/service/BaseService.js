@@ -14,6 +14,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import InfoIcon from '@material-ui/icons/Info';
 import SendIcon from '@material-ui/icons/Send';
 import EditIcon from '@material-ui/icons/Edit';
+import HomeIcon from '@material-ui/icons/Home';
+import StoreIcon from '@material-ui/icons/Store';
 
 export function search(url, pageRequest, searchCriteria) {
     const criteriaParams = Object.keys(searchCriteria)
@@ -94,7 +96,12 @@ export const TAG_LINKS = [
 ]
 
 export const CARTABLE_LINKS = [
-    {title: 'Central Cartable', to: '/cguild-cartable', icon:<LabelIcon />},
-    {title: 'Company Cartable', to: '/comp-cartable', icon:<DeleteIcon />},
+    {title: 'Central Cartable', to: '/cguild-cartable', icon:<HomeIcon />},
+    {title: 'Company Cartable', to: '/comp-cartable', icon:<HomeIcon />},
+]
+
+export const TAG_STORE_LINKS = [
+    {title: 'Central Tag Store', to: '/cguild-tag-store', icon:<StoreIcon />},
+    {title: 'Province Tag Store', to: '/comp-tag-store', icon:<StoreIcon />},
 ]
 

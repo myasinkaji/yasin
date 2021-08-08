@@ -14,6 +14,8 @@ import AgentContractorAssignmentPage from "../page/agent_contractor_assignment/A
 import TagRequestPage from "../page/tagrequest/TagRequestPage";
 import CentralGuildCartablePage from "../page/centralguildcartable/CentralGuildCartablePage";
 import CompanyCartablePage from "../page/companycartable/CompanyCartablePage";
+import CentralGuildTagStorePage from "../page/centralguildtagstore/CentralGuildTagStorePage";
+import CompanyTagStorePage from "../page/companytagstore/CompanyTagStorePage";
 
 
 const PageContent = () => {
@@ -63,6 +65,12 @@ const PageContent = () => {
             </Route>
             <Route path='/comp-cartable'>
                 <CompanyCartablePage />
+            </Route>
+            <Route path='/cguild-tag-store'>
+                <CentralGuildTagStorePage />
+            </Route>
+            <Route path='/comp-tag-store'>
+                <CompanyTagStorePage />
             </Route>
         </Switch>
     );
