@@ -7,7 +7,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import * as Service from '../../service/centralguildcartable/CentralGuildCartableService';
 
 
-const CentralGuildCartableSearchForm = (props) => {
+const CompanyTagStoreSearchForm = (props) => {
 
     const [searchCriteria, setSearchCriteria] = useState(Service.SEARCH_CRITERIA)
     const {setOpen, searchAction} = props;
@@ -95,4 +95,4 @@ const CentralGuildCartableSearchForm = (props) => {
     );
 }
 
-export default CentralGuildCartableSearchForm;
+export default CompanyTagStoreSearchForm;

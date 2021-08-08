@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import {Backdrop, CircularProgress, Grid, makeStyles, Paper} from "@material-ui/core";
 import PageHeader from "../../component/PageHeader";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
-import CentralGuildCartableSearchForm from "./CentralGuildCartableSearchForm";
-import CentralGuildCartableForm from "./CentralGuildCartableForm";
+import CompanyTagStoreSearchForm from "./CompanyTagStoreSearchForm";
+import CompanyTagStoreForm from "./CompanyTagStoreForm";
 import Dialog from "../../component/Dialog";
-import CentralGuildCartableTable from "./CentralGuildCartableTable";
+import CompanyTagStoreTable from "./CompanyTagStoreTable";
 import * as Service from '../../service/centralguildcartable/CentralGuildCartableService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const CentralGuildCartablePage = () => {
+const CompanyTagStorePage = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [record, setRecord] = useState(undefined);
@@ -89,22 +89,22 @@ const CentralGuildCartablePage = () => {
             <Grid item xs={12}>
                 <PageHeader
                     icon={<PeopleOutlineIcon/>}
-                    title='Central Guild Cartable'
-                    subtitle='central guild cartable subtitle is here'/>
+                    title='Company Tag Store'
+                    subtitle='company tag store subtitle is here'/>
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <CentralGuildCartableSearchForm setOpen={setOpen} searchAction={onSearchClick}/>
+                    <CompanyTagStoreSearchForm setOpen={setOpen} searchAction={onSearchClick}/>
                 </Paper>
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <CentralGuildCartableTable pageData={page} confirm={confirm}
-                                               reject={reject} loadPage={loadPage}/>
+                    <CompanyTagStoreTable pageData={page} confirm={confirm}
+                                          reject={reject} loadPage={loadPage}/>
                 </Paper>
             </Grid>
             <Dialog title='Insert new' onClose={dialogClose} open={open}>
-                <CentralGuildCartableForm submitAware={submitAware} recordForUpdate={record} setNotify={setNotify}/>
+                <CompanyTagStoreForm submitAware={submitAware} recordForUpdate={record} setNotify={setNotify}/>
             </Dialog>
             <Notification
                 notify={notify}
@@ -121,4 +121,4 @@ const CentralGuildCartablePage = () => {
     );
 }
 
-export default CentralGuildCartablePage;
+export default CompanyTagStorePage;
