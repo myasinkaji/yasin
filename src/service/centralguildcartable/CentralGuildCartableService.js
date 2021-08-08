@@ -3,6 +3,7 @@ import * as BaseService from '../../service/BaseService';
 import * as Constants from "../Constants";
 
 const BASE_ADDRESS = '/tag-request';
+const GUILD_CONFIRMATION = BASE_ADDRESS.concat('/guild-accept');
 const SEARCH_ADDRESS = BASE_ADDRESS.concat('/search')
 
 export const SEARCH_CRITERIA = {
@@ -45,6 +46,10 @@ export function remove(id) {
 
 export function save(tagRequest) {
     return RestService.post(BASE_ADDRESS, tagRequest);
+}
+export function confirm(tagRequest, confirm) {
+    const object = {tagRequestId: tagRequest.id, confirm}
+    return RestService.post(GUILD_CONFIRMATION, object);
 }
 
 export function search(pageRequest, searchCriteria) {

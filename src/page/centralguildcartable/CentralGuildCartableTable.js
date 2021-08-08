@@ -15,9 +15,11 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import * as Constants from '../../service/Constants';
-import * as Service from '../../service/tagrequest/TagRequestService';
+import * as Service from '../../service/centralguildcartable/CentralGuildCartableService';
 import {AnimalKind} from "../../service/enums/AnimalKind";
 import {TagType} from "../../service/enums/TagType";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import CancelIcon from "@material-ui/icons/Cancel";
 
 const useStyles = makeStyles(theme => ({
     checkbox: {
@@ -43,17 +45,19 @@ const HEADERS = [
     {id: 'animalKind', title: 'Animal Kind', sortable: true},
     {id: 'tagType', title: 'Tag Type', sortable: true},
     {id: 'count', title: 'Count', sortable: true},
+    {id: 'from', title: 'From', sortable: true},
+    {id: 'to', title: 'To', sortable: true},
     {id: 'tagCompanyId', title: 'Tag Company', sortable: false},
     {id: 'centralGuildCode', title: 'Central Guild', sortable: false},
 ];
 
 const CentralGuildCartableTable = (props) => {
     const classes = useStyles();
-    const {pageData, onEditClick, onDeleteClick, loadPage} = props;
+    const {pageData, confirm, reject, loadPage} = props;
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(Constants.DEFAULT_ROWS_PER_PAGE);
     const [orderBy, setOrderBy] = useState(Service.DEFAULT_PAGE_REQUEST.orderBy);
-    const [order, setOrder] = useState(Constants.DEFAULT_ORDER);
+    const [order, setOrder] = useState(Service.DEFAULT_PAGE_REQUEST.order);
 
     useEffect(() => {
         loadPage({
@@ -75,6 +79,24 @@ const CentralGuildCartableTable = (props) => {
     function orderChanged(newOrderBy) {
         setOrder(orderBy === newOrderBy ? (order === 'asc' ? 'desc' : 'asc') : 'asc')
         setOrderBy(newOrderBy);
+    }
+
+    function getActionComponents(tagRequest) {
+        let component = (<></>);
+        if (tagRequest.status === 1) { // COMPANY_ACCEPTED
+            component = (
+                <>
+                    <IconButton size='small' onClick={() => confirm(tagRequest)}>
+                        <CheckCircleIcon fontSize='small' color="primary"/>
+                    </IconButton>
+                    <IconButton size='small' onClick={() => reject(tagRequest)}>
+                        <CancelIcon fontSize='small' color="primary"/>
+                    </IconButton>
+                </>
+            )
+        }
+
+        return component;
     }
 
     return (
@@ -107,16 +129,14 @@ const CentralGuildCartableTable = (props) => {
                             <TableCell className={classes.cell} align='center'>{AnimalKind[tagRequest.animalKind].title}</TableCell>
                             <TableCell className={classes.cell} align='center'>{TagType[tagRequest.tagType].title}</TableCell>
                             <TableCell className={classes.cell} align='center'>{tagRequest.count}</TableCell>
+                            <TableCell className={classes.cell}
+                                       align='center'>{tagRequest.from === 0 ? '' : tagRequest.from}</TableCell>
+                            <TableCell className={classes.cell}
+                                       align='center'>{tagRequest.to === 0 ? '' : tagRequest.to}</TableCell>
                             <TableCell className={classes.cell} align='center'>{tagRequest.tagCompanyName}</TableCell>
                             <TableCell className={classes.cell} align='center'>{tagRequest.centralGuildName}</TableCell>
-                            <TableCell className={classes.cell} align='center'>
-                                <IconButton size='small' onClick={() => onDeleteClick(tagRequest)}>
-                                    <DeleteIcon fontSize='small' color="primary"/>
-                                </IconButton>
-                                <IconButton size='small' onClick={() => onEditClick(tagRequest)}>
-                                    <EditIcon fontSize='small' color="primary"/>
-                                </IconButton>
-                            </TableCell>
+                            <TableCell className={classes.cell}
+                                       align='center'>{getActionComponents(tagRequest)}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

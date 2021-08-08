@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {DialogActions, DialogContent, Grid, makeStyles} from "@material-ui/core";
 import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
-import * as Service from '../../service/tagrequest/TagRequestService';
+import * as Service from '../../service/centralguildcartable/CentralGuildCartableService';
 import * as AnimalKindEnum from '../../service/enums/AnimalKind';
 import * as TagTypeEnum from '../../service/enums/TagType';
 import * as TagCompanyService from '../../service/tagcompany/TagCompanyService';

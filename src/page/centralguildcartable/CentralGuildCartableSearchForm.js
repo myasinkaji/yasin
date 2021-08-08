@@ -4,7 +4,7 @@ import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
 import SaveIcon from '@material-ui/icons/Save';
 import SearchIcon from '@material-ui/icons/Search';
-import * as Service from '../../service/agent/AgentService';
+import * as Service from '../../service/centralguildcartable/CentralGuildCartableService';
 
 
 const CentralGuildCartableSearchForm = (props) => {

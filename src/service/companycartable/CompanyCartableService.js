@@ -3,6 +3,8 @@ import * as BaseService from '../../service/BaseService';
 import * as Constants from "../Constants";
 
 const BASE_ADDRESS = '/tag-request';
+const COMPANY_ACCEPT = BASE_ADDRESS.concat('/company-accept');
+const COMPANY_DELIVER = BASE_ADDRESS.concat('/company-delivery');
 const SEARCH_ADDRESS = BASE_ADDRESS.concat('/search')
 
 export const SEARCH_CRITERIA = {
@@ -41,6 +43,15 @@ export function remove(id) {
         .concat('id=')
         .concat(id);
     return RestService.delete(url);
+}
+
+export function companyDeliver(tagRequest) {
+    const object = {tagRequestId: tagRequest.id}
+    return RestService.post(COMPANY_DELIVER, object);
+}
+export function companyConfirm(tagRequest, confirm) {
+    const object = {tagRequestId: tagRequest.id, confirm}
+    return RestService.post(COMPANY_ACCEPT, object);
 }
 
 export function save(tagRequest) {

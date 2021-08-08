@@ -6,7 +6,7 @@ import CentralGuildCartableSearchForm from "./CentralGuildCartableSearchForm";
 import CentralGuildCartableForm from "./CentralGuildCartableForm";
 import Dialog from "../../component/Dialog";
 import CentralGuildCartableTable from "./CentralGuildCartableTable";
-import * as Service from '../../service/tagrequest/TagRequestService';
+import * as Service from '../../service/centralguildcartable/CentralGuildCartableService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
 import Notification from "../../component/Notification";
@@ -66,27 +66,22 @@ const CentralGuildCartablePage = () => {
         setOpen(false);
     }
 
-    function onDeleteClick(tagRequest) {
-        setConfirmDialog({
-            isOpen: true,
-            title: `Are you sure to delete tag request: ${tagRequest.name}?`,
-            subTitle: "You can't undo this operation",
-            onConfirm: () => removeTagRequest(tagRequest)
-        });
-    }
-
-    function removeTagRequest(tagRequest) {
-        Service.remove(tagRequest.id).then(() => {
+    function confirm(tagRequest) {
+        Service.confirm(tagRequest, true).then(() => {
             loadPage(Service.DEFAULT_PAGE_REQUEST);
-            setNotify(BaseService.getWarningMessageObject(`${tagRequest.code} is deleted Successfully`));
+            setNotify(BaseService.getSuccessMessageObject(`${tagRequest.code} is confirmed Successfully`));
         }).catch(e => {
             setNotify(BaseService.getErrorMessageObject(`${tagRequest.code} can not be delete. ${e.message}`));
         });
     }
 
-    function onEditClick(tagRequest) {
-        setRecord(tagRequest);
-        setOpen(true);
+    function reject(tagRequest) {
+        Service.confirm(tagRequest, false).then(() => {
+            loadPage(Service.DEFAULT_PAGE_REQUEST);
+            setNotify(BaseService.getWarningMessageObject(`${tagRequest.code} is rejected Successfully`));
+        }).catch(e => {
+            setNotify(BaseService.getErrorMessageObject(`${tagRequest.code} can not be delete. ${e.message}`));
+        });
     }
 
     return (
@@ -94,8 +89,8 @@ const CentralGuildCartablePage = () => {
             <Grid item xs={12}>
                 <PageHeader
                     icon={<PeopleOutlineIcon/>}
-                    title='Tag Request Form'
-                    subtitle='tag request subtitle is here'/>
+                    title='Central Guild Cartable'
+                    subtitle='central guild cartable subtitle is here'/>
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
@@ -104,8 +99,8 @@ const CentralGuildCartablePage = () => {
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <CentralGuildCartableTable pageData={page} onEditClick={onEditClick}
-                                               onDeleteClick={onDeleteClick} loadPage={loadPage}/>
+                    <CentralGuildCartableTable pageData={page} confirm={confirm}
+                                               reject={reject} loadPage={loadPage}/>
                 </Paper>
             </Grid>
             <Dialog title='Insert new' onClose={dialogClose} open={open}>

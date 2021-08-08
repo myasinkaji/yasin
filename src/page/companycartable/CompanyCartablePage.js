@@ -6,7 +6,7 @@ import CompanyCartableSearchForm from "./CompanyCartableSearchForm";
 import CompanyCartableForm from "./CompanyCartableForm";
 import Dialog from "../../component/Dialog";
 import CompanyCartableTable from "./CompanyCartableTable";
-import * as Service from '../../service/tagrequest/TagRequestService';
+import * as Service from '../../service/companycartable/CompanyCartableService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
 import Notification from "../../component/Notification";
@@ -66,36 +66,39 @@ const CompanyCartablePage = () => {
         setOpen(false);
     }
 
-    function onDeleteClick(tagRequest) {
-        setConfirmDialog({
-            isOpen: true,
-            title: `Are you sure to delete tag request: ${tagRequest.name}?`,
-            subTitle: "You can't undo this operation",
-            onConfirm: () => removeTagRequest(tagRequest)
-        });
-    }
-
-    function removeTagRequest(tagRequest) {
-        Service.remove(tagRequest.code).then(() => {
+    function delivery(tagRequest) {
+        Service.companyDeliver(tagRequest).then(() => {
             loadPage(Service.DEFAULT_PAGE_REQUEST);
-            setNotify(BaseService.getWarningMessageObject(`${tagRequest.code} is deleted Successfully`));
+            setNotify(BaseService.getWarningMessageObject(`${tagRequest.code} is delivered Successfully`));
         }).catch(e => {
             setNotify(BaseService.getErrorMessageObject(`${tagRequest.code} can not be delete. ${e.message}`));
         });
     }
 
-    function onEditClick(tagRequest) {
-        setRecord(tagRequest);
-        setOpen(true);
+    function companyConfirm(tagRequest) {
+        Service.companyConfirm(tagRequest, true).then(() => {
+            loadPage(Service.DEFAULT_PAGE_REQUEST);
+            setNotify(BaseService.getSuccessMessageObject(`${tagRequest.code} is confirmed Successfully`));
+        }).catch(e => {
+            setNotify(BaseService.getErrorMessageObject(`${tagRequest.code} can not be delete. ${e.message}`));
+        });
     }
 
+    function companyReject(tagRequest) {
+        Service.companyConfirm(tagRequest, false).then(() => {
+            loadPage(Service.DEFAULT_PAGE_REQUEST);
+            setNotify(BaseService.getWarningMessageObject(`${tagRequest.code} is rejected Successfully`));
+        }).catch(e => {
+            setNotify(BaseService.getErrorMessageObject(`${tagRequest.code} can not be delete. ${e.message}`));
+        });
+    }
     return (
         <>
             <Grid item xs={12}>
                 <PageHeader
                     icon={<PeopleOutlineIcon/>}
-                    title='Tag Request Form'
-                    subtitle='tag request subtitle is here'/>
+                    title='Company Cartable Form'
+                    subtitle='company cartable subtitle is here'/>
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
@@ -104,8 +107,8 @@ const CompanyCartablePage = () => {
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <CompanyCartableTable pageData={page} onEditClick={onEditClick}
-                                          onDeleteClick={onDeleteClick} loadPage={loadPage}/>
+                    <CompanyCartableTable pageData={page} companyConfirm={companyConfirm}
+                                          companyReject={companyReject} delivery={delivery} loadPage={loadPage}/>
                 </Paper>
             </Grid>
             <Dialog title='Insert new' onClose={dialogClose} open={open}>
