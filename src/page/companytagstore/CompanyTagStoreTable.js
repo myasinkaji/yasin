@@ -12,8 +12,6 @@ import {
     TableRow,
     TableSortLabel
 } from "@material-ui/core";
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
 import * as Constants from '../../service/Constants';
 import * as Service from '../../service/centralguildcartable/CentralGuildCartableService';
 import {AnimalKind} from "../../service/enums/AnimalKind";
@@ -47,6 +45,7 @@ const HEADERS = [
     {id: 'count', title: 'Count', sortable: true},
     {id: 'from', title: 'From', sortable: true},
     {id: 'to', title: 'To', sortable: true},
+    {id: 'createdTime', title: 'Created Time', sortable: false},
     {id: 'tagCompanyId', title: 'Tag Company', sortable: false},
     {id: 'centralGuildCode', title: 'Central Guild', sortable: false},
 ];
@@ -118,7 +117,7 @@ const CompanyTagStoreTable = (props) => {
                                 }
                             </TableCell>))
                         }
-                        <TableCell align='center'>Actions</TableCell>
+                        <TableCell align='center'>Distribute</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -133,6 +132,7 @@ const CompanyTagStoreTable = (props) => {
                                        align='center'>{tagRequest.from === 0 ? '' : tagRequest.from}</TableCell>
                             <TableCell className={classes.cell}
                                        align='center'>{tagRequest.to === 0 ? '' : tagRequest.to}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{tagRequest.createdTime}</TableCell>
                             <TableCell className={classes.cell} align='center'>{tagRequest.tagCompanyName}</TableCell>
                             <TableCell className={classes.cell} align='center'>{tagRequest.centralGuildName}</TableCell>
                             <TableCell className={classes.cell}
