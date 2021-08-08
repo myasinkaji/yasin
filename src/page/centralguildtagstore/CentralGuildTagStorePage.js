@@ -89,8 +89,8 @@ const CentralGuildTagStorePage = () => {
             <Grid item xs={12}>
                 <PageHeader
                     icon={<PeopleOutlineIcon/>}
-                    title='Central Guild Cartable'
-                    subtitle='central guild cartable subtitle is here'/>
+                    title='Central Guild Tag Store'
+                    subtitle='central guild tag store subtitle is here'/>
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
