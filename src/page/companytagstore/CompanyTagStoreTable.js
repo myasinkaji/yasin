@@ -13,7 +13,7 @@ import {
     TableSortLabel
 } from "@material-ui/core";
 import * as Constants from '../../service/Constants';
-import * as Service from '../../service/centralGuildTagStore/CentralGuildTagStoreService';
+import * as Service from '../../service/centralguildcartable/CentralGuildCartableService';
 import {AnimalKind} from "../../service/enums/AnimalKind";
 import {TagType} from "../../service/enums/TagType";
 import LabelIcon from '@material-ui/icons/Label';

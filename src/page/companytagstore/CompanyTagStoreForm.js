@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {DialogActions, DialogContent, Grid, makeStyles} from "@material-ui/core";
 import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
-import * as Service from '../../service/centralGuildTagStore/CentralGuildTagStoreService';
-import * as ProvinceGuildService from '../../service/provinceGuild/ProvinceGuildService';
+import * as Service from '../../service/companyTagStore/CompanyTagStoreService';
+import * as ContractorService from '../../service/contractor/ContractorService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
 import AutoComplete from "../../component/controls/AutoComplete";
@@ -23,11 +23,11 @@ const CompanyTagStoreForm = (props) => {
     const initialValue = recordForUpdate;
     const [tagRequest, setTagRequest] = useState(initialValue);
     const [errors, setErrors] = useState(Constants.NO_ERROR);
-    const [provinceGuilds, setProvinceGuilds] = useState([]);
+    const [contractors, setContractors] = useState([]);
 
     useEffect(() => {
-        ProvinceGuildService.getLazyProvinceGuildChildren(initialValue)
-            .then(response => setProvinceGuilds(response.data.data))
+        ContractorService.getLazy()
+            .then(response => setContractors(response.data.data))
             .catch(e => setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`)));
     }, []);
 
@@ -61,12 +61,12 @@ const CompanyTagStoreForm = (props) => {
                 <Grid container spacing={3}>
                     <Grid item container xs={12} md={6} spacing={3}>
                         <Grid item xs={12}>
-                            <AutoComplete error={errors.provinceGuildCode}
+                            <AutoComplete error={errors.contractorNationalCode}
                                 // value={Service.getCentralGuildOf(tagRequest)}
-                                          data={provinceGuilds}
+                                          data={contractors}
                                           onChange={onchange}
-                                          name='provinceGuildCode'
-                                          label='Province Guild'/>
+                                          name='contractorNationalCode'
+                                          label='Contractor'/>
                         </Grid>
                     </Grid>
                     <Grid item container xs={12} md={6} spacing={3}>

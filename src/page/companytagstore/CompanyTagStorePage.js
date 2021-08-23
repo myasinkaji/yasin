@@ -6,7 +6,7 @@ import CompanyTagStoreSearchForm from "./CompanyTagStoreSearchForm";
 import CompanyTagStoreForm from "./CompanyTagStoreForm";
 import Dialog from "../../component/Dialog";
 import CompanyTagStoreTable from "./CompanyTagStoreTable";
-import * as Service from '../../service/centralGuildTagStore/CentralGuildTagStoreService';
+import * as Service from '../../service/companyTagStore/CompanyTagStoreService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
 import Notification from "../../component/Notification";

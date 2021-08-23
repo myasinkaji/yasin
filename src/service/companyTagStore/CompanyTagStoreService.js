@@ -2,9 +2,9 @@ import RestService from "../rest/RestService";
 import * as BaseService from '../../service/BaseService';
 import * as Constants from "../Constants";
 
-const BASE_ADDRESS = '/tag-request';
+const BASE_ADDRESS = '/pg_tag-request';
 const DELIVERED = BASE_ADDRESS.concat('/cartable-page');
-const CENTRAL_DISTRIBUTE = BASE_ADDRESS.concat('/distribute');
+const DISTRIBUTE = BASE_ADDRESS.concat('/distribute');
 const SEARCH_ADDRESS = BASE_ADDRESS.concat('/search')
 
 export const SEARCH_CRITERIA = {
@@ -46,7 +46,7 @@ export function getDeliveredTagRequests(pageRequest) {
 }
 
 export function save(tagRequest) {
-    return RestService.post(CENTRAL_DISTRIBUTE, tagRequest);
+    return RestService.post(DISTRIBUTE, tagRequest);
 }
 
 export function search(pageRequest, searchCriteria) {
@@ -56,7 +56,7 @@ export function search(pageRequest, searchCriteria) {
 export function validate(tagRequest, setErrors) {
     const errors = {};
     errors.distributeCount = !tagRequest.distributeCount || isBlank(String(tagRequest.distributeCount)) ? 'Count is required' : '';
-    errors.provinceGuildCode = !tagRequest.provinceGuildCode || isBlank(String(tagRequest.provinceGuildCode)) ? 'Province Guild is required' : '';
+    errors.contractorNationalCode = !tagRequest.contractorNationalCode || isBlank(String(tagRequest.contractorNationalCode)) ? 'Contractor is required' : '';
 
     setErrors({...errors})
     return Object.values(errors).every(isBlank);
