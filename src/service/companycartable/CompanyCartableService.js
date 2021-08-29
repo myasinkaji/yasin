@@ -63,7 +63,6 @@ export function search(pageRequest, searchCriteria) {
 }
 
 export function validate(tagRequest, setErrors) {
-    console.log(tagRequest);
     const errors = {};
     errors.animalKind = tagRequest.animalKind === undefined || isBlank(String(tagRequest.animalKind)) ? 'Animal Kind is required' : '';
     errors.tagType = tagRequest.tagType === undefined  || isBlank(String(tagRequest.tagType)) ? 'Tag Type is required' : '';

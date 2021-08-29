@@ -26,8 +26,17 @@ function postFunc(url, object) {
     return Axios(config);
 }
 
-function putFunc(url) {
-    console.log('put to url: ', url);
+function putFunc(url, object) {
+    const data = JSON.stringify(object);
+    const config = {
+        method: 'put',
+        url: BASE_URL + url,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data
+    }
+    return Axios(config);
 }
 
 function deleteFunc(url) {

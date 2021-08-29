@@ -62,7 +62,7 @@ const AgentPage = () => {
     }
 
     function dialogClose() {
-        setRecord(Service.INITIAL_AGENT);
+        setRecord(undefined);
         setOpen(false);
     }
 
@@ -76,11 +76,11 @@ const AgentPage = () => {
     }
 
     function removeAgent(agent) {
-        Service.remove(agent.code).then(() => {
+        Service.remove(agent.nationalCode).then(() => {
             loadPage(Service.DEFAULT_PAGE_REQUEST);
-            setNotify(BaseService.getWarningMessageObject(`${agent.code} is deleted Successfully`));
+            setNotify(BaseService.getWarningMessageObject(`${agent.nationalCode} is deleted Successfully`));
         }).catch(e => {
-            setNotify(BaseService.getErrorMessageObject(`${agent.code} can not be delete. ${e.message}`));
+            setNotify(BaseService.getErrorMessageObject(`${agent.nationalCode} can not be delete. ${e.message}`));
         });
     }
 

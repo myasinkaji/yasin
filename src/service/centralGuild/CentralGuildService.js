@@ -62,7 +62,6 @@ export function validate(guild, setErrors) {
     const errors = {};
     errors.code = isBlank(String(guild.code)) ? 'code is required' : '';
     errors.name = isBlank(guild.name) ? 'name is required' : '';
-    errors.uniqueId = isBlank(String(guild.uniqueId)) ? 'unique id is required' : '';
     errors.postalCode = isBlank(String(guild.postalCode)) ? 'postal code is required' : '';
     errors.managerName = isBlank(guild.managerName) ? 'manager name is required' : '';
     errors.phone = isBlank(guild.phone) ? 'phone is required' : '';

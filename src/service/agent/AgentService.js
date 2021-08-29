@@ -53,6 +53,10 @@ export function save(agent) {
     return RestService.post(BASE_ADDRESS, agent);
 }
 
+export function update(agent) {
+    return RestService.put(BASE_ADDRESS, agent);
+}
+
 export function search(pageRequest, searchCriteria) {
     return BaseService.search(SEARCH_ADDRESS, pageRequest, searchCriteria);
 }
@@ -60,7 +64,6 @@ export function search(pageRequest, searchCriteria) {
 export function validate(agent, setErrors) {
     const errors = {};
     errors.nationalCode = isBlank(String(agent.nationalCode)) ? 'national code is required' : '';
-    errors.uniqueId = isBlank(String(agent.uniqueId)) ? 'unique id is required' : '';
     errors.birthDate = isBlank(String(agent.birthDate)) ? 'birth date is required' : '';
     errors.postalCode = isBlank(String(agent.postalCode)) ? 'postal code is required' : '';
     errors.firstname = isBlank(agent.firstname) ? 'firstname is required' : '';

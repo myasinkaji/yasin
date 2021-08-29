@@ -60,10 +60,6 @@ const CentralGuildForm = (props) => {
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField error={errors.uniqueId}
-                                       onChange={onchange} name='uniqueId' label='UniqueId' value={guild.uniqueId}/>
-                        </Grid>
-                        <Grid item xs={12}>
                             <TextField error={errors.postalCode}
                                        onChange={onchange} name='postalCode' label='Postal Code'
                                        value={guild.postalCode}/>

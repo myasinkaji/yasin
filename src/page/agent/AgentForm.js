@@ -41,9 +41,17 @@ const AgentForm = (props) => {
         });
     }
 
+    const isUpdate = () => {
+        return recordForUpdate;
+    }
+
+    function saveOrUpdate() {
+        return  isUpdate() ? Service.update(agent) : Service.save(agent);
+    }
+
     function register() {
         if (Service.validate(agent, setErrors)) {
-            Service.save(agent).then(() => {
+            saveOrUpdate().then(() => {
                 submitAware(agent);
             }).catch(e => {
                 setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`));
@@ -75,14 +83,15 @@ const AgentForm = (props) => {
                                        label='Lastname'
                                        value={agent.lastname}/>
                         </Grid>
-
-                        <Grid item xs={12}>
-                            <TextField error={errors.nationalCode}
-                                       onChange={onchange}
-                                       name='nationalCode'
-                                       label='National Code'
-                                       value={agent.nationalCode}/>
-                        </Grid>
+                        {
+                            isUpdate() ? "" : <Grid item xs={12}>
+                                <TextField error={errors.nationalCode}
+                                           onChange={onchange}
+                                           name='nationalCode'
+                                           label='National Code'
+                                           value={agent.nationalCode}/>
+                            </Grid>
+                        }
 
                         <Grid item xs={12}>
                             <TextField error={errors.postalCode}
@@ -91,15 +100,14 @@ const AgentForm = (props) => {
                                        label='Postal Code'
                                        value={agent.postalCode}/>
                         </Grid>
+
                         <Grid item xs={12}>
-                            <TextField error={errors.uniqueId}
+                            <TextField error={errors.birthDate}
                                        onChange={onchange}
-                                       name='uniqueId'
-                                       label='Unique Id'
-                                       value={agent.uniqueId}/>
+                                       name='birthDate'
+                                       label='Birth Date'
+                                       value={agent.birthDate}/>
                         </Grid>
-
-
                     </Grid>
                     <Grid item container xs={12} md={6} spacing={3}>
 
@@ -116,13 +124,6 @@ const AgentForm = (props) => {
                                        name='phone'
                                        label='Phone'
                                        value={agent.phone}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField error={errors.birthDate}
-                                       onChange={onchange}
-                                       name='birthDate'
-                                       label='Birth Date'
-                                       value={agent.birthDate}/>
                         </Grid>
                         <Grid item xs={12}>
                             <AutoComplete error={errors.gradeId}
