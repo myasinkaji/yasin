@@ -102,6 +102,6 @@ export const CARTABLE_LINKS = [
 
 export const TAG_STORE_LINKS = [
     {title: 'Central Tag Store', to: '/cguild-tag-store', icon:<StoreIcon />},
-    {title: 'Province Tag Store', to: '/comp-tag-store', icon:<StoreIcon />},
+    {title: 'Company Tag Store', to: '/comp-tag-store', icon:<StoreIcon />},
 ]
 
