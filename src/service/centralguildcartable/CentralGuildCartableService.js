@@ -3,7 +3,7 @@ import * as BaseService from '../../service/BaseService';
 import * as Constants from "../Constants";
 
 const BASE_ADDRESS = '/tag-request';
-const GUILD_CONFIRMATION = BASE_ADDRESS.concat('/guild-accept');
+const GUILD_CONFIRMATION = BASE_ADDRESS.concat('/tr_admin-confirm');
 const SEARCH_ADDRESS = BASE_ADDRESS.concat('/search')
 
 export const SEARCH_CRITERIA = {
