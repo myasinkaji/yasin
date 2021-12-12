@@ -53,7 +53,9 @@ export function remove(guildCode) {
 export function save(guild) {
     return RestService.post(BASE_ADDRESS, guild);
 }
-
+export function update(guild) {
+    return RestService.put(BASE_ADDRESS, guild);
+}
 export function search(pageRequest, searchCriteria) {
     return BaseService.search(SEARCH_ADDRESS, pageRequest, searchCriteria);
 }

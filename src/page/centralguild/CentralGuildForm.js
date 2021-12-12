@@ -31,9 +31,17 @@ const CentralGuildForm = (props) => {
         });
     }
 
+    const isUpdate = () => {
+        return recordForUpdate;
+    }
+
+    function saveOrUpdate() {
+        return  isUpdate() ? Service.update(guild) : Service.save(guild);
+    }
+
     function register() {
         if (Service.validate(guild, setErrors)) {
-            Service.save(guild).then(() => {
+            saveOrUpdate(guild).then(() => {
                 submitAware(guild);
             }).catch(e => {
                 setNotify(BaseService.getErrorMessageObject(`Error Code: ${e.status}, Message: ${e.name}`));
@@ -50,10 +58,13 @@ const CentralGuildForm = (props) => {
             <DialogContent className={classes.dialogContent}>
                 <Grid container spacing={3}>
                     <Grid item container xs={12} md={6} spacing={3}>
-                        <Grid item xs={12}>
-                            <TextField error={errors.code}
-                                       onChange={onchange} name='code' label='Code' value={guild.code}/>
-                        </Grid>
+                        {
+                            isUpdate() ? "" :
+                                <Grid item xs={12}>
+                                    <TextField error={errors.code}
+                                               onChange={onchange} name='code' label='Code' value={guild.code}/>
+                                </Grid>
+                        }
                         <Grid item xs={12}>
                             <TextField error={errors.name}
                                        onChange={onchange} name='name' label='Name' value={guild.name}/>
