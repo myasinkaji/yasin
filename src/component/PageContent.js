@@ -69,7 +69,7 @@ const PageContent = () => {
             <Route path='/cguild-tag-store'>
                 <CentralGuildTagStorePage />
             </Route>
-            <Route path='/comp-tag-store'>
+            <Route path='/pguild-tag-store'>
                 <CompanyTagStorePage />
             </Route>
         </Switch>
