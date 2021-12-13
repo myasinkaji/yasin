@@ -50,7 +50,7 @@ const HEADERS = [
     {id: 'centralGuildCode', title: 'Central Guild', sortable: false},
 ];
 
-const CompanyTagStoreTable = (props) => {
+const ContractorTagStoreTable = (props) => {
     const classes = useStyles();
     const {pageData, distribute, loadPage} = props;
     const [page, setPage] = useState(0);
@@ -142,4 +142,4 @@ const CompanyTagStoreTable = (props) => {
     );
 }
 
-export default CompanyTagStoreTable;
+export default ContractorTagStoreTable;

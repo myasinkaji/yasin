@@ -17,7 +17,7 @@ const useStyle = makeStyles(theme => ({
 }));
 
 
-const CompanyTagStoreForm = (props) => {
+const ContractorTagStoreForm = (props) => {
     const classes = useStyle();
     const {recordForUpdate, submitAware, setNotify} = props;
     const initialValue = recordForUpdate;
@@ -100,4 +100,4 @@ const CompanyTagStoreForm = (props) => {
     );
 }
 
-export default CompanyTagStoreForm;
+export default ContractorTagStoreForm;

@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import {Backdrop, CircularProgress, Grid, makeStyles, Paper} from "@material-ui/core";
 import PageHeader from "../../component/PageHeader";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
-import CompanyTagStoreSearchForm from "./CompanyTagStoreSearchForm";
-import CompanyTagStoreForm from "./CompanyTagStoreForm";
+import ContractorTagStoreSearchForm from "./ContractorTagStoreSearchForm";
+import ContractorTagStoreForm from "./ContractorTagStoreForm";
 import Dialog from "../../component/Dialog";
-import CompanyTagStoreTable from "./CompanyTagStoreTable";
+import ContractorTagStoreTable from "./ContractorTagStoreTable";
 import * as Service from '../../service/companyTagStore/CompanyTagStoreService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const CompanyTagStorePage = () => {
+const ContractorTagStorePage = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [record, setRecord] = useState(undefined);
@@ -82,16 +82,16 @@ const CompanyTagStorePage = () => {
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <CompanyTagStoreSearchForm setOpen={setOpen} searchAction={onSearchClick}/>
+                    <ContractorTagStoreSearchForm setOpen={setOpen} searchAction={onSearchClick}/>
                 </Paper>
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>
-                    <CompanyTagStoreTable pageData={page} distribute={distribute} loadPage={loadPage}/>
+                    <ContractorTagStoreTable pageData={page} distribute={distribute} loadPage={loadPage}/>
                 </Paper>
             </Grid>
             <Dialog title='Distribute' onClose={dialogClose} open={open}>
-                <CompanyTagStoreForm submitAware={submitAware} recordForUpdate={record} setNotify={setNotify}/>
+                <ContractorTagStoreForm submitAware={submitAware} recordForUpdate={record} setNotify={setNotify}/>
             </Dialog>
             <Notification
                 notify={notify}
@@ -108,4 +108,4 @@ const CompanyTagStorePage = () => {
     );
 }
 
-export default CompanyTagStorePage;
+export default ContractorTagStorePage;
