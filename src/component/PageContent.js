@@ -16,6 +16,7 @@ import CentralGuildCartablePage from "../page/centralguildcartable/CentralGuildC
 import CompanyCartablePage from "../page/companycartable/CompanyCartablePage";
 import CentralGuildTagStorePage from "../page/centralguildtagstore/CentralGuildTagStorePage";
 import CompanyTagStorePage from "../page/companytagstore/CompanyTagStorePage";
+import ContractorTagStorePage from "../page/contractortagstore/ContractorTagStorePage";
 
 
 const PageContent = () => {
@@ -71,6 +72,9 @@ const PageContent = () => {
             </Route>
             <Route path='/pguild-tag-store'>
                 <CompanyTagStorePage />
+            </Route>
+            <Route path='/contractor-tag-store'>
+                <ContractorTagStorePage />
             </Route>
         </Switch>
     );
