@@ -4,7 +4,7 @@ import * as Constants from "../Constants";
 
 const BASE_ADDRESS = '/tag-request';
 const DELIVERED = BASE_ADDRESS.concat('/cartable-page');
-const CENTRAL_DISTRIBUTE = BASE_ADDRESS.concat('/cg-tr-distribute');
+const CENTRAL_DISTRIBUTE = BASE_ADDRESS.concat('/distribute');
 const SEARCH_ADDRESS = BASE_ADDRESS.concat('/search')
 
 export const SEARCH_CRITERIA = {
