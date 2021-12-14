@@ -4,6 +4,7 @@ import * as Constants from "../Constants";
 
 const BASE_ADDRESS = '/agent';
 const SEARCH_ADDRESS = BASE_ADDRESS.concat('/search')
+const LAZY_ADDRESS = BASE_ADDRESS.concat('/lazy')
 
 export const SEARCH_CRITERIA = {
     nationalCode: '',
@@ -40,6 +41,12 @@ export function getPage(pageRequest) {
         .concat(BaseService.getPageRequestURLParams(pageRequest))
     return RestService.get(url)
 }
+
+
+export function getLazy() {
+    return RestService.get(LAZY_ADDRESS)
+}
+
 
 export function remove(nationalCode) {
     const url = BASE_ADDRESS
