@@ -2,7 +2,7 @@ import RestService from "../rest/RestService";
 import * as BaseService from '../../service/BaseService';
 import * as Constants from "../Constants";
 
-const BASE_ADDRESS = '/pg_tag-request';
+const BASE_ADDRESS = '/con-tag-request';
 const DELIVERED = BASE_ADDRESS.concat('/cartable-page');
 const DISTRIBUTE = BASE_ADDRESS.concat('/distribute');
 const SEARCH_ADDRESS = BASE_ADDRESS.concat('/search')
@@ -11,8 +11,7 @@ export const SEARCH_CRITERIA = {
     animalKind: '',
     tagType: '',
     count: '',
-    tagCompanyId: '',
-    centralGuildCode: '',
+    contractorNationalCode: '',
 };
 
 
@@ -56,7 +55,7 @@ export function search(pageRequest, searchCriteria) {
 export function validate(tagRequest, setErrors) {
     const errors = {};
     errors.distributeCount = !tagRequest.distributeCount || isBlank(String(tagRequest.distributeCount)) ? 'Count is required' : '';
-    errors.contractorNationalCode = !tagRequest.contractorNationalCode || isBlank(String(tagRequest.contractorNationalCode)) ? 'Contractor is required' : '';
+    errors.agentNationalCode = !tagRequest.agentNationalCode || isBlank(String(tagRequest.agentNationalCode)) ? 'Agent is required' : '';
 
     setErrors({...errors})
     return Object.values(errors).every(isBlank);

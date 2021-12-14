@@ -46,8 +46,7 @@ const HEADERS = [
     {id: 'from', title: 'From', sortable: true},
     {id: 'to', title: 'To', sortable: true},
     {id: 'createdTime', title: 'Created Time', sortable: false},
-    {id: 'tagCompanyId', title: 'Tag Company', sortable: false},
-    {id: 'centralGuildCode', title: 'Central Guild', sortable: false},
+    {id: 'contractorNationalCode', title: 'Contractor', sortable: false},
 ];
 
 const ContractorTagStoreTable = (props) => {
@@ -118,8 +117,7 @@ const ContractorTagStoreTable = (props) => {
                             <TableCell className={classes.cell}
                                        align='center'>{tagRequest.to === 0 ? '' : tagRequest.to}</TableCell>
                             <TableCell className={classes.cell} align='center'>{tagRequest.createdTime}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{tagRequest.tagCompanyName}</TableCell>
-                            <TableCell className={classes.cell} align='center'>{tagRequest.centralGuildName}</TableCell>
+                            <TableCell className={classes.cell} align='center'>{tagRequest.contractorName}</TableCell>
                             <TableCell className={classes.cell} align='center'>
                                 <IconButton size='small' onClick={() => distribute(tagRequest)}>
                                     <LabelIcon fontSize='small' color="primary"/>

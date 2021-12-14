@@ -6,7 +6,7 @@ import ContractorTagStoreSearchForm from "./ContractorTagStoreSearchForm";
 import ContractorTagStoreForm from "./ContractorTagStoreForm";
 import Dialog from "../../component/Dialog";
 import ContractorTagStoreTable from "./ContractorTagStoreTable";
-import * as Service from '../../service/companyTagStore/CompanyTagStoreService';
+import * as Service from '../../service/contractorTagStore/ContractorTagStoreService';
 import * as BaseService from '../../service/BaseService';
 import * as Constants from '../../service/Constants';
 import Notification from "../../component/Notification";
@@ -77,8 +77,8 @@ const ContractorTagStorePage = () => {
             <Grid item xs={12}>
                 <PageHeader
                     icon={<PeopleOutlineIcon/>}
-                    title='Company Tag Store'
-                    subtitle='company tag store subtitle is here'/>
+                    title='Contractor Tag Store'
+                    subtitle='contractor tag store subtitle is here'/>
             </Grid>
             <Grid item xs={12}>
                 <Paper square className={classes.paper}>

@@ -2,9 +2,8 @@ import React, {useState} from 'react';
 import {Grid} from "@material-ui/core";
 import TextField from "../../component/controls/TextField";
 import Button from "../../component/controls/Button";
-import SaveIcon from '@material-ui/icons/Save';
 import SearchIcon from '@material-ui/icons/Search';
-import * as Service from '../../service/centralguildcartable/CentralGuildCartableService';
+import * as Service from '../../service/contractorTagStore/ContractorTagStoreService';
 
 
 const ContractorTagStoreSearchForm = (props) => {
@@ -75,15 +74,7 @@ const ContractorTagStoreSearchForm = (props) => {
                                 icon={<SearchIcon/>}/>
 
                         </Grid>
-                        <Grid item xs={12}>
-                            <Button
-                                onClick={() => {
-                                    setOpen(true)
-                                }}
-                                label='جدید'
-                                color='primary'
-                                icon={<SaveIcon/>}/>
-                        </Grid>
+
                     </Grid>
                 </Grid>
 
